@@ -7,7 +7,7 @@ pluginManagement {
     }
 }
 
-rootProject.name = 'timmychips_create_decor_tweaks'
+rootProject.name = 'colored_packages'
 
 include 'common'
 include 'fabric'

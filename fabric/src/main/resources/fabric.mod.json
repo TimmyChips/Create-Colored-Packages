@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "id": "timmychips_create_decor_tweaks",
+  "id": "colored_packages",
   "version": "${version}",
-  "name": "timmychips_create_decor_tweaks",
+  "name": "colored_packages",
   "description": "Hytale-like ledge grab to vault the player up blocks",
   "authors": [
     "TimmyChips"
@@ -11,18 +11,18 @@
     "homepage": ""
   },
   "license": "GPL-3.0",
-  "icon": "assets/timmychips_create_decor_tweaks/icon.png",
+  "icon": "assets/colored_packages/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
-      "timmychips.timmychips_create_decor_tweaks.fabric.Timmychips_create_decor_tweaksFabric"
+      "timmychips.colored_packages.fabric.colored_packagesFabric"
     ],
     "client": [
-      "timmychips.timmychips_create_decor_tweaks.fabric.client.Timmychips_create_decor_tweaksFabricClient"
+      "timmychips.colored_packages.fabric.client.colored_packagesFabricClient"
     ]
   },
   "mixins": [
-    "timmychips_create_decor_tweaks.mixins.json"
+    "colored_packages.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=0.18.4",

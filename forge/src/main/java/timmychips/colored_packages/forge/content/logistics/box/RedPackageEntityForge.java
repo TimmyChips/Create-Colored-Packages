@@ -1,27 +1,48 @@
-package timmychips.colored_packages.content.logistics.box;
+package timmychips.colored_packages.forge.content.logistics.box;
 
-import com.simibubi.create.AllEntityTypes;
 import com.simibubi.create.content.logistics.box.PackageEntity;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.entity.IEntityAdditionalSpawnData;
 import net.minecraftforge.network.PlayMessages;
-import timmychips.colored_packages.content.logistics.box.forge.AllPackageEntityTypesImpl;
+import timmychips.colored_packages.ColoredPackages;
+import timmychips.colored_packages.forge.AllPackageEntityTypesForge;
 
-public class RedPackageEntityForge extends PackageEntity {
+public class RedPackageEntityForge extends PackageEntity implements IEntityAdditionalSpawnData {
+
+    public String model;
+
     public RedPackageEntityForge(EntityType<?> entityTypeIn, Level worldIn) {
         super(entityTypeIn, worldIn);
+        box = ItemStack.EMPTY;
+        setYRot(this.random.nextFloat() * 360.0F);
+        setYHeadRot(getYRot());
+        yRotO = getYRot();
+        insertionDelay = 30;
+    }
+
+    public RedPackageEntityForge(EntityType<?> entityType, Level world, double x, double y, double z, String model) {
+        super(entityType, world);
+        this.setPos(x, y, z);
+        this.model = model;
+        this.refreshDimensions();
     }
 
     public RedPackageEntityForge(Level worldIn, double x, double y, double z) {
-        this(AllPackageEntityTypesImpl.RED_COLORED_PACKAGE_FORGE.get(), worldIn);
+        this(AllPackageEntityTypesForge.RED_COLORED_PACKAGE_FORGE.get(), worldIn);
         this.setPos(x, y, z);
         this.refreshDimensions();
     }
 
     public static RedPackageEntityForge fromItemStack(Level world, Vec3 position, ItemStack itemstack) {
-        RedPackageEntityForge packageEntity = AllPackageEntityTypesImpl.RED_COLORED_PACKAGE_FORGE.get()
+        RedPackageEntityForge packageEntity = AllPackageEntityTypesForge.RED_COLORED_PACKAGE_FORGE.get()
                 .create(world);
         packageEntity.setPos(position);
         packageEntity.setBox(itemstack);
@@ -36,10 +57,45 @@ public class RedPackageEntityForge extends PackageEntity {
         return packageEntity;
     }
 
+    @Override
+    public void onAddedToWorld() {
+        super.onAddedToWorld();
+        this.setPos(this.getX(), this.getY(), this.getZ());
+    }
+
     public static EntityType.Builder<?> build(EntityType.Builder<?> builder) {
         @SuppressWarnings("unchecked")
-        EntityType.Builder<PackageEntity> boxBuilder = (EntityType.Builder<PackageEntity>) builder;
-        return boxBuilder.setCustomClientFactory(PackageEntity::spawn)
+        EntityType.Builder<RedPackageEntityForge> boxBuilder = (EntityType.Builder<RedPackageEntityForge>) builder;
+        return boxBuilder.setCustomClientFactory(RedPackageEntityForge::spawn)
                 .sized(1, 1);
+    }
+
+    @Override
+    public void writeSpawnData(FriendlyByteBuf buffer) {
+        buffer.writeItem(getBox());
+        Vec3 motion = getDeltaMovement();
+        buffer.writeFloat((float) motion.x);
+        buffer.writeFloat((float) motion.y);
+        buffer.writeFloat((float) motion.z);
+    }
+
+    public static AttributeSupplier.Builder createPackageAttributes() {
+        return LivingEntity.createLivingAttributes()
+                .add(Attributes.MAX_HEALTH, 5f)
+                .add(Attributes.MOVEMENT_SPEED, 1f);
+    }
+
+    @Override
+    public void readAdditionalSaveData(CompoundTag compound) {
+        super.readAdditionalSaveData(compound);
+        box = ItemStack.of(compound.getCompound("Box"));
+        ColoredPackages.LOGGER.info("read box: {}", box); // Always air item
+        refreshDimensions();
+    }
+
+    @Override
+    public void addAdditionalSaveData(CompoundTag compound) {
+        super.addAdditionalSaveData(compound);
+        compound.put("Box", box.serializeNBT()); // Always air item
     }
 }

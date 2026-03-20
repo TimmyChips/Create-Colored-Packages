@@ -4,30 +4,30 @@ loaderVersion = "[47,)"
 license = "GNU GPL 3.0"
 
 [[mods]]
-modId = "timmychips_create_decor_tweaks"
+modId = "colored_packages"
 version = "${version}"
-displayName = "timmychips_create_decor_tweaks"
+displayName = "colored_packages"
 authors = "TimmyChips"
 description = '''
 Hytale-like ledge grab to vault the player up blocks
 '''
 #logoFile = ""
 
-[[dependencies.timmychips_create_decor_tweaks]]
+[[dependencies.colored_packages]]
 modId = "forge"
 mandatory = true
 versionRange = "[47,)"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.timmychips_create_decor_tweaks]]
+[[dependencies.colored_packages]]
 modId = "minecraft"
 mandatory = true
 versionRange = "[1.20.1,)"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.timmychips_create_decor_tweaks]]
+[[dependencies.colored_packages]]
 modId = "architectury"
 mandatory = true
 versionRange = "[9.2.14,)"

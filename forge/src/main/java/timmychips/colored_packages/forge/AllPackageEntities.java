@@ -1,4 +1,4 @@
-package timmychips.colored_packages;
+package timmychips.colored_packages.forge;
 
 import com.simibubi.create.Create;
 import com.simibubi.create.content.logistics.box.PackageEntity;
@@ -15,29 +15,24 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
+import timmychips.colored_packages.ColoredPackages;
 
 public class AllPackageEntities {
-    public static final EntityEntry<PackageEntity> PACKAGE = register("package", PackageEntity::new, () -> PackageRenderer::new,
-            MobCategory.MISC, 10, 3, true, false, PackageEntity::build)
-            .visual(() -> PackageVisual::new, true)
-            .register();
+//    public static final EntityEntry<PackageEntity> PACKAGE;
 
-    private static <T extends Entity> CreateEntityBuilder<T, ?> register(String name, EntityType.EntityFactory<T> factory,
-                                                                         NonNullSupplier<NonNullFunction<EntityRendererProvider.Context, EntityRenderer<? super T>>> renderer,
-                                                                         MobCategory group, int range, int updateFrequency, boolean sendVelocity, boolean immuneToFire,
-                                                                         NonNullConsumer<EntityType.Builder<T>> propertyBuilder) {
+    private static <T extends Entity> CreateEntityBuilder<T, ?> register(String name, EntityType.EntityFactory<T> factory, NonNullSupplier<NonNullFunction<EntityRendererProvider.Context, EntityRenderer<? super T>>> renderer, MobCategory group, int range, int updateFrequency, boolean sendVelocity, boolean immuneToFire, NonNullConsumer<EntityType.Builder<T>> propertyBuilder) {
         String id = Lang.asId(name);
-        return (CreateEntityBuilder<T, ?>) ColoredPackages.REGISTRATE
-                .entity(id, factory, group)
-                .properties(b -> b.setTrackingRange(range)
-                        .setUpdateInterval(updateFrequency)
-                        .setShouldReceiveVelocityUpdates(sendVelocity))
-                .properties(propertyBuilder)
-                .properties(b -> {
-                    if (immuneToFire)
-                        b.fireImmune();
-                })
-                .renderer(renderer);
+        return (CreateEntityBuilder) ColoredPackages.REGISTRATE.entity(id, factory, group).properties((b) -> b.setTrackingRange(range).setUpdateInterval(updateFrequency).setShouldReceiveVelocityUpdates(sendVelocity)).properties(propertyBuilder).properties((b) -> {
+            if (immuneToFire) {
+                b.fireImmune();
+            }
+
+        }).renderer(renderer);
     }
 
+    static {
+//        PACKAGE = register("red", PackageEntity::new, () -> PackageRenderer::new, MobCategory.MISC, 10, 3, true, false, PackageEntity::build).visual(() -> PackageVisual::new, true).register();
+    }
+
+    public static void register() {}
 }
