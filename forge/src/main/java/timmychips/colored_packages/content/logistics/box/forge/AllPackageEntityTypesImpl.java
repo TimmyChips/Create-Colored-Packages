@@ -34,7 +34,7 @@ public class AllPackageEntityTypesImpl {
 
         RED_COLORED_PACKAGE_FORGE = register("red_package", RedPackageEntityForge::new, () -> RedPackageRendererForge::new,
                 MobCategory.MISC, 10, 3, true, false, RedPackageEntityForge::build)
-                .visual(() -> RedPackageVisualForge::new, true)
+                .visual(() -> RedPackageVisual::new, true)
                 .register();
     }
 
