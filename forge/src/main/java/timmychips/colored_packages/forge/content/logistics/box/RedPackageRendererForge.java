@@ -21,6 +21,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.registries.ForgeRegistries;
 import timmychips.colored_packages.AllPackagePartialModels;
+import timmychips.colored_packages.ColoredPackages;
 
 import static timmychips.colored_packages.ColoredPackages.LOGGER;
 
@@ -39,8 +40,9 @@ public class RedPackageRendererForge extends EntityRenderer<RedPackageEntityForg
             if (box.isEmpty() || !PackageItem.isPackage(box)) box = AllBlocks.CARDBOARD_BLOCK.asStack();
 
             ResourceLocation modelName = BuiltInRegistries.ITEM.getKey(box.getItem());
-            PartialModel model = AllPackagePartialModels.COLORED_PACKAGES.get(modelName);
-//            model = AllPartialModels.PACKAGES.get(ForgeRegistries.ITEMS.getKey(box.getItem()));
+            ColoredPackages.LOGGER.info("Model name Renderer: {}", modelName);
+//            PartialModel model = AllPackagePartialModels.COLORED_PACKAGES.get(modelName);
+            PartialModel model = AllPartialModels.PACKAGES.get(ForgeRegistries.ITEMS.getKey(box.getItem()));
 
             // OG
 //            PartialModel model = AllPackagePartialModels.COLORED_PACKAGES.get(BuiltInRegistries.ITEM.getKey(box.getItem()));

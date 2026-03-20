@@ -26,7 +26,8 @@ public class AllPackageItems {
         LOGGER.info("Registering packages");
 
 //        ItemBuilder<PackageItem, CreateRegistrate> packageItem = packageItem(RED_PACKAGE_STYLE);
-        ItemBuilder<ColoredPackageItem, CreateRegistrate> packageItem = coloredPackageItem(RED_PACKAGE_STYLE);
+//        ItemBuilder<ColoredPackageItem, CreateRegistrate> packageItem = coloredPackageItem(RED_PACKAGE_STYLE);
+        ItemBuilder<?, CreateRegistrate> packageItem = coloredPackageItem(RED_PACKAGE_STYLE);
 
         packageItem.setData(ProviderType.LANG, NonNullBiConsumer.noop());
 
@@ -59,7 +60,7 @@ public class AllPackageItems {
                         + " Package");
     }
 
-    public static ItemBuilder<ColoredPackageItem, CreateRegistrate> coloredPackageItem(PackageStyles.PackageStyle style) {
+    public static ItemBuilder<?, CreateRegistrate> coloredPackageItem(PackageStyles.PackageStyle style) {
         String size = "_" + style.width() + "x" + style.height();
         return ColoredPackages.REGISTRATE.item(style.getItemId()
                         .getPath(), p -> {

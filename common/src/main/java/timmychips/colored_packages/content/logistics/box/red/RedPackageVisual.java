@@ -5,41 +5,50 @@ import com.simibubi.create.AllPartialModels;
 import com.simibubi.create.content.logistics.box.PackageEntity;
 import com.simibubi.create.content.logistics.box.PackageItem;
 import com.simibubi.create.content.logistics.box.PackageVisual;
+import dev.engine_room.flywheel.api.visual.DynamicVisual;
 import dev.engine_room.flywheel.api.visualization.VisualizationContext;
 import dev.engine_room.flywheel.lib.instance.InstanceTypes;
 import dev.engine_room.flywheel.lib.instance.TransformedInstance;
 import dev.engine_room.flywheel.lib.model.Models;
 import dev.engine_room.flywheel.lib.model.baked.PartialModel;
+import dev.engine_room.flywheel.lib.visual.AbstractEntityVisual;
+import dev.engine_room.flywheel.lib.visual.SimpleDynamicVisual;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 import timmychips.colored_packages.AllPackagePartialModels;
+import timmychips.colored_packages.ColoredPackages;
 
-public class RedPackageVisual extends PackageVisual {
+import static com.mojang.text2speech.Narrator.LOGGER;
 
+public class RedPackageVisual<T extends PackageEntity> extends AbstractEntityVisual<T> implements SimpleDynamicVisual {
     public final TransformedInstance instance;
 
-    public RedPackageVisual(VisualizationContext ctx, RedPackageEntity entity, float partialTick) {
+    public RedPackageVisual(VisualizationContext ctx, T entity, float partialTick) {
         super(ctx, entity, partialTick);
 
         ItemStack box = entity.box;
         if (box.isEmpty() || !PackageItem.isPackage(box))
             box = AllBlocks.CARDBOARD_BLOCK.asStack();
-//        PartialModel model = AllPartialModels.PACKAGES.get(BuiltInRegistries.ITEM.getKey(box.getItem()));
-        PartialModel model = AllPackagePartialModels.COLORED_PACKAGES.get(BuiltInRegistries.ITEM.getKey(box.getItem()));
+
+//        ResourceLocation modelName = BuiltInRegistries.ITEM.getKey(box.getItem());
+        PartialModel model = AllPartialModels.PACKAGES.get(box.getItem().arch$registryName()); // get PartialModel from the entity's box item ResourceLocation
 
         instance = instancerProvider().instancer(InstanceTypes.TRANSFORMED, Models.partial(model))
                 .createInstance();
 
-        //TODO make ColoredPackageVisualTemplate or similar name that has the animate method as a parent
-        //  that way any colored package object can extend that one and simply call "super.animate(partialTick)"
-        //  instead of copy-pasting the same method
-//        super.animate(partialTick);
         animate(partialTick);
     }
 
+    @Override
+    public void beginFrame(DynamicVisual.Context ctx) {
+        animate(ctx.partialTick());
+    }
+
+    // Copied from PackageVisual
     private void animate(float partialTick) {
         float yaw = Mth.lerp(partialTick, entity.yRotO, entity.getYRot());
 
@@ -60,5 +69,10 @@ public class RedPackageVisual extends PackageVisual {
                 .rotateYCenteredDegrees(-yaw - 90)
                 .light(computePackedLight(partialTick))
                 .setChanged();
+    }
+
+    @Override
+    protected void _delete() {
+        instance.delete();
     }
 }

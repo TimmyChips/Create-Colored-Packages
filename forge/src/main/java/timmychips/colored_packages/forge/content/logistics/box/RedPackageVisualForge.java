@@ -37,8 +37,8 @@ public class RedPackageVisualForge extends AbstractEntityVisual<RedPackageEntity
         ResourceLocation modelName = BuiltInRegistries.ITEM.getKey(box.getItem());
 //        ResourceLocation modelName = BuiltInRegistries.ITEM.getKey(ColoredPackageItem.))
         ColoredPackages.LOGGER.info("Model name: {}", modelName);
-        PartialModel model = AllPackagePartialModels.COLORED_PACKAGES.get(modelName);
-//        model = AllPartialModels.PACKAGES.get(ForgeRegistries.ITEMS.getKey(box.getItem()));
+//        PartialModel model = AllPackagePartialModels.COLORED_PACKAGES.get(modelName);
+        PartialModel model = AllPartialModels.PACKAGES.get(ForgeRegistries.ITEMS.getKey(box.getItem()));
 
         // OG
 //        PartialModel model = AllPackagePartialModels.COLORED_PACKAGES.get(BuiltInRegistries.ITEM.getKey(box.getItem()));

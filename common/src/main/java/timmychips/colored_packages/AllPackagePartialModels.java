@@ -1,5 +1,7 @@
 package timmychips.colored_packages;
 
+import com.simibubi.create.AllPartialModels;
+import com.simibubi.create.content.logistics.box.PackageStyles;
 import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 import net.minecraft.resources.ResourceLocation;
 import timmychips.colored_packages.content.logistics.box.ColoredPackageStyles;
@@ -20,6 +22,9 @@ public class AllPackagePartialModels {
     static  {
         ResourceLocation key = ColoredPackageStyles.getColoredItemId(RED_PACKAGE_STYLE);
         PartialModel model = PartialModel.of(ColoredPackages.asResource("item/" + key.getPath()));
+
+        AllPartialModels.PACKAGE_RIGGING.put(key, PartialModel.of(PackageStyles.STYLES.get(0).getRiggingModel()));
+        AllPartialModels.PACKAGES.put(key, model); // Add to Create Partial Models for packages
 
         COLORED_PACKAGES.put(key, model);
         LOGGER.info("Partial Models: {}", COLORED_PACKAGES);
