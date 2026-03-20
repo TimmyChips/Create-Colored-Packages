@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "timmychips_create_decor_tweaks",
+  "version": "${version}",
+  "name": "timmychips_create_decor_tweaks",
+  "description": "Hytale-like ledge grab to vault the player up blocks",
+  "authors": [
+    "TimmyChips"
+  ],
+  "contact": {
+    "homepage": ""
+  },
+  "license": "GPL-3.0",
+  "icon": "assets/timmychips_create_decor_tweaks/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "timmychips.timmychips_create_decor_tweaks.fabric.Timmychips_create_decor_tweaksFabric"
+    ],
+    "client": [
+      "timmychips.timmychips_create_decor_tweaks.fabric.client.Timmychips_create_decor_tweaksFabricClient"
+    ]
+  },
+  "mixins": [
+    "timmychips_create_decor_tweaks.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.18.4",
+    "minecraft": "~1.20.1",
+    "java": ">=17",
+    "architectury": ">=9.2.14",
+    "fabric-api": "*"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}

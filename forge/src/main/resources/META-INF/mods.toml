@@ -1,0 +1,35 @@
+modLoader = "javafml"
+loaderVersion = "[47,)"
+#issueTrackerURL = ""
+license = "GNU GPL 3.0"
+
+[[mods]]
+modId = "timmychips_create_decor_tweaks"
+version = "${version}"
+displayName = "timmychips_create_decor_tweaks"
+authors = "TimmyChips"
+description = '''
+Hytale-like ledge grab to vault the player up blocks
+'''
+#logoFile = ""
+
+[[dependencies.timmychips_create_decor_tweaks]]
+modId = "forge"
+mandatory = true
+versionRange = "[47,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.timmychips_create_decor_tweaks]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.20.1,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.timmychips_create_decor_tweaks]]
+modId = "architectury"
+mandatory = true
+versionRange = "[9.2.14,)"
+ordering = "AFTER"
+side = "BOTH"
