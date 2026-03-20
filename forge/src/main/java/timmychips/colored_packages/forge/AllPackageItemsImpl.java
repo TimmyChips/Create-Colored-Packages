@@ -7,6 +7,7 @@ import timmychips.colored_packages.forge.content.logistics.box.ColoredPackageIte
 
 
 public class AllPackageItemsImpl {
+    // Return Forge specific colored package item
     public static Item getPlatformPackageItem(Item.Properties properties, PackageStyles.PackageStyle style) {
         return new ColoredPackageItemForge(properties, style);
     }

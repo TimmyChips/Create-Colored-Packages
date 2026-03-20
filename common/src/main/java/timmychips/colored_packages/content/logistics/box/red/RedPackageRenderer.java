@@ -15,6 +15,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
+// TODO: update it so Renderer returns right type? Maybe convert to abstract class for Forge/Fabric Renderer versions to return
 public class RedPackageRenderer<T extends PackageEntity> extends EntityRenderer<T> {
 
     public RedPackageRenderer(EntityRendererProvider.Context pContext) {

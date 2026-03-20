@@ -16,7 +16,6 @@ import timmychips.colored_packages.ColoredPackages;
 import timmychips.colored_packages.content.logistics.box.red.RedPackageVisual;
 import timmychips.colored_packages.forge.content.logistics.box.RedPackageEntityForge;
 import timmychips.colored_packages.forge.content.logistics.box.RedPackageRendererForge;
-import timmychips.colored_packages.forge.content.logistics.box.RedPackageVisualForge;
 
 public class AllPackageEntityTypesForge {
 

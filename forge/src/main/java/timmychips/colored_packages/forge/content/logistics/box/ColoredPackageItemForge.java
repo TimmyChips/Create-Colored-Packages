@@ -1,7 +1,6 @@
 package timmychips.colored_packages.forge.content.logistics.box;
 
 import com.simibubi.create.AllEntityTypes;
-import com.simibubi.create.content.logistics.box.PackageEntity;
 import com.simibubi.create.content.logistics.box.PackageStyles;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
@@ -15,7 +14,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import timmychips.colored_packages.content.logistics.box.ColoredPackageItem;
-import timmychips.colored_packages.content.logistics.box.red.RedPackageEntity;
 
 import java.lang.ref.WeakReference;
 
@@ -85,7 +83,7 @@ public class ColoredPackageItemForge extends ColoredPackageItem {
                 .scale(f * 2);
         vec = vec.add(motion);
 
-        RedPackageEntity packageEntity = new RedPackageEntity(world, vec.x, vec.y, vec.z);
+        RedPackageEntityForge packageEntity = new RedPackageEntityForge(world, vec.x, vec.y, vec.z);
         packageEntity.setBox(copy);
         packageEntity.setDeltaMovement(motion);
         packageEntity.tossedBy = new WeakReference<>(player);
