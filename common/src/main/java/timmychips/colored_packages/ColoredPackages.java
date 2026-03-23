@@ -21,6 +21,8 @@ public final class ColoredPackages {
         // Write common init code here.
         AllPackageItems.register();
 //        AllPackageEntityTypes.register();
+        AllDyedBlocks.register();
+        AllDyedBlockEntityTypes.register();
         AllPackagePartialModels.init();
     }
 }

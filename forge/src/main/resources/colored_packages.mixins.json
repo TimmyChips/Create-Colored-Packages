@@ -1,12 +1,12 @@
 {
   "required": true,
-  "package": "timmychips.colored_packages.mixin",
+  "package": "timmychips.colored_packages.forge.mixin",
   "compatibilityLevel": "JAVA_17",
   "minVersion": "0.8",
   "client": [
   ],
   "mixins": [
-    "PackagerBlockEntityMixin"
+    "PackagerBlockEntityForgeMixin"
   ],
   "injectors": {
     "defaultRequire": 1
