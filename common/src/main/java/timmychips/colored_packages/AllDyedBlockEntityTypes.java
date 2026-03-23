@@ -9,13 +9,15 @@ import timmychips.colored_packages.content.logistics.DyedPackagerBlockEntity;
 
 public class AllDyedBlockEntityTypes {
 
-    // copy from Create with tweaks
-    public static final BlockEntityEntry<DyedPackagerBlockEntity> DYED_PACKAGER = ColoredPackages.REGISTRATE
-            .blockEntity("dyed_packager", DyedPackagerBlockEntity::new)
-            .visual(() -> PackagerVisual::new, true)
-            .validBlocks(AllDyedBlocks.DYED_PACKAGER)
-            .renderer(() -> PackagerRenderer::new)
-            .register();
+    public static BlockEntityEntry<?> DYED_PACKAGER;
+
+//    // copy from Create with tweaks
+//    public static final BlockEntityEntry<DyedPackagerBlockEntity> DYED_PACKAGER = ColoredPackages.REGISTRATE
+//            .blockEntity("dyed_packager", DyedPackagerBlockEntity::new)
+//            .visual(() -> PackagerVisual::new, true)
+//            .validBlocks(AllDyedBlocks.DYED_PACKAGER)
+//            .renderer(() -> PackagerRenderer::new)
+//            .register();
 
     public static void register() {
     }

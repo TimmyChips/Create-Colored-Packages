@@ -20,7 +20,7 @@ import net.minecraft.world.phys.BlockHitResult;
 
 // I am PISSED I cant extend the PackagerBlock class because of dumb block entity type shit
 // So let me just copy and paste code instead 😤
-public class DyedPackagerBlock extends PackagerBlockFramework {
+public abstract class DyedPackagerBlock extends PackagerBlockFramework {
     public DyedPackagerBlock(Properties properties) {
         super(properties);
     }

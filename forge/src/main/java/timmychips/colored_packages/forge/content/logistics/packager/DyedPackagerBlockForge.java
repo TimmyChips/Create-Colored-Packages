@@ -1,5 +1,6 @@
-package timmychips.colored_packages.content.logistics;
+package timmychips.colored_packages.forge.content.logistics.packager;
 
+import com.simibubi.create.AllBlockEntityTypes;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.AllSoundEvents;
@@ -13,21 +14,13 @@ import com.simibubi.create.foundation.block.WrenchableDirectionalBlock;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.inventory.InvManipulationBehaviour;
 import com.simibubi.create.foundation.utility.CreateLang;
-import io.github.fabricators_of_create.porting_lib.tags.Tags;
-import io.github.fabricators_of_create.porting_lib.util.TagUtil;
-import net.fabricmc.fabric.api.entity.FakePlayer;
-import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage;
-import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
-import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
-import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -44,16 +37,22 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.common.util.FakePlayer;
+import net.minecraftforge.items.IItemHandler;
 import timmychips.colored_packages.AllDyedBlockEntityTypes;
+import timmychips.colored_packages.content.logistics.DyedPackagerBlockEntity;
+import timmychips.colored_packages.content.logistics.PackagerBlockFramework;
+import timmychips.colored_packages.forge.AllDyedBlockEntityTypesForge;
 
-
-// Copied and pasted from Create's PackagerBlock class because it wont let me extend that class properly, slight edits for arch + dyes
-public abstract class PackagerBlockFramework extends WrenchableDirectionalBlock implements IBE<DyedPackagerBlockEntity>, IWrenchable {
+public class DyedPackagerBlockForge extends WrenchableDirectionalBlock implements IBE<DyedPackagerBlockEntityForge>, IWrenchable {
 
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
     public static final BooleanProperty LINKED = BooleanProperty.create("linked");
 
-    public PackagerBlockFramework(Properties properties) {
+    public DyedPackagerBlockForge(Properties properties) {
         super(properties);
         BlockState defaultBlockState = defaultBlockState();
         if (defaultBlockState.hasProperty(LINKED))
@@ -69,14 +68,16 @@ public abstract class PackagerBlockFramework extends WrenchableDirectionalBlock 
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
+        Capability<IItemHandler> itemCap = ForgeCapabilities.ITEM_HANDLER;
         Direction preferredFacing = null;
         for (Direction face : context.getNearestLookingDirections()) {
-            BlockPos pos = context.getClickedPos().relative(face);
-            BlockEntity be = context.getLevel().getBlockEntity(pos);
-            if (be instanceof DyedPackagerBlockEntity)
+            BlockEntity be = context.getLevel()
+                    .getBlockEntity(context.getClickedPos()
+                            .relative(face));
+            if (be instanceof PackagerBlockEntity)
                 continue;
-            Storage<ItemVariant> storage = ItemStorage.SIDED.find(context.getLevel(), pos, face.getOpposite());
-            if (storage != null) {
+            if (be != null && (be.getCapability(itemCap)
+                    .isPresent())) {
                 preferredFacing = face.getOpposite();
                 break;
             }
@@ -122,7 +123,7 @@ public abstract class PackagerBlockFramework extends WrenchableDirectionalBlock 
         if (isDye || hasWater)
             return onBlockEntityUse(worldIn, pos,
                     be ->
-                            be.applyColor(TagUtil.getColorFromStack(itemInHand)) ? InteractionResult.SUCCESS : InteractionResult.PASS);
+                            be.applyColor(DyeColor.getColor(itemInHand)) ? InteractionResult.SUCCESS : InteractionResult.PASS);
         ///
 
         if (AllItems.WRENCH.isIn(itemInHand))
@@ -141,17 +142,15 @@ public abstract class PackagerBlockFramework extends WrenchableDirectionalBlock 
                 if (PackageItem.isPackage(itemInHand)) {
                     if (worldIn.isClientSide())
                         return InteractionResult.SUCCESS;
-                    try (Transaction t = Transaction.openOuter()) {
-                        if (!be.unwrapBox(itemInHand.copy(), t))
-                            return InteractionResult.SUCCESS;
-                        t.commit();
-                        be.triggerStockCheck();
-                        itemInHand.shrink(1);
-                        AllSoundEvents.DEPOT_PLOP.playOnServer(worldIn, pos);
-                        if (itemInHand.isEmpty())
-                            player.setItemInHand(handIn, ItemStack.EMPTY);
+                    if (!be.unwrapBox(itemInHand.copy(), true))
                         return InteractionResult.SUCCESS;
-                    }
+                    be.unwrapBox(itemInHand.copy(), false);
+                    be.triggerStockCheck();
+                    itemInHand.shrink(1);
+                    AllSoundEvents.DEPOT_PLOP.playOnServer(worldIn, pos);
+                    if (itemInHand.isEmpty())
+                        player.setItemInHand(handIn, ItemStack.EMPTY);
+                    return InteractionResult.SUCCESS;
                 }
                 return InteractionResult.SUCCESS;
             }
@@ -176,10 +175,13 @@ public abstract class PackagerBlockFramework extends WrenchableDirectionalBlock 
         super.createBlockStateDefinition(builder.add(POWERED, LINKED));
     }
 
-    // fabric: stock checks may be scheduled instead of immediate to avoid opening transactions at the wrong time
     @Override
-    public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        withBlockEntityDo(level, pos, DyedPackagerBlockEntity::triggerStockCheck);
+    public void onNeighborChange(BlockState state, LevelReader level, BlockPos pos, BlockPos neighbor) {
+        super.onNeighborChange(state, level, pos, neighbor);
+        if (neighbor.relative(state.getOptionalValue(FACING)
+                        .orElse(Direction.UP))
+                .equals(pos))
+            withBlockEntityDo(level, pos, PackagerBlockEntity::triggerStockCheck);
     }
 
     @Override
@@ -197,7 +199,7 @@ public abstract class PackagerBlockFramework extends WrenchableDirectionalBlock 
             return;
         worldIn.setBlock(pos, state.cycle(POWERED), 2);
         if (!previouslyPowered)
-            withBlockEntityDo(worldIn, pos, DyedPackagerBlockEntity::activate);
+            withBlockEntityDo(worldIn, pos, PackagerBlockEntity::activate);
     }
 
     @Override
@@ -206,14 +208,19 @@ public abstract class PackagerBlockFramework extends WrenchableDirectionalBlock 
     }
 
     @Override
-    public Class<DyedPackagerBlockEntity> getBlockEntityClass() {
-        return DyedPackagerBlockEntity.class;
+    public boolean shouldCheckWeakPower(BlockState state, SignalGetter level, BlockPos pos, Direction side) {
+        return false;
     }
 
-//    @Override
-//    public BlockEntityType<? extends DyedPackagerBlockEntity> getBlockEntityType() {
-//        return AllDyedBlockEntityTypes.DYED_PACKAGER.get();
-//    }
+    @Override
+    public Class<DyedPackagerBlockEntityForge> getBlockEntityClass() {
+        return DyedPackagerBlockEntityForge.class;
+    }
+
+    @Override
+    public BlockEntityType<? extends DyedPackagerBlockEntityForge> getBlockEntityType() {
+        return AllDyedBlockEntityTypesForge.DYED_PACKAGER.get();
+    }
 
     @Override
     public boolean isPathfindable(BlockState pState, BlockGetter pLevel, BlockPos pPos, PathComputationType pType) {
@@ -228,11 +235,13 @@ public abstract class PackagerBlockFramework extends WrenchableDirectionalBlock 
     @Override
     public int getAnalogOutputSignal(BlockState pState, Level pLevel, BlockPos pPos) {
         return getBlockEntityOptional(pLevel, pPos).map(pbe -> {
-                    boolean empty = pbe.heldBox.isEmpty();
+                    boolean empty = pbe.inventory.getStackInSlot(0)
+                            .isEmpty();
                     if (pbe.animationTicks != 0)
                         empty = false;
                     return empty ? 0 : 15;
                 })
                 .orElse(0);
     }
+
 }

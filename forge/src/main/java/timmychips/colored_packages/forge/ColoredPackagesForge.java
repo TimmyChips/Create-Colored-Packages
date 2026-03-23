@@ -2,6 +2,7 @@ package timmychips.colored_packages.forge;
 
 import com.simibubi.create.AllEntityTypes;
 import net.minecraftforge.eventbus.api.IEventBus;
+import timmychips.colored_packages.AllDyedBlockEntityTypes;
 import timmychips.colored_packages.ColoredPackages;
 import dev.architectury.platform.forge.EventBuses;
 import net.minecraftforge.fml.common.Mod;
@@ -24,6 +25,8 @@ public final class ColoredPackagesForge {
         // Run our common setup.
         ColoredPackages.REGISTRATE.registerEventListeners(bus);
         ColoredPackages.init();
+        AllDyedBlocksForge.register();
+        AllDyedBlockEntityTypesForge.register();
         AllPackageEntityTypesForge.register();
         bus.addListener(AllPackageEntityTypesForge::registerEntityAttributes);
     }
