@@ -3,23 +3,36 @@ package timmychips.colored_packages.forge.content.logistics.box;
 import com.simibubi.create.AllEntityTypes;
 import com.simibubi.create.content.logistics.box.PackageStyles;
 import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.items.ItemStackHandler;
 import timmychips.colored_packages.content.logistics.box.ColoredPackageItem;
+import timmychips.colored_packages.content.logistics.box.ColoredPackageStyles;
 
 import java.lang.ref.WeakReference;
+import java.util.Optional;
+
+import static timmychips.colored_packages.content.logistics.box.ColoredPackageStyles.ALL_COLORED_BOXES;
 
 public class ColoredPackageItemForge extends ColoredPackageItem {
+
+//    private static DyeColor color;
+
     public ColoredPackageItemForge(Properties properties, PackageStyles.PackageStyle style) {
         super(properties, style);
+
+//        color = DyeColor.valueOf(style.type());
+        ALL_COLORED_BOXES.add(this);
     }
 
     @Override
@@ -88,5 +101,17 @@ public class ColoredPackageItemForge extends ColoredPackageItem {
         packageEntity.setDeltaMovement(motion);
         packageEntity.tossedBy = new WeakReference<>(player);
         world.addFreshEntity(packageEntity);
+    }
+
+    public static ItemStack coloredContaining(ItemStackHandler stacks, Optional<DyeColor> color) {
+//        ItemStack box = PackageStyles.getRandomBox();
+        ItemStack box = ItemStack.EMPTY;
+        if (color.isEmpty()) box = PackageStyles.getRandomBox();
+        else box = ColoredPackageStyles.getRandomColoredBox(color.get());
+
+        CompoundTag compound = new CompoundTag();
+        compound.put("Items", stacks.serializeNBT());
+        box.setTag(compound);
+        return box;
     }
 }

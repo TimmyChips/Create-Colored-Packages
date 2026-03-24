@@ -20,14 +20,31 @@ public class AllPackagePartialModels {
 //        PartialModel model = PartialModel.of(ColoredPackages.asResource("item/" + key.getPath()));
 
     static  {
-        ResourceLocation key = ColoredPackageStyles.getColoredItemId(RED_PACKAGE_STYLE);
-        PartialModel model = PartialModel.of(ColoredPackages.asResource("item/" + key.getPath()));
 
-        AllPartialModels.PACKAGE_RIGGING.put(key, PartialModel.of(PackageStyles.STYLES.get(0).getRiggingModel()));
-        AllPartialModels.PACKAGES.put(key, model); // Add to Create Partial Models for packages
+        for (PackageStyles.PackageStyle style : ColoredPackageStyles.COLORED_STYLES) {
+//            ResourceLocation key = style.getItemId();
+            ResourceLocation key = ColoredPackageStyles.getColoredItemId(style);
+            PartialModel model = PartialModel.of(ColoredPackages.asResource("item/" + key.getPath()));
 
-        COLORED_PACKAGES.put(key, model);
-        LOGGER.info("Partial Models: {}", COLORED_PACKAGES);
+            // Add to Create Partial Models for packages
+            AllPartialModels.PACKAGE_RIGGING.put(key, PartialModel.of(PackageStyles.STYLES.get(0).getRiggingModel()));
+            AllPartialModels.PACKAGES.put(key, model);
+
+            COLORED_PACKAGES.put(key, model);
+
+            // DEBUG
+            LOGGER.info("Partial Models: {}", COLORED_PACKAGES);
+        }
+
+//        ResourceLocation key = ColoredPackageStyles.getColoredItemId(RED_PACKAGE_STYLE);
+//        PartialModel model = PartialModel.of(ColoredPackages.asResource("item/" + key.getPath()));
+//
+//        // Add to Create Partial Models for packages
+//        AllPartialModels.PACKAGE_RIGGING.put(key, PartialModel.of(PackageStyles.STYLES.get(0).getRiggingModel()));
+//        AllPartialModels.PACKAGES.put(key, model);
+//
+//        COLORED_PACKAGES.put(key, model);
+//        LOGGER.info("Partial Models: {}", COLORED_PACKAGES);
     }
 
     public static void init() {}

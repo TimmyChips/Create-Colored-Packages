@@ -105,6 +105,20 @@ public class DyedPackagerBlockForge extends WrenchableDirectionalBlock implement
                 .setValue(FACING, preferredFacing);
     }
 
+    public void setToDefaultPackager(BlockState state, Level worldIn, BlockPos pos) {
+        // Get block state properties from Dyed Packager block
+        Direction currentFacing = state.getValue(FACING);
+        boolean currentPowered = state.getValue(POWERED);
+
+        // Get Create Packager block state with current property values
+        BlockState createPackagerState = AllBlocks.PACKAGER.getDefaultState()
+                        .setValue(FACING, currentFacing)
+                        .setValue(POWERED, currentPowered);
+
+        // Set and update Dyed Packager block to Create Packager block
+        worldIn.setBlockAndUpdate(pos, createPackagerState);
+    }
+
     @Override
     public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn,
                                  BlockHitResult hit) {
@@ -120,10 +134,14 @@ public class DyedPackagerBlockForge extends WrenchableDirectionalBlock implement
                 .getFluid()
                 .isSame(Fluids.WATER);
 
-        if (isDye || hasWater)
+        if (isDye)
             return onBlockEntityUse(worldIn, pos,
                     be ->
                             be.applyColor(DyeColor.getColor(itemInHand)) ? InteractionResult.SUCCESS : InteractionResult.PASS);
+        if (hasWater) {
+            setToDefaultPackager(state, worldIn, pos);
+            return InteractionResult.SUCCESS;
+        }
         ///
 
         if (AllItems.WRENCH.isIn(itemInHand))

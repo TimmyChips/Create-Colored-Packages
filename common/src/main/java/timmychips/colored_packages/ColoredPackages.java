@@ -5,6 +5,7 @@ import net.minecraft.resources.ResourceLocation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import timmychips.colored_packages.content.logistics.box.AllPackageEntityTypes;
+import timmychips.colored_packages.content.logistics.box.ColoredPackageStyles;
 
 public final class ColoredPackages {
     public static final String MOD_ID = "colored_packages";

@@ -8,15 +8,12 @@ import com.tterrag.registrate.builders.ItemBuilder;
 import com.tterrag.registrate.providers.ProviderType;
 import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
 import dev.architectury.injectables.annotations.ExpectPlatform;
-import dev.architectury.platform.Platform;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
-import timmychips.colored_packages.content.logistics.box.ColoredPackageItem;
+import timmychips.colored_packages.content.logistics.box.ColoredPackageStyles;
 
 import java.util.Locale;
-import java.util.Properties;
 
-import static timmychips.colored_packages.content.logistics.box.ColoredPackageStyles.RED_PACKAGE_STYLE;
 import static timmychips.colored_packages.ColoredPackages.LOGGER;
 
 public class AllPackageItems {
@@ -25,13 +22,16 @@ public class AllPackageItems {
 
         LOGGER.info("Registering packages");
 
+        for (PackageStyles.PackageStyle style : ColoredPackageStyles.COLORED_STYLES) {
+
 //        ItemBuilder<PackageItem, CreateRegistrate> packageItem = packageItem(RED_PACKAGE_STYLE);
 //        ItemBuilder<ColoredPackageItem, CreateRegistrate> packageItem = coloredPackageItem(RED_PACKAGE_STYLE);
-        ItemBuilder<?, CreateRegistrate> packageItem = coloredPackageItem(RED_PACKAGE_STYLE);
+            ItemBuilder<?, CreateRegistrate> packageItem = coloredPackageItem(style);
 
-        packageItem.setData(ProviderType.LANG, NonNullBiConsumer.noop());
+            packageItem.setData(ProviderType.LANG, NonNullBiConsumer.noop());
 
-        packageItem.register();
+            packageItem.register();
+        }
     }
 
     public static ItemBuilder<PackageItem, CreateRegistrate> packageItem(PackageStyles.PackageStyle style) {
