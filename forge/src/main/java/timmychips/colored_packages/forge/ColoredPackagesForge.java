@@ -8,6 +8,8 @@ import dev.architectury.platform.forge.EventBuses;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import timmychips.colored_packages.content.logistics.box.AllPackageEntityTypes;
+import timmychips.colored_packages.content.logistics.box.ColoredPackageStyles;
+import timmychips.colored_packages.content.logistics.box.forge.ColoredPackageStylesImpl;
 
 @Mod(ColoredPackages.MOD_ID)
 public final class ColoredPackagesForge {

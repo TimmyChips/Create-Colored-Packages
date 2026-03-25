@@ -23,6 +23,7 @@ public final class ColoredPackages {
         AllPackageItems.register();
 //        AllPackageEntityTypes.register();
 //        AllDyedBlockEntityTypes.register();
+//        ColoredPackageStyles.init();
         AllPackagePartialModels.init();
     }
 }

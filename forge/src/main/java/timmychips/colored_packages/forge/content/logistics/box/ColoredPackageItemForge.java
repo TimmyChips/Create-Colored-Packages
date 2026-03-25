@@ -1,6 +1,7 @@
 package timmychips.colored_packages.forge.content.logistics.box;
 
 import com.simibubi.create.AllEntityTypes;
+import com.simibubi.create.content.logistics.box.PackageItem;
 import com.simibubi.create.content.logistics.box.PackageStyles;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -11,18 +12,25 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.items.ItemStackHandler;
+import timmychips.colored_packages.ColoredPackages;
 import timmychips.colored_packages.content.logistics.box.ColoredPackageItem;
 import timmychips.colored_packages.content.logistics.box.ColoredPackageStyles;
+import timmychips.colored_packages.content.logistics.box.forge.ColoredPackageStylesImpl;
+import timmychips.colored_packages.forge.test;
 
 import java.lang.ref.WeakReference;
+import java.util.List;
 import java.util.Optional;
 
 import static timmychips.colored_packages.content.logistics.box.ColoredPackageStyles.ALL_COLORED_BOXES;
+import static timmychips.colored_packages.content.logistics.box.ColoredPackageStyles.BOXES_BY_COLOR;
 
 public class ColoredPackageItemForge extends ColoredPackageItem {
 
@@ -33,6 +41,8 @@ public class ColoredPackageItemForge extends ColoredPackageItem {
 
 //        color = DyeColor.valueOf(style.type());
         ALL_COLORED_BOXES.add(this);
+//        ColoredPackageStyles.addColoredPackageToMap1();
+        ColoredPackageStyles.addColoredPackageToMap1(this);
     }
 
     @Override
