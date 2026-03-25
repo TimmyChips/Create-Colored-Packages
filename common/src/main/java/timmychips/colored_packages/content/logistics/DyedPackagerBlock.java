@@ -25,11 +25,6 @@ public abstract class DyedPackagerBlock extends PackagerBlockFramework {
         super(properties);
     }
 
-//    @Override
-//    public Class<DyedPackagerBlockEntity> getBlockEntityClass() {
-//        return DyedPackagerBlockEntity.class;
-//    }
-
     @Override
     public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand handIn,
                                  BlockHitResult hit) {

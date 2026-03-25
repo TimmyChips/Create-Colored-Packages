@@ -31,7 +31,9 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 import timmychips.colored_packages.ColoredPackages;
+import timmychips.colored_packages.content.logistics.DyedPackagerBlock;
 import timmychips.colored_packages.forge.content.logistics.box.ColoredPackageItemForge;
+import timmychips.colored_packages.forge.mixin.accessors.PackagerBlockEntityAccessorForge;
 
 import java.util.List;
 import java.util.Optional;
@@ -232,7 +234,8 @@ public class DyedPackagerBlockEntityForge extends PackagerBlockEntity {
         animationInward = false;
         animationTicks = CYCLE;
 
-//        advancements.awardPlayer(AllAdvancements.PACKAGER);
+        AdvancementBehaviour advancements = ((PackagerBlockEntityAccessorForge) this).coloredPackages$getPackagerAdvancements(); // Get advancements via accessor
+        advancements.awardPlayer(AllAdvancements.PACKAGER);
         triggerStockCheck();
         notifyUpdate();
     }

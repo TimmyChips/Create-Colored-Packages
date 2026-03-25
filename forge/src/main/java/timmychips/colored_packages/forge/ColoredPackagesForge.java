@@ -1,15 +1,10 @@
 package timmychips.colored_packages.forge;
 
-import com.simibubi.create.AllEntityTypes;
 import net.minecraftforge.eventbus.api.IEventBus;
-import timmychips.colored_packages.AllDyedBlockEntityTypes;
 import timmychips.colored_packages.ColoredPackages;
 import dev.architectury.platform.forge.EventBuses;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import timmychips.colored_packages.content.logistics.box.AllPackageEntityTypes;
-import timmychips.colored_packages.content.logistics.box.ColoredPackageStyles;
-import timmychips.colored_packages.content.logistics.box.forge.ColoredPackageStylesImpl;
 
 @Mod(ColoredPackages.MOD_ID)
 public final class ColoredPackagesForge {

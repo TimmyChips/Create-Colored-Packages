@@ -3,10 +3,8 @@ package timmychips.colored_packages.content.logistics.box;
 import com.google.common.collect.ImmutableList;
 import com.simibubi.create.content.logistics.box.PackageItem;
 import com.simibubi.create.content.logistics.box.PackageStyles;
-import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import timmychips.colored_packages.ColoredPackages;
 
@@ -23,10 +21,6 @@ public class ColoredPackageStyles extends PackageStyles {
     public static List<PackageItem> ALL_COLORED_BOXES = new ArrayList<>();
     public static Map<DyeColor, ArrayList<PackageItem>> BOXES_BY_COLOR = new EnumMap<>(DyeColor.class); // Map of all colors and their respective list of ColoredPackageItems
 
-    public static final List<PackageStyle> RED_STYLES = ImmutableList.of(
-            new PackageStyle("red", 12, 12, 23f, false)
-    );
-
     public static final PackageStyles.PackageStyle RED_PACKAGE_STYLE =
             new PackageStyles.PackageStyle("red", 12, 12, 23f, false);
 
@@ -39,49 +33,39 @@ public class ColoredPackageStyles extends PackageStyles {
         return new ResourceLocation(ColoredPackages.MOD_ID, itemPath);
     }
 
-    public static void addColoredPackageToMap1(PackageItem packageItem) {
-//         Perform for each dye color
+    /**
+     * Adds colored package item to respective color list in colored boxes map
+     * @param packageItem the colored package item object
+     */
+    public static void addColoredPackageItemToMap(PackageItem packageItem) {
 
+        // Get DyeColor from the package item's style type (i.e. red, blue, lime, etc.)
         DyeColor color = DyeColor.byName(packageItem.style.type(), DyeColor.WHITE);
-
         ColoredPackages.LOGGER.info("DyeColor color: {}", color);
 
-        // Stream and create new List of PackageItem for specific color
-//            List<PackageItem> coloredPackages = ColoredPackageStyles.ALL_COLORED_BOXES.stream()
-//                    .filter(packageItem -> packageItem.style.type().equals(color.getName()))
-//                    .toList();
-
-//            PackageItem packageItem1 = ALL_COLORED_BOXES.get(0);
-
+        // Try to fetch colored package list of this specific color, else create new list; then add to it
+        // E.g. the first red package item will create a new list, subsequent red packages will get and add to that list
         ArrayList<PackageItem> coloredPackages = BOXES_BY_COLOR.getOrDefault(color, new ArrayList<>());
-
-//            ArrayList<PackageItem> coloredPackages = new ArrayList<>();
         coloredPackages.add(packageItem);
-
-//            coloredPackages.add((PackageItem) packageItem);
-
 
         ColoredPackages.LOGGER.info("coloredPackages list for this color: {}", coloredPackages);
 
-        BOXES_BY_COLOR.put(color, coloredPackages);
+        BOXES_BY_COLOR.put(color, coloredPackages); // Adds colored list to colored boxes map
     }
 
-//    @ExpectPlatform
-//    public static ItemStack getRandomColoredBox(DyeColor color) {
-//        return ItemStack.EMPTY;
-//    }
-
+    /**
+     *
+     * @param color The dye color of the package this method will try to look for and get
+     * @return Random colored package ItemStack of the input color; or rarely gets one of the Create rare Easter egg packages
+     */
     public static ItemStack getRandomColoredBox(DyeColor color) {
         // Get all the ColoredPackageItems from the map based on input color
         List<? extends PackageItem> coloredPackages = BOXES_BY_COLOR.getOrDefault(color, new ArrayList<>(PackageStyles.STANDARD_BOXES));
 
+        // Get Create rare boxes list rarely, or else get the list of the specified color package items
         List<? extends PackageItem> pool = STYLE_PICKER.nextInt(RARE_CHANCE) == 0 ?
                 PackageStyles.RARE_BOXES : coloredPackages;
         ColoredPackages.LOGGER.info("returned random item stack box: {}", new ItemStack(pool.get(STYLE_PICKER.nextInt(pool.size()))));
-        return new ItemStack(pool.get(STYLE_PICKER.nextInt(pool.size())));
-    }
-
-    public static void init() {
-//        initColoredPackageMaps();
+        return new ItemStack(pool.get(STYLE_PICKER.nextInt(pool.size()))); // Return random package item from list
     }
 }

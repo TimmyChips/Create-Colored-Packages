@@ -6,7 +6,9 @@
   "client": [
   ],
   "mixins": [
-    "PackagerBlockEntityForgeMixin"
+    "PackagerBlockEntityForgeMixin",
+    "PackagerBlockMixinForge",
+    "accessors.PackagerBlockEntityAccessorForge"
   ],
   "injectors": {
     "defaultRequire": 1
