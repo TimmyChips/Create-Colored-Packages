@@ -14,7 +14,7 @@ public class ColoredPackageStyles extends PackageStyles {
 
     public static final List<PackageStyle> COLORED_STYLES = ImmutableList.of(
             new PackageStyle("red", 12, 12, 23f, false),
-            new PackageStyle("red", 12, 10, 22f, false),
+            new PackageStyle("red", 12, 10, 21f, false),
             new PackageStyle("lime", 12, 12, 23f, false)
     );
 
@@ -51,6 +51,7 @@ public class ColoredPackageStyles extends PackageStyles {
         ColoredPackages.LOGGER.info("coloredPackages list for this color: {}", coloredPackages);
 
         BOXES_BY_COLOR.put(color, coloredPackages); // Adds colored list to colored boxes map
+        PackageStyles.STANDARD_BOXES.remove(packageItem); // Remove colored package item from Create's list so the normal Packager doesn't create colored packages
     }
 
     /**

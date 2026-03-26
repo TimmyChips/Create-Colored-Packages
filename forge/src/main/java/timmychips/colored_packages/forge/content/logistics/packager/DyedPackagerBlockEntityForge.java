@@ -41,7 +41,7 @@ import java.util.Optional;
 public class DyedPackagerBlockEntityForge extends PackagerBlockEntity {
 
     public Optional<DyeColor> color;
-//    private AdvancementBehaviour advancements; // Copied from PackagerBlockEntity since advancements field in that class is private
+    private AdvancementBehaviour advancements; // Copied from PackagerBlockEntity since advancements field in that class is private
 
     public DyedPackagerBlockEntityForge(BlockEntityType<?> typeIn, BlockPos pos, BlockState state) {
         super(typeIn, pos, state);
@@ -69,10 +69,6 @@ public class DyedPackagerBlockEntityForge extends PackagerBlockEntity {
 //    @Override
 //    public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
 //        behaviours.add(advancements = new AdvancementBehaviour(this, AllAdvancements.PACKAGER));
-//    }
-
-//    public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
-//        behaviours.add(this.advancements = new AdvancementBehaviour(this, new CreateAdvancement[]{AllAdvancements.PACKAGER}));
 //    }
 
     // Apply color and return true if successful
@@ -234,8 +230,14 @@ public class DyedPackagerBlockEntityForge extends PackagerBlockEntity {
         animationInward = false;
         animationTicks = CYCLE;
 
-        AdvancementBehaviour advancements = ((PackagerBlockEntityAccessorForge) this).coloredPackages$getPackagerAdvancements(); // Get advancements via accessor
-        advancements.awardPlayer(AllAdvancements.PACKAGER);
+        // Try to cast for accessor, idk if needed but it crashed once from not being able to cast to accessor class
+        try {
+            AdvancementBehaviour advancements = ((PackagerBlockEntityAccessorForge) this).coloredPackages$getPackagerAdvancements(); // Get advancements via accessor
+            advancements.awardPlayer(AllAdvancements.PACKAGER);
+        } catch (ClassCastException e) {
+            ColoredPackages.LOGGER.info("Unable to cast DyedPackagerBlockEntity: {} to {}", this, PackagerBlockEntityAccessorForge.class);
+        }
+
         triggerStockCheck();
         notifyUpdate();
     }

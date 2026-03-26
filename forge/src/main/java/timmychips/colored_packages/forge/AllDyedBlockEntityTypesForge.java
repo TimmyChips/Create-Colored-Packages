@@ -7,13 +7,14 @@ import timmychips.colored_packages.AllDyedBlocks;
 import timmychips.colored_packages.ColoredPackages;
 import timmychips.colored_packages.content.logistics.DyedPackagerBlockEntity;
 import timmychips.colored_packages.forge.content.logistics.packager.DyedPackagerBlockEntityForge;
+import timmychips.colored_packages.forge.content.logistics.packager.DyedPackagerRendererForge;
 
 public class AllDyedBlockEntityTypesForge {
     public static final BlockEntityEntry<DyedPackagerBlockEntityForge> DYED_PACKAGER = ColoredPackages.REGISTRATE
             .blockEntity("dyed_packager", DyedPackagerBlockEntityForge::new)
             .visual(() -> PackagerVisual::new, true)
             .validBlocks(AllDyedBlocksForge.DYED_PACKAGER)
-            .renderer(() -> PackagerRenderer::new)
+            .renderer(() -> DyedPackagerRendererForge::new)
             .register();
 
     public static void register() {

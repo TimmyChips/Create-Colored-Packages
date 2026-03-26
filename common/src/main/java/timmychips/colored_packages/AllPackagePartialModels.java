@@ -1,8 +1,10 @@
 package timmychips.colored_packages;
 
 import com.simibubi.create.AllPartialModels;
+import com.simibubi.create.Create;
 import com.simibubi.create.content.logistics.box.PackageStyles;
 import dev.engine_room.flywheel.lib.model.baked.PartialModel;
+import net.createmod.catnip.render.SpriteShiftEntry;
 import net.minecraft.resources.ResourceLocation;
 import timmychips.colored_packages.content.logistics.box.ColoredPackageStyles;
 
@@ -14,6 +16,7 @@ import static timmychips.colored_packages.content.logistics.box.ColoredPackageSt
 
 public class AllPackagePartialModels {
     public static final Map<ResourceLocation, PartialModel> COLORED_PACKAGES = new HashMap<>();
+    public static final PartialModel DYED_PACKAGER_COLOR_LABEL = block("dyed_packager/color_label");
 
 //    for (PackageStyles.PackageStyle style : P) {
 //        ResourceLocation key = style.getItemId();
@@ -27,7 +30,7 @@ public class AllPackagePartialModels {
             PartialModel model = PartialModel.of(ColoredPackages.asResource("item/" + key.getPath()));
 
             // Add to Create Partial Models for packages
-            AllPartialModels.PACKAGE_RIGGING.put(key, PartialModel.of(PackageStyles.STYLES.get(0).getRiggingModel()));
+            AllPartialModels.PACKAGE_RIGGING.put(key, PartialModel.of(style.getRiggingModel()));
             AllPartialModels.PACKAGES.put(key, model);
 
             COLORED_PACKAGES.put(key, model);
@@ -35,16 +38,11 @@ public class AllPackagePartialModels {
             // DEBUG
             LOGGER.info("Partial Models: {}", COLORED_PACKAGES);
         }
+        ColoredPackages.LOGGER.info("Dyed packager color label partial: {}", DYED_PACKAGER_COLOR_LABEL);
+    }
 
-//        ResourceLocation key = ColoredPackageStyles.getColoredItemId(RED_PACKAGE_STYLE);
-//        PartialModel model = PartialModel.of(ColoredPackages.asResource("item/" + key.getPath()));
-//
-//        // Add to Create Partial Models for packages
-//        AllPartialModels.PACKAGE_RIGGING.put(key, PartialModel.of(PackageStyles.STYLES.get(0).getRiggingModel()));
-//        AllPartialModels.PACKAGES.put(key, model);
-//
-//        COLORED_PACKAGES.put(key, model);
-//        LOGGER.info("Partial Models: {}", COLORED_PACKAGES);
+    private static PartialModel block(String path) {
+        return PartialModel.of(ColoredPackages.asResource("block/" + path));
     }
 
     public static void init() {}
