@@ -10,11 +10,14 @@ import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
+import timmychips.colored_packages.AllPackagePartialModels;
 import timmychips.colored_packages.ColoredPackages;
+import timmychips.colored_packages.content.logistics.box.ColoredPackageItem;
 
 public class RedPackageRendererForge extends EntityRenderer<RedPackageEntityForge> {
 
@@ -29,7 +32,18 @@ public class RedPackageRendererForge extends EntityRenderer<RedPackageEntityForg
             ItemStack box = entity.box;
             if (box.isEmpty() || !PackageItem.isPackage(box)) box = AllBlocks.CARDBOARD_BLOCK.asStack();
 
-            PartialModel model = AllPartialModels.PACKAGES.get(ForgeRegistries.ITEMS.getKey(box.getItem()));
+            ColoredPackages.LOGGER.info("test!!");
+
+            PartialModel model;
+            CompoundTag compoundTag = box.getTag();
+            ColoredPackages.LOGGER.info("compound tag: {}", box.getTag().getString(ColoredPackageItem.TAG_COLOR));
+            if (compoundTag != null) {
+                String color = compoundTag.getString(ColoredPackageItem.TAG_COLOR);
+                model = AllPackagePartialModels.coloredPartialFromColor(box, color);
+            }
+            else model = AllPartialModels.PACKAGES.get(ForgeRegistries.ITEMS.getKey(box.getItem()));
+
+            ColoredPackages.LOGGER.info("Partial model for render: {}", model);
 
             PackageRenderer.renderBox(entity, yaw, ms, buffer, light, model);
         }

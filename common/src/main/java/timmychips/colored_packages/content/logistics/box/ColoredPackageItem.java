@@ -18,7 +18,10 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
@@ -28,6 +31,18 @@ import org.jetbrains.annotations.Nullable;
 public class ColoredPackageItem extends PackageItem {
     public ColoredPackageItem(Properties properties, PackageStyles.PackageStyle style) {
         super(properties, style);
+    }
+
+    public static final String TAG_COLOR = "PackageColor";
+
+    public static void setColor(ItemStack packageStage, DyeColor color) {
+        CompoundTag colorTag = packageStage.getOrCreateTag();
+        colorTag.putString(TAG_COLOR, color.getName());
+    }
+
+    public static boolean hasColor(ItemStack itemStack, DyeColor color) {
+        CompoundTag compoundTag = itemStack.getTag();
+        return compoundTag != null && compoundTag.getString(TAG_COLOR).equals(color.getName());
     }
 
 //    @ExpectPlatform

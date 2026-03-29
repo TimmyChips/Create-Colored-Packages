@@ -6,7 +6,7 @@
   "client": [
   ],
   "mixins": [
-    "PackagerBlockEntityForgeMixin",
+    "ChainConveyerVisualMixinForge",
     "PackagerBlockMixinForge",
     "accessors.PackagerBlockEntityAccessorForge"
   ],

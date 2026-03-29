@@ -1,7 +1,6 @@
 package timmychips.colored_packages.content.logistics.box.red;
 
 import com.simibubi.create.AllBlocks;
-import com.simibubi.create.AllPartialModels;
 import com.simibubi.create.content.logistics.box.PackageEntity;
 import com.simibubi.create.content.logistics.box.PackageItem;
 import dev.engine_room.flywheel.api.visual.DynamicVisual;
@@ -15,6 +14,8 @@ import dev.engine_room.flywheel.lib.visual.SimpleDynamicVisual;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
+import timmychips.colored_packages.ColoredPackages;
+import timmychips.colored_packages.content.logistics.box.util.ColoredPackagePartialUtil;
 
 public class RedPackageVisual<T extends PackageEntity> extends AbstractEntityVisual<T> implements SimpleDynamicVisual {
     public final TransformedInstance instance;
@@ -26,7 +27,8 @@ public class RedPackageVisual<T extends PackageEntity> extends AbstractEntityVis
         if (box.isEmpty() || !PackageItem.isPackage(box))
             box = AllBlocks.CARDBOARD_BLOCK.asStack();
 
-        PartialModel model = AllPartialModels.PACKAGES.get(box.getItem().arch$registryName()); // get PartialModel from the entity's box item ResourceLocation
+        PartialModel model;
+        model = ColoredPackagePartialUtil.getPartialFromTag(box);
 
         instance = instancerProvider().instancer(InstanceTypes.TRANSFORMED, Models.partial(model))
                 .createInstance();

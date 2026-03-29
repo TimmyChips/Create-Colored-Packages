@@ -1,0 +1,13 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "create:item/package/cardboard_12x12",
+	"textures": {
+		"0": "colored_packages:item/package/red",
+		"particle": "create:item/package/cardboard_particle"
+	},
+    "overrides": [
+      { "predicate" : { "colored_packages:red": 1 }, "model":  "colored_packages:item/red_package_12x12" },
+      { "predicate" : { "colored_packages:lime": 1 }, "model":  "colored_packages:item/red_package_12x10" },
+      { "predicate" : { "colored_packages:black": 1 }, "model":  "minecraft:item/stick" }
+    ]
+}

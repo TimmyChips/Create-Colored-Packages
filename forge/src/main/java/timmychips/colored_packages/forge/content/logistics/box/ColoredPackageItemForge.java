@@ -10,6 +10,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
@@ -31,6 +32,9 @@ public class ColoredPackageItemForge extends ColoredPackageItem {
 
         // Add this item object to its respective colored list in the colored boxes array
         ColoredPackageStyles.addColoredPackageItemToMap(this);
+
+        // For constant type
+        ColoredPackageStyles.ALL_COLORED_BOXES_CONSTANT.add(this);
     }
 
     @Override
@@ -110,11 +114,14 @@ public class ColoredPackageItemForge extends ColoredPackageItem {
     public static ItemStack coloredContaining(ItemStackHandler stacks, Optional<DyeColor> color) {
         ItemStack box;
         if (color.isEmpty()) box = PackageStyles.getRandomBox(); // get Create random box if color isn't present
-        else box = ColoredPackageStyles.getRandomColoredBox(color.get()); // Get random colored box from the input color
+//        else box = ColoredPackageStyles.getRandomColoredBox(color.get()); // Get random colored box from the input color
+
+        else box = ColoredPackageStyles.getRandomConstantTypeBox(); // Get random box from the input color
 
         CompoundTag compound = new CompoundTag();
         compound.put("Items", stacks.serializeNBT());
         box.setTag(compound);
+        setColor(box, color.get());
         return box;
     }
 }
