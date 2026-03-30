@@ -89,7 +89,7 @@ public class DyedPackagerRendererForge extends SmartBlockEntityRenderer<DyedPack
 
     // From PackagerRenderer class with slight tweak to return correct tray model
     public static PartialModel getTrayModel(BlockState blockState) {
-        return AllPartialModels.PACKAGER_TRAY_REGULAR;
+        return AllPartialModels.PACKAGER_TRAY_DEFRAG;
     }
 
     // Render color label + sprite shift

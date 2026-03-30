@@ -14,7 +14,6 @@ import dev.engine_room.flywheel.lib.visual.SimpleDynamicVisual;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
-import timmychips.colored_packages.ColoredPackages;
 import timmychips.colored_packages.content.logistics.box.util.ColoredPackagePartialUtil;
 
 public class RedPackageVisual<T extends PackageEntity> extends AbstractEntityVisual<T> implements SimpleDynamicVisual {
@@ -28,7 +27,7 @@ public class RedPackageVisual<T extends PackageEntity> extends AbstractEntityVis
             box = AllBlocks.CARDBOARD_BLOCK.asStack();
 
         PartialModel model;
-        model = ColoredPackagePartialUtil.getPartialFromTag(box);
+        model = ColoredPackagePartialUtil.getPartialFromTagColor(box);
 
         instance = instancerProvider().instancer(InstanceTypes.TRANSFORMED, Models.partial(model))
                 .createInstance();

@@ -202,7 +202,7 @@ public class DyedPackagerBlockEntityForge extends PackagerBlockEntity {
         /// Call colored box containing method instead
         ItemStack createdBox =
                 extractedPackageItem.isEmpty() ? ColoredPackageItemForge.coloredContaining(extractedItems, color) : extractedPackageItem.copy();
-        ColoredPackages.LOGGER.info("createdBox: {}", createdBox);
+//        ColoredPackages.LOGGER.info("createdBox: {}", createdBox);
         ///
 
         computerBehaviour.prepareComputerEvent(new PackageEvent(createdBox, "package_created"));
@@ -232,7 +232,9 @@ public class DyedPackagerBlockEntityForge extends PackagerBlockEntity {
 
         // Try to cast for accessor, idk if needed but it crashed once from not being able to cast to accessor class
         try {
-            AdvancementBehaviour advancements = ((PackagerBlockEntityAccessorForge) this).coloredPackages$getPackagerAdvancements(); // Get advancements via accessor
+            PackagerBlockEntityAccessorForge packagerAccessor = (PackagerBlockEntityAccessorForge) this;
+
+            AdvancementBehaviour advancements = packagerAccessor.coloredPackages$getPackagerAdvancements(); // Get advancements via accessor
             advancements.awardPlayer(AllAdvancements.PACKAGER);
         } catch (ClassCastException e) {
             ColoredPackages.LOGGER.info("Unable to cast DyedPackagerBlockEntity: {} to {}", this, PackagerBlockEntityAccessorForge.class);

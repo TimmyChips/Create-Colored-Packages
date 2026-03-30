@@ -14,91 +14,62 @@ import java.util.Map;
 import static com.mojang.text2speech.Narrator.LOGGER;
 
 public class AllPackagePartialModels {
-    public static final Map<ResourceLocation, PartialModel> COLORED_PACKAGES = new HashMap<>();
-    public static final PartialModel DYED_PACKAGER_COLOR_LABEL = block("dyed_packager/color_label");
 
-//    for (PackageStyles.PackageStyle style : P) {
-//        ResourceLocation key = style.getItemId();
-//        PartialModel model = PartialModel.of(ColoredPackages.asResource("item/" + key.getPath()));
+    public static final PartialModel DYED_PACKAGER_COLOR_LABEL = block("dyed_packager/color_label"); // Partial model of the color label that will be rendered with Dyed Packager block
 
     static  {
 
-        /*
-        for (PackageStyles.PackageStyle style : ColoredPackageStyles.COLORED_STYLES) {
-//            ResourceLocation key = style.getItemId();
-            ResourceLocation key = ColoredPackageStyles.getColoredItemId(style);
-            PartialModel model = PartialModel.of(ColoredPackages.asResource("item/" + key.getPath()));
-
-            // Add to Create Partial Models for packages
-            AllPartialModels.PACKAGE_RIGGING.put(key, PartialModel.of(style.getRiggingModel()));
-            AllPartialModels.PACKAGES.put(key, model);
-
-            COLORED_PACKAGES.put(key, model);
-
-            // DEBUG
-            LOGGER.info("Partial Models: {}", COLORED_PACKAGES);
-        }
-        ColoredPackages.LOGGER.info("Dyed packager color label partial: {}", DYED_PACKAGER_COLOR_LABEL);
-
-         */
-
-
-        // Constant type
+        // Not really used in the normal game (since all colored packages are created with color suffix), but just in case to avoid null rendering errors
+        // Define and put all uncolored colored packages (lol) into Create's Package partial models
+        // It's not used because PartialModels don't use item model predicate overrides, so we have to define the actual COLOR packages partial models
         for (PackageStyles.PackageStyle sizeStyle : ColoredPackageStyles.STYLES) {
-            ResourceLocation key = ColoredPackageStyles.getColoredItemId(sizeStyle);
-            PartialModel model = PartialModel.of(ColoredPackages.asResource("item/" + key.getPath()));
+
+            ResourceLocation key = ColoredPackageStyles.getColoredItemId(sizeStyle); // Item id of package
+            PartialModel model = PartialModel.of(ColoredPackages.asResource("item/" + key.getPath())); // Where the model is located at in the resources
+                    // e.g. resources/assets/colored_packages/models/item/colored_package_12x10
 
             // Add to Create Partial Models for packages
             AllPartialModels.PACKAGE_RIGGING.put(key, PartialModel.of(sizeStyle.getRiggingModel()));
             AllPartialModels.PACKAGES.put(key, model);
         }
 
-//        // Partial models for color
+        // Color partial models
+        // Define and register all partial models of colored package models with their color (e.g. "green_package_12x12") and put into Create's Package partial models
         for (DyeColor color : DyeColor.values()) {
             for (PackageStyles.PackageStyle sizeStyle : ColoredPackageStyles.STYLES) {
 
                 ResourceLocation key = ColoredPackageStyles.getColoredItemId(sizeStyle);
-                String path = color.getName() + key.getPath().split("colored")[1];
+                String path = splitStringForColor(color.getName(), key);
 
-                PartialModel model = PartialModel.of(ColoredPackages.asResource("item/" + path));
-                ResourceLocation coloredPackageKey = ColoredPackages.asResource(path);
-
-                ColoredPackages.LOGGER.info("colored box key: {}, model: {}", coloredPackageKey, model);
+                ResourceLocation coloredPackageKey = ColoredPackages.asResource(path); // "Key" id of colored package
+                PartialModel model = PartialModel.of(ColoredPackages.asResource("item/" + path)); // Model location (e.g. "assets/colored_packages/models/item/purple_package_10x12")
 
                 // Add to Create Partial Models for packages
-//                AllPartialModels.PACKAGE_RIGGING.put(key, PartialModel.of(sizeStyle.getRiggingModel()));
-//                AllPartialModels.PACKAGES.put(key, model);
-                COLORED_PACKAGES.put(coloredPackageKey, model);
                 AllPartialModels.PACKAGES.put(coloredPackageKey, model);
                 AllPartialModels.PACKAGE_RIGGING.put(coloredPackageKey, PartialModel.of(sizeStyle.getRiggingModel()));
             }
         }
-        LOGGER.info("Colored package partial models: {}", COLORED_PACKAGES);
-        ColoredPackages.LOGGER.info("Create package partial models: {}", AllPartialModels.PACKAGES);
-
     }
 
+    // Get the associated PartialModel from the colored package ResourceLocation
     public static PartialModel coloredPartialFromColor(ItemStack stack, String colorStr) {
-        ResourceLocation key = stack.getItem().arch$registryName();
-        String path = colorStr + key.getPath().split("colored")[1];
-        LOGGER.info("colored box partial path from stack: {}", ColoredPackages.asResource("item/" + path));
-        LOGGER.info("partial model got: {}", COLORED_PACKAGES.get(ColoredPackages.asResource(path)));
-        return COLORED_PACKAGES.get(ColoredPackages.asResource(path));
+        return AllPartialModels.PACKAGES.get(coloredResourceFromColor(stack, colorStr));
     }
 
-    public static ResourceLocation coloredPartialResourceFromColor(ItemStack stack, String colorStr) {
+    // Get ResourceLocation of the package with its color
+    public static ResourceLocation coloredResourceFromColor(ItemStack stack, String colorStr) {
         ResourceLocation key = stack.getItem().arch$registryName();
-        String path = colorStr + key.getPath().split("colored")[1];
-        ColoredPackages.LOGGER.info("colored box resource: {}", ColoredPackages.asResource("item/" + path));
-        return ColoredPackages.asResource("item/" + path);
+        if (key == null) return null;
+
+        return ColoredPackages.asResource(splitStringForColor(colorStr, key)); // Return resource id the color the package should be
     }
-    // with item resource
-//    public static ResourceLocation coloredResourceFromColor(ItemStack stack, String colorStr) {
-//        ResourceLocation key = stack.getItem().arch$registryName();
-//        String path = colorStr + key.getPath().split("colored")[1];
-//        ColoredPackages.LOGGER.info("colored box resource: {}", ColoredPackages.asResource("item/" + path));
-//        return ColoredPackages.asResource("item/" + path);
-//    }
+
+    // Splits string and appends the color for it
+    // E.g. turns path string from "colored_package_12x12" to "blue_package_12x12"
+    private static String splitStringForColor(String color, ResourceLocation itemId) {
+        ColoredPackages.LOGGER.info("string in: {}", itemId);
+        return color + itemId.getPath().split("colored")[1];
+    }
 
     private static PartialModel block(String path) {
         return PartialModel.of(ColoredPackages.asResource("block/" + path));
