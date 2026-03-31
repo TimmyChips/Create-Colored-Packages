@@ -1,7 +1,6 @@
 package timmychips.colored_packages.forge.content.logistics.packager;
 
 import com.simibubi.create.AllBlocks;
-import com.simibubi.create.compat.computercraft.ComputerCraftProxy;
 import com.simibubi.create.compat.computercraft.events.PackageEvent;
 import com.simibubi.create.content.logistics.BigItemStack;
 import com.simibubi.create.content.logistics.box.PackageItem;
@@ -13,11 +12,7 @@ import com.simibubi.create.content.logistics.packagerLink.PackagerLinkBlockEntit
 import com.simibubi.create.content.logistics.stockTicker.PackageOrderWithCrafts;
 import com.simibubi.create.foundation.advancement.AdvancementBehaviour;
 import com.simibubi.create.foundation.advancement.AllAdvancements;
-import com.simibubi.create.foundation.advancement.CreateAdvancement;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
-import com.simibubi.create.foundation.blockEntity.behaviour.inventory.CapManipulationBehaviourBase;
-import com.simibubi.create.foundation.blockEntity.behaviour.inventory.InvManipulationBehaviour;
-import com.simibubi.create.foundation.blockEntity.behaviour.inventory.VersionedInventoryTrackerBehaviour;
 import net.createmod.catnip.data.Iterate;
 import net.createmod.catnip.nbt.NBTHelper;
 import net.minecraft.core.BlockPos;
@@ -31,7 +26,6 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 import timmychips.colored_packages.ColoredPackages;
-import timmychips.colored_packages.content.logistics.DyedPackagerBlock;
 import timmychips.colored_packages.forge.content.logistics.box.ColoredPackageItemForge;
 import timmychips.colored_packages.forge.mixin.accessors.PackagerBlockEntityAccessorForge;
 
@@ -41,7 +35,7 @@ import java.util.Optional;
 public class DyedPackagerBlockEntityForge extends PackagerBlockEntity {
 
     public Optional<DyeColor> color;
-    private AdvancementBehaviour advancements; // Copied from PackagerBlockEntity since advancements field in that class is private
+    private AdvancementBehaviour advancementsJunk; // Copied from PackagerBlockEntity since advancements field in that class is private
 
     public DyedPackagerBlockEntityForge(BlockEntityType<?> typeIn, BlockPos pos, BlockState state) {
         super(typeIn, pos, state);
@@ -68,7 +62,18 @@ public class DyedPackagerBlockEntityForge extends PackagerBlockEntity {
     // Copied from PackagerBlockEntity since advancements field in that class is private
 //    @Override
 //    public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
-//        behaviours.add(advancements = new AdvancementBehaviour(this, AllAdvancements.PACKAGER));
+//        super.addBehaviours(behaviours);
+//        for (BlockEntityBehaviour behaviour : behaviours) {
+////            ColoredPackages.LOGGER.info("block entity: {}", behaviour.blockEntity);
+//            if (behaviour instanceof AdvancementBehaviour advancementBehaviour) {
+//                advancementBehaviour.initialize();
+//                ColoredPackages.LOGGER.info("matching advancement type");
+//                ColoredPackages.LOGGER.info("owner? {}", advancementBehaviour.isOwnerPresent());
+////                advancementsJunk = advancementBehaviour;
+////                ColoredPackages.LOGGER.info("advancement behavior: {}", advancementBehaviour);
+//            }
+//        }
+////        behaviours.add(advancementsJunk = new AdvancementBehaviour(this, AllAdvancements.PACKAGER));
 //    }
 
     // Apply color and return true if successful
@@ -231,14 +236,34 @@ public class DyedPackagerBlockEntityForge extends PackagerBlockEntity {
         animationTicks = CYCLE;
 
         // Try to cast for accessor, idk if needed but it crashed once from not being able to cast to accessor class
-        try {
-            PackagerBlockEntityAccessorForge packagerAccessor = (PackagerBlockEntityAccessorForge) this;
+//        try {
+//            PackagerBlockEntityAccessorForge packagerAccessor = (PackagerBlockEntityAccessorForge) this;
+//
+//            AdvancementBehaviour advancements = packagerAccessor.coloredPackages$getPackagerAdvancements(); // Get advancements via accessor
+//            advancements.awardPlayer(AllAdvancements.PACKAGER);
+//        } catch (ClassCastException e) {
+//            ColoredPackages.LOGGER.info("Unable to cast DyedPackagerBlockEntity: {} to {}", this, PackagerBlockEntityAccessorForge.class);
+//        }
 
-            AdvancementBehaviour advancements = packagerAccessor.coloredPackages$getPackagerAdvancements(); // Get advancements via accessor
+        try {
+            PackagerBlockEntityAccessorForge advancementAccessor = (PackagerBlockEntityAccessorForge) (Object) this;
+
+            AdvancementBehaviour advancements = advancementAccessor.coloredPackages$getPackagerAdvancements();
+            ColoredPackages.LOGGER.info("try to award advancement, {}", advancements);
             advancements.awardPlayer(AllAdvancements.PACKAGER);
         } catch (ClassCastException e) {
-            ColoredPackages.LOGGER.info("Unable to cast DyedPackagerBlockEntity: {} to {}", this, PackagerBlockEntityAccessorForge.class);
+            ColoredPackages.LOGGER.info("Unable to cast DyedPackagerBlockEntityForge: {} to {}", this, PackagerBlockEntityAccessorForge.class);
         }
+
+//        try {
+//            advancementsJunk.awardPlayer(AllAdvancements.PACKAGER);
+//        } catch (Exception e) {
+//            ColoredPackages.LOGGER.error(String.valueOf(e));
+//        }
+
+
+//        ColoredPackages.LOGGER.info("try to award advancement");
+//        award(AllAdvancements.PACKAGER);
 
         triggerStockCheck();
         notifyUpdate();

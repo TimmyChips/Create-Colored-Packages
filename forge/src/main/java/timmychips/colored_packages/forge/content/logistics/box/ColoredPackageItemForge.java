@@ -17,6 +17,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.items.ItemStackHandler;
+import timmychips.colored_packages.ColoredPackages;
 import timmychips.colored_packages.content.logistics.box.ColoredPackageItem;
 import timmychips.colored_packages.content.logistics.box.ColoredPackageStyles;
 
@@ -113,7 +114,10 @@ public class ColoredPackageItemForge extends ColoredPackageItem {
      */
     public static ItemStack coloredContaining(ItemStackHandler stacks, Optional<DyeColor> color) {
         ItemStack box;
-        if (color.isEmpty()) box = PackageStyles.getRandomBox(); // get Create random box if color isn't present
+        if (color.isEmpty()) {
+            ColoredPackages.LOGGER.warn("Dye Color on Dyed Packager isn't set yet! Defaulting to Create's packages.");
+            box = PackageStyles.getRandomBox(); // get Create random box if color isn't present
+        }
 //        else box = ColoredPackageStyles.getRandomColoredBox(color.get()); // Get random colored box from the input color
 
         else box = ColoredPackageStyles.getRandomConstantTypeBox(); // Get random box from the input color
@@ -121,7 +125,9 @@ public class ColoredPackageItemForge extends ColoredPackageItem {
         CompoundTag compound = new CompoundTag();
         compound.put("Items", stacks.serializeNBT());
         box.setTag(compound);
-        setColor(box, color.get());
+        if (color.isPresent()) {
+            setColor(box, color.get());
+        }
         return box;
     }
 }

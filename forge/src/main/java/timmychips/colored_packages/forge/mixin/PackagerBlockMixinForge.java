@@ -3,10 +3,12 @@ package timmychips.colored_packages.forge.mixin;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.fluids.transfer.GenericItemEmptying;
 import com.simibubi.create.content.logistics.packager.PackagerBlock;
+import com.simibubi.create.foundation.advancement.AdvancementBehaviour;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
@@ -18,10 +20,7 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.common.Tags;
-import org.spongepowered.asm.mixin.Final;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -30,6 +29,7 @@ import timmychips.colored_packages.forge.content.logistics.packager.DyedPackager
 
 import static net.minecraft.world.level.block.DirectionalBlock.FACING;
 
+@Debug(export = true)
 @Mixin(PackagerBlock.class)
 public class PackagerBlockMixinForge {
     @Shadow
@@ -53,7 +53,7 @@ public class PackagerBlockMixinForge {
 
             if (isDye) {
                 // Set Packager to Dyed Packager and return newly created block entity
-                BlockEntity blockEntity = coloredPackages$setToDyedPackager(state, worldIn, pos);
+                BlockEntity blockEntity = coloredPackages$setToDyedPackager(state, worldIn, pos, player);
 
                 // Apply color to dyed packager block entity
                 if (blockEntity instanceof DyedPackagerBlockEntityForge dyedPackagerBE) {
@@ -65,7 +65,7 @@ public class PackagerBlockMixinForge {
     }
 
     @Unique
-    private BlockEntity coloredPackages$setToDyedPackager(BlockState state, Level worldIn, BlockPos pos) {
+    private BlockEntity coloredPackages$setToDyedPackager(BlockState state, Level worldIn, BlockPos pos, LivingEntity dyer) {
         // Get block state properties from Packager block
         PackagerBlock self = (PackagerBlock) (Object) this;
 
@@ -79,6 +79,9 @@ public class PackagerBlockMixinForge {
 
         // Set and update Create Packager block to Dyed Packager block
         worldIn.setBlockAndUpdate(pos, dyedPackagerState);
+
+        // Set advancement owner to player to properly grant advancement
+        AdvancementBehaviour.setPlacedBy(worldIn, pos, dyer);
 
         return worldIn.getBlockEntity(pos); // Return newly created dyed packager block entity
     }
