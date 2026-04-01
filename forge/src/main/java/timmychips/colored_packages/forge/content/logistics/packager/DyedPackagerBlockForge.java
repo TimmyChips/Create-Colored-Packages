@@ -7,6 +7,7 @@ import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.content.fluids.transfer.GenericItemEmptying;
 import com.simibubi.create.content.logistics.box.PackageItem;
+import com.simibubi.create.content.logistics.packager.PackagerBlock;
 import com.simibubi.create.content.logistics.packager.PackagerBlockEntity;
 import com.simibubi.create.foundation.advancement.AdvancementBehaviour;
 import com.simibubi.create.foundation.block.IBE;
@@ -14,6 +15,7 @@ import com.simibubi.create.foundation.block.WrenchableDirectionalBlock;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.inventory.InvManipulationBehaviour;
 import com.simibubi.create.foundation.utility.CreateLang;
+import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -105,13 +107,13 @@ public class DyedPackagerBlockForge extends WrenchableDirectionalBlock implement
                 .setValue(FACING, preferredFacing);
     }
 
-    public void setToDefaultPackager(BlockState state, Level worldIn, BlockPos pos) {
+    public void setToDefaultPackager(BlockState state, Level worldIn, BlockPos pos, BlockEntry<?> packagerEntry) {
         // Get block state properties from Dyed Packager block
         Direction currentFacing = state.getValue(FACING);
         boolean currentPowered = state.getValue(POWERED);
 
         // Get Create Packager block state with current property values
-        BlockState createPackagerState = AllBlocks.PACKAGER.getDefaultState()
+        BlockState createPackagerState = packagerEntry.getDefaultState()
                         .setValue(FACING, currentFacing)
                         .setValue(POWERED, currentPowered);
 
@@ -122,8 +124,6 @@ public class DyedPackagerBlockForge extends WrenchableDirectionalBlock implement
     @Override
     public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn,
                                  BlockHitResult hit) {
-        if (player == null)
-            return InteractionResult.PASS;
 
         ItemStack itemInHand = player.getItemInHand(handIn);
 
@@ -139,7 +139,7 @@ public class DyedPackagerBlockForge extends WrenchableDirectionalBlock implement
                     be ->
                             be.applyColor(DyeColor.getColor(itemInHand)) ? InteractionResult.SUCCESS : InteractionResult.PASS);
         if (hasWater) {
-            setToDefaultPackager(state, worldIn, pos);
+            setToDefaultPackager(state, worldIn, pos, AllBlocks.PACKAGER);
             return InteractionResult.SUCCESS;
         }
         ///

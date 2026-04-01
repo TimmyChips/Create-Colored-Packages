@@ -28,6 +28,7 @@ import timmychips.colored_packages.AllPackagePartialModels;
 import timmychips.colored_packages.AllPackagerSpriteShifts;
 import timmychips.colored_packages.ColoredPackages;
 import timmychips.colored_packages.content.logistics.DyedPackagerBlock;
+import timmychips.colored_packages.content.logistics.packager.DyedPackagerVisual;
 import timmychips.colored_packages.forge.AllDyedBlocksForge;
 
 public class DyedPackagerRendererForge extends SmartBlockEntityRenderer<DyedPackagerBlockEntityForge> {
@@ -62,7 +63,7 @@ public class DyedPackagerRendererForge extends SmartBlockEntityRenderer<DyedPack
                     .light(light)
                     .renderInto(ms, buffer.getBuffer(RenderType.solid()));
 
-            sbb = CachedBuffers.partial(getTrayModel(blockState), blockState);
+            sbb = CachedBuffers.partial(DyedPackagerVisual.getTrayModel(blockState), blockState);
             sbb.translate(Vec3.atLowerCornerOf(facing.getNormal())
                             .scale(trayOffset))
                     .rotateYCenteredDegrees(facing.toYRot())
@@ -85,11 +86,6 @@ public class DyedPackagerRendererForge extends SmartBlockEntityRenderer<DyedPack
                             overlay, 0);
             ms.popPose();
         }
-    }
-
-    // From PackagerRenderer class with slight tweak to return correct tray model
-    public static PartialModel getTrayModel(BlockState blockState) {
-        return AllPartialModels.PACKAGER_TRAY_DEFRAG;
     }
 
     // Render color label + sprite shift
