@@ -24,8 +24,7 @@ public final class ColoredPackages {
         ColoredPackageStyles.initColoredPackageStyles();
         PackageItemModelPredicate.register();
         AllPackageItems.register();
-//        AllPackageEntityTypes.register();
-//        AllDyedBlockEntityTypes.register();
+        AllDyedBlocks.register();
         AllPackagerSpriteShifts.init();
         AllPackagePartialModels.init();
     }

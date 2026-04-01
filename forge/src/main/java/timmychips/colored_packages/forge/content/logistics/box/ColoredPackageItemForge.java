@@ -130,4 +130,8 @@ public class ColoredPackageItemForge extends ColoredPackageItem {
         }
         return box;
     }
+
+//    public static ItemStack copyExtractedPackageItem(ItemStack extractedPackageItem, Optional<DyeColor> color) {
+//
+//    }
 }

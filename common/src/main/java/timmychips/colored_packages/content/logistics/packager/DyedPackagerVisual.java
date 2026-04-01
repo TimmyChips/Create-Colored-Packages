@@ -55,15 +55,13 @@ public class DyedPackagerVisual<T extends PackagerBlockEntity> extends AbstractB
                 .rotateXCenteredDegrees(AngleHelper.verticalAngle(facing))
                 .setChanged();
 
-        // TODO: I think we need proper ItemVisuals to handle rendering the boxes in here
-
         animate(partialTick);
     }
 
     // From PackagerRenderer class with slight tweak to return correct tray model
     // For whatever reason the PackagerVisual class had the tray in "defrag" sicko mode
     public static PartialModel getTrayModel(BlockState blockState) {
-        return AllDyedBlocks.DYED_REPACKAGER_TEST.has(blockState) ? AllPartialModels.PACKAGER_TRAY_REGULAR
+        return AllDyedBlocks.DYED_PACKAGER.has(blockState) ? AllPartialModels.PACKAGER_TRAY_REGULAR
                 : AllPartialModels.PACKAGER_TRAY_DEFRAG;
     }
 

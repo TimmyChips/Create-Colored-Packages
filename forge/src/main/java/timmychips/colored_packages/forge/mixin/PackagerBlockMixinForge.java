@@ -3,7 +3,9 @@ package timmychips.colored_packages.forge.mixin;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.fluids.transfer.GenericItemEmptying;
 import com.simibubi.create.content.logistics.packager.PackagerBlock;
+import com.simibubi.create.content.logistics.packager.PackagerBlockEntity;
 import com.simibubi.create.foundation.advancement.AdvancementBehaviour;
+import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -13,7 +15,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.DirectionalBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
@@ -24,7 +25,7 @@ import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import timmychips.colored_packages.forge.AllDyedBlocksForge;
+import timmychips.colored_packages.AllDyedBlocks;
 import timmychips.colored_packages.forge.content.logistics.packager.DyedPackagerBlockEntityForge;
 
 import static net.minecraft.world.level.block.DirectionalBlock.FACING;
@@ -72,8 +73,12 @@ public class PackagerBlockMixinForge {
         Direction currentFacing = state.getValue(FACING);
         boolean currentPowered = state.getValue(POWERED);
 
+        // Get the dyed packager (or re-repackager) block entry if the Create packager entry has this state (i.e. it's a packager block) or not
+        BlockEntry<?> dyedPackagerEntry = AllBlocks.PACKAGER.has(state) ? AllDyedBlocks.DYED_PACKAGER
+                : AllDyedBlocks.DYED_REPACKAGER;
+
         // Get Dyed Packager block state with current property values
-        BlockState dyedPackagerState = AllDyedBlocksForge.DYED_PACKAGER.getDefaultState()
+        BlockState dyedPackagerState = dyedPackagerEntry.getDefaultState()
                 .setValue(FACING, currentFacing)
                 .setValue(POWERED, currentPowered);
 

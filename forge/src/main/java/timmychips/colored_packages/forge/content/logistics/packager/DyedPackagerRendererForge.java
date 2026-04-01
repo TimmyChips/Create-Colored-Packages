@@ -1,10 +1,6 @@
 package timmychips.colored_packages.forge.content.logistics.packager;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.simibubi.create.AllBlocks;
-import com.simibubi.create.AllPartialModels;
-import com.simibubi.create.content.logistics.packager.PackagerBlock;
-import com.simibubi.create.content.logistics.packager.PackagerBlockEntity;
 import com.simibubi.create.content.logistics.packager.PackagerRenderer;
 import com.simibubi.create.foundation.blockEntity.renderer.SmartBlockEntityRenderer;
 import dev.engine_room.flywheel.api.visualization.VisualizationManager;
@@ -26,10 +22,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import timmychips.colored_packages.AllPackagePartialModels;
 import timmychips.colored_packages.AllPackagerSpriteShifts;
-import timmychips.colored_packages.ColoredPackages;
 import timmychips.colored_packages.content.logistics.DyedPackagerBlock;
 import timmychips.colored_packages.content.logistics.packager.DyedPackagerVisual;
-import timmychips.colored_packages.forge.AllDyedBlocksForge;
 
 public class DyedPackagerRendererForge extends SmartBlockEntityRenderer<DyedPackagerBlockEntityForge> {
     public DyedPackagerRendererForge(BlockEntityRendererProvider.Context context) {
