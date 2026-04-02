@@ -1,4 +1,4 @@
-package timmychips.colored_packages.forge.content.logistics.packager;
+package timmychips.colored_packages.forge.content.logistics.packager.repackager;
 
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.fluids.transfer.GenericItemEmptying;
@@ -6,7 +6,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -15,10 +14,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
-import timmychips.colored_packages.ColoredPackages;
-import timmychips.colored_packages.content.logistics.DyedPackagerBlock;
-import timmychips.colored_packages.content.logistics.DyedPackagerBlockEntity;
 import timmychips.colored_packages.forge.AllDyedBlockEntityTypesForge;
+import timmychips.colored_packages.forge.content.logistics.packager.DyedPackagerBlockEntityForge;
+import timmychips.colored_packages.forge.content.logistics.packager.DyedPackagerBlockForge;
 
 public class DyedRepackagerBlockForge extends DyedPackagerBlockForge {
     public DyedRepackagerBlockForge(Properties properties) {

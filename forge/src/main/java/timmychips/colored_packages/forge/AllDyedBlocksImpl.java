@@ -3,7 +3,7 @@ package timmychips.colored_packages.forge;
 import com.simibubi.create.foundation.data.BuilderTransformers;
 import timmychips.colored_packages.ColoredPackages;
 import timmychips.colored_packages.forge.content.logistics.packager.DyedPackagerBlockForge;
-import timmychips.colored_packages.forge.content.logistics.packager.DyedRepackagerBlockForge;
+import timmychips.colored_packages.forge.content.logistics.packager.repackager.DyedRepackagerBlockForge;
 
 import static timmychips.colored_packages.AllDyedBlocks.DYED_PACKAGER;
 import static timmychips.colored_packages.AllDyedBlocks.DYED_REPACKAGER;

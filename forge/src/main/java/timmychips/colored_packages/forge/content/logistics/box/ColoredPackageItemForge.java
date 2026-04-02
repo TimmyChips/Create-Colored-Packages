@@ -16,12 +16,14 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 import timmychips.colored_packages.ColoredPackages;
 import timmychips.colored_packages.content.logistics.box.ColoredPackageItem;
 import timmychips.colored_packages.content.logistics.box.ColoredPackageStyles;
 
 import java.lang.ref.WeakReference;
+import java.util.List;
 import java.util.Optional;
 
 public class ColoredPackageItemForge extends ColoredPackageItem {
@@ -131,7 +133,10 @@ public class ColoredPackageItemForge extends ColoredPackageItem {
         return box;
     }
 
-//    public static ItemStack copyExtractedPackageItem(ItemStack extractedPackageItem, Optional<DyeColor> color) {
-//
-//    }
+    // For repacking
+    public static ItemStack coloredContaining(List<ItemStack> stacks, Optional<DyeColor> color) {
+        ItemStackHandler newInv = new ItemStackHandler(9);
+        stacks.forEach(s -> ItemHandlerHelper.insertItemStacked(newInv, s, false));
+        return coloredContaining(newInv, color);
+    }
 }

@@ -6,7 +6,7 @@ import timmychips.colored_packages.ColoredPackages;
 import timmychips.colored_packages.content.logistics.packager.DyedPackagerVisual;
 import timmychips.colored_packages.forge.content.logistics.packager.DyedPackagerBlockEntityForge;
 import timmychips.colored_packages.forge.content.logistics.packager.DyedPackagerRendererForge;
-import timmychips.colored_packages.forge.content.logistics.packager.DyedRepackagerBlockEntityForge;
+import timmychips.colored_packages.forge.content.logistics.packager.repackager.DyedRepackagerBlockEntityForge;
 
 public class AllDyedBlockEntityTypesForge {
     public static final BlockEntityEntry<DyedPackagerBlockEntityForge> DYED_PACKAGER = ColoredPackages.REGISTRATE

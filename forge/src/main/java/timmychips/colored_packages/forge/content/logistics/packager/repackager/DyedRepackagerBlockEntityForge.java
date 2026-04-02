@@ -1,31 +1,37 @@
-package timmychips.colored_packages.forge.content.logistics.packager;
+package timmychips.colored_packages.forge.content.logistics.packager.repackager;
 
 import com.simibubi.create.compat.computercraft.events.PackageEvent;
 import com.simibubi.create.compat.computercraft.events.RepackageEvent;
 import com.simibubi.create.content.logistics.BigItemStack;
 import com.simibubi.create.content.logistics.box.PackageItem;
 import com.simibubi.create.content.logistics.crate.BottomlessItemHandler;
-import com.simibubi.create.content.logistics.packager.PackagerBlockEntity;
+import com.simibubi.create.content.logistics.packager.InventorySummary;
 import com.simibubi.create.content.logistics.packager.PackagerItemHandler;
 import com.simibubi.create.content.logistics.packager.PackagingRequest;
 import com.simibubi.create.content.logistics.packager.repackager.PackageRepackageHelper;
+import com.simibubi.create.content.logistics.stockTicker.PackageOrderWithCrafts;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.items.IItemHandler;
-import timmychips.colored_packages.ColoredPackages;
+import net.minecraftforge.items.ItemStackHandler;
+import timmychips.colored_packages.forge.content.logistics.box.ColoredPackageItemForge;
+import timmychips.colored_packages.forge.content.logistics.packager.DyedPackagerBlockEntityForge;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DyedRepackagerBlockEntityForge extends DyedPackagerBlockEntityForge {
 
-    public PackageRepackageHelper repackageHelper;
+    public DyedPackageRepackageHelper repackageHelper;
 
     public DyedRepackagerBlockEntityForge(BlockEntityType<?> typeIn, BlockPos pos, BlockState state) {
         super(typeIn, pos, state);
 
-        repackageHelper = new PackageRepackageHelper();
+        // Dyed version to get colored box
+        repackageHelper = new DyedPackageRepackageHelper();
     }
 
     public boolean unwrapBox(ItemStack box, boolean simulate) {
@@ -114,7 +120,7 @@ public class DyedRepackagerBlockEntityForge extends DyedPackagerBlockEntityForge
         if (completedOrderId == -1)
             return;
 
-        List<BigItemStack> boxesToExport = repackageHelper.repack(completedOrderId, level.getRandom());
+        List<BigItemStack> boxesToExport = repackageHelper.coloredRepack(completedOrderId, level.getRandom(), color);
 
         for (int slot = 0; slot < targetInv.getSlots(); slot++) {
             ItemStack extracted = targetInv.extractItem(slot, 1, true);
@@ -136,5 +142,4 @@ public class DyedRepackagerBlockEntityForge extends DyedPackagerBlockEntityForge
         queuedExitingPackages.addAll(boxesToExport);
         notifyUpdate();
     }
-
 }
