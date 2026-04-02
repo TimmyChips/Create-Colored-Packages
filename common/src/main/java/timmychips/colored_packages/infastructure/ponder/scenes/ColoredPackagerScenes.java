@@ -5,6 +5,7 @@ import com.simibubi.create.content.logistics.box.PackageItem;
 import com.simibubi.create.content.logistics.box.PackageStyles;
 import com.simibubi.create.foundation.ponder.CreateSceneBuilder;
 import com.simibubi.create.infrastructure.ponder.scenes.highLogistics.PonderHilo;
+import net.createmod.catnip.math.Pointing;
 import net.createmod.ponder.api.PonderPalette;
 import net.createmod.ponder.api.element.ElementLink;
 import net.createmod.ponder.api.element.WorldSectionElement;
@@ -13,6 +14,8 @@ import net.createmod.ponder.api.scene.SceneBuildingUtil;
 import net.createmod.ponder.api.scene.Selection;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -102,11 +105,12 @@ public class ColoredPackagerScenes {
         scene.world()
                 .toggleRedstonePower(util.select()
                         .fromTo(2, 2, 1, 2, 3, 1));
-        scene.idle(50);
+        scene.idle(30);
 
         // Package hops off belt; item still technically present lmao
         PonderHilo.packageHopsOffBelt(scene, util.grid()
                 .at(0, 1, 1), Direction.WEST, box);
+        scene.world().modifyEntities(ItemEntity.class, Entity::discard); // Kill package item entity
         scene.idle(20);
 
         // Dye overlay
@@ -127,9 +131,15 @@ public class ColoredPackagerScenes {
 
         // Dyed packager
         ItemStack applied = new ItemStack(Items.RED_DYE);
+        scene.overlay()
+                .showControls(util.vector()
+                        .of(2.5, 3, 1.5), Pointing.DOWN, 40)
+                .withItem(applied);
+        scene.idle(10);
+
         scene.world().setBlocks(packager1S, AllDyedBlocks.DYED_PACKAGER.getDefaultState(), false);
         scene.world().modifyBlockEntity(packager1, DyedPackagerBlockEntity.class, be -> {
-            be.color = Optional.of(DyeColor.RED);
+            be.color = Optional.of(DyeColor.RED); // Set color
         });
         scene.idle(20);
         scene.overlay()
@@ -166,16 +176,32 @@ public class ColoredPackagerScenes {
         scene.world()
                 .toggleRedstonePower(util.select()
                         .fromTo(2, 2, 1, 2, 3, 1));
-        scene.idle(50);
+        scene.idle(30);
+        // Package hops off belt; item still technically present lmao
+        PonderHilo.packageHopsOffBelt(scene, util.grid()
+                .at(0, 1, 1), Direction.WEST, box);
+        scene.world().modifyEntities(ItemEntity.class, Entity::discard); // Kill package item entity
+        scene.idle(20);
 
         // Water bucket / clear dyed packager
         scene.overlay()
                 .showText(90)
-                .text("The package will now be colored off the dye applied")
+                .text("Dyed Packagers and Re-Packager can be reverted to normal with a water bucket or water bottle")
                 .placeNearTarget()
                 .attachKeyFrame()
                 .pointAt(util.vector()
                         .blockSurface(util.grid()
                                 .at(2, 2, 1), Direction.WEST));
+        scene.idle(40);
+
+        applied = new ItemStack(Items.WATER_BUCKET);
+        scene.overlay()
+                .showControls(util.vector()
+                        .of(2.5, 3, 1.5), Pointing.DOWN, 40)
+                .withItem(applied);
+        scene.idle(10);
+
+        scene.world().setBlocks(packager1S, AllBlocks.PACKAGER.getDefaultState(), false);
+        scene.idle(40);
     }
 }
