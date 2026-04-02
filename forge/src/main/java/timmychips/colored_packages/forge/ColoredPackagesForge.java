@@ -26,5 +26,8 @@ public final class ColoredPackagesForge {
         AllDyedBlockEntityTypesForge.register();
         AllPackageEntityTypesForge.register();
         bus.addListener(AllPackageEntityTypesForge::registerEntityAttributes);
+
+        // Client bus listener
+        bus.addListener(ColoredPackagesClientForge::init);
     }
 }
