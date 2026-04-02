@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "colored_packages:dyed_packager",
+    "colored_packages:dyed_repackager"
+  ]
+}
