@@ -75,7 +75,7 @@ public class ColoredPackagerScenes {
         // Default packager overlay
         scene.overlay()
                 .showText(80)
-                .text("By default, packagers will create standard packages")
+                .text("By default, Packagers will create standard packages")
                 .attachKeyFrame()
                 .placeNearTarget()
                 .pointAt(util.vector()
@@ -113,14 +113,14 @@ public class ColoredPackagerScenes {
         // Dye overlay
         scene.overlay()
                 .showOutlineWithText(util.select()
-                        .position(2, 2, 2), 40)
+                        .position(2, 2, 2), 60)
                 .text("Right clicking on a Packager or Re-Packager will dye it")
                 .colored(PonderPalette.GREEN)
                 .placeNearTarget()
                 .attachKeyFrame()
                 .pointAt(util.vector()
                         .of(2, 3, 2.5));
-        scene.idle(60);
+        scene.idle(80);
 
         // Dyed packager
         ItemStack applied = new ItemStack(Items.RED_DYE);
@@ -174,7 +174,7 @@ public class ColoredPackagerScenes {
         // Water bucket / clear dyed packager
         scene.overlay()
                 .showText(90)
-                .text("Dyed Packagers and Re-Packager can be reverted to normal with a water bucket or water bottle")
+                .text("Dyed Packagers can be reverted to normal with a water bucket or water bottle")
                 .placeNearTarget()
                 .attachKeyFrame()
                 .pointAt(util.vector()
@@ -189,7 +189,7 @@ public class ColoredPackagerScenes {
         scene.idle(10);
 
         scene.world().setBlocks(packager1S, AllBlocks.PACKAGER.getDefaultState(), false);
-        scene.idle(40);
+        scene.idle(60);
 
         /// Scene end
     }

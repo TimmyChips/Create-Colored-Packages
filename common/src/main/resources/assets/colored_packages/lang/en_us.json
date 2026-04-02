@@ -1,0 +1,10 @@
+{
+  "block.colored_packages.dyed_packager": "Dyed Packager",
+  "block.colored_packages.dyed_repackager": "Dyed Re-Packager",
+
+  "colored_packages.ponder.dyed_packager.header": "Create Colored Packages: Creating colored packages",
+  "colored_packages.ponder.dyed_packager.text_1": "By default, Packagers will create standard packages",
+  "colored_packages.ponder.dyed_packager.text_2": "Right clicking on a Packager or Re-Packager will dye it",
+  "colored_packages.ponder.dyed_packager.text_3": "The package will now be colored off the dye applied",
+  "colored_packages.ponder.dyed_packager.text_4": "Dyed Packagers can be reverted to normal with a water bucket or water bottle"
+}
