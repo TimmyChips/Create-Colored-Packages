@@ -3,6 +3,7 @@ package timmychips.colored_packages.content.logistics.box;
 import com.google.common.collect.ImmutableList;
 import com.simibubi.create.content.logistics.box.PackageItem;
 import com.simibubi.create.content.logistics.box.PackageStyles;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
@@ -96,6 +97,7 @@ public class ColoredPackageStyles extends PackageStyles {
         BOXES_BY_COLOR.put(color, coloredPackages); // Adds colored list to colored boxes map
 
         PackageStyles.STANDARD_BOXES.remove(packageItem); // Remove colored package item from Create's list so the normal Packager doesn't create colored packages
+        PackageStyles.ALL_BOXES.remove(packageItem);
     }
 
     /**
@@ -120,5 +122,12 @@ public class ColoredPackageStyles extends PackageStyles {
                 PackageStyles.RARE_BOXES : ALL_COLORED_BOXES_CONSTANT;
         ColoredPackages.LOGGER.info("returned random item stack box: {}", new ItemStack(pool.get(STYLE_PICKER.nextInt(pool.size()))));
         return new ItemStack(pool.get(STYLE_PICKER.nextInt(pool.size()))); // Return random package item from list
+    }
+
+    // For Ponder scene
+    public static ItemStack getDefaultColoredBox() {
+        ItemStack box = new ItemStack(ALL_COLORED_BOXES_CONSTANT.get(0));
+        ColoredPackageItem.setColor(box, DyeColor.RED);
+        return box;
     }
 }
