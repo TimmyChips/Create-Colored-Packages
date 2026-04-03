@@ -7,17 +7,25 @@ import com.simibubi.create.content.logistics.box.PackageItem;
 import com.simibubi.create.content.logistics.box.PackageRenderer;
 import dev.engine_room.flywheel.api.visualization.VisualizationManager;
 import dev.engine_room.flywheel.lib.model.baked.PartialModel;
+import net.createmod.catnip.math.AngleHelper;
+import net.createmod.catnip.render.CachedBuffers;
+import net.createmod.catnip.render.SuperByteBuffer;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 import timmychips.colored_packages.AllPackagePartialModels;
 import timmychips.colored_packages.ColoredPackages;
 import timmychips.colored_packages.content.logistics.box.ColoredPackageItem;
+import timmychips.colored_packages.content.logistics.box.util.ColoredPackagePartialUtil;
 
 public class RedPackageRendererForge extends EntityRenderer<RedPackageEntityForge> {
 
@@ -41,13 +49,26 @@ public class RedPackageRendererForge extends EntityRenderer<RedPackageEntityForg
                 String color = compoundTag.getString(ColoredPackageItem.TAG_COLOR);
                 model = AllPackagePartialModels.coloredPartialFromColor(box, color);
             }
-            else model = AllPartialModels.PACKAGES.get(ForgeRegistries.ITEMS.getKey(box.getItem()));
+            model = ColoredPackagePartialUtil.getPartialFromTagColor(box);
+//            else model = AllPartialModels.PACKAGES.get(ForgeRegistries.ITEMS.getKey(box.getItem()));
 
             ColoredPackages.LOGGER.info("Partial model for render: {}", model);
 
-            PackageRenderer.renderBox(entity, yaw, ms, buffer, light, model);
+            renderBox(entity, yaw, ms, buffer, light, model);
         }
         super.render(entity, yaw, pt, ms, buffer, light);
+    }
+
+    public static void renderBox(Entity entity, float yaw, PoseStack ms, MultiBufferSource buffer, int light,
+                                 PartialModel model) {
+        if (model == null)
+            return;
+        SuperByteBuffer sbb = CachedBuffers.partial(model, Blocks.AIR.defaultBlockState());
+        sbb.translate(-.5, 0, -.5)
+                .rotateCentered(-AngleHelper.rad(yaw + 90), Direction.UP)
+                .light(light)
+                .nudge(entity.getId());
+        sbb.renderInto(ms, buffer.getBuffer(RenderType.solid()));
     }
 
     // Not needed, just return new null ResourceLocation to avoid error/warning

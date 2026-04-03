@@ -1,8 +1,12 @@
 package timmychips.colored_packages.forge.content.logistics.box;
 
+import com.simibubi.create.AllEntityTypes;
 import com.simibubi.create.content.logistics.box.PackageEntity;
+import com.simibubi.create.content.logistics.chute.ChuteBlock;
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -17,6 +21,7 @@ import timmychips.colored_packages.forge.AllPackageEntityTypesForge;
 
 public class RedPackageEntityForge extends PackageEntity implements IEntityAdditionalSpawnData {
 
+    private Entity originalEntity;
     public String model;
 
     public RedPackageEntityForge(EntityType<?> entityTypeIn, Level worldIn) {
@@ -68,6 +73,25 @@ public class RedPackageEntityForge extends PackageEntity implements IEntityAddit
         EntityType.Builder<RedPackageEntityForge> boxBuilder = (EntityType.Builder<RedPackageEntityForge>) builder;
         return boxBuilder.setCustomClientFactory(RedPackageEntityForge::spawn)
                 .sized(1, 1);
+    }
+
+    // From dropped item
+    public static RedPackageEntityForge fromDroppedItem(Level world, Entity originalEntity, ItemStack itemstack) {
+        RedPackageEntityForge packageEntity = AllPackageEntityTypesForge.RED_COLORED_PACKAGE_FORGE.get()
+                .create(world);
+
+        Vec3 position = originalEntity.position();
+        packageEntity.setPos(position);
+        packageEntity.setBox(itemstack);
+        packageEntity.setDeltaMovement(originalEntity.getDeltaMovement()
+                .scale(1.5f));
+        packageEntity.originalEntity = originalEntity;
+
+        if (world != null && !world.isClientSide)
+            if (ChuteBlock.isChute(world.getBlockState(BlockPos.containing(position.x, position.y + .5f, position.z))))
+                packageEntity.setYRot(((int) packageEntity.getYRot()) / 90 * 90);
+
+        return packageEntity;
     }
 
     @Override

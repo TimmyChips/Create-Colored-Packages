@@ -1,12 +1,14 @@
 package timmychips.colored_packages.forge.content.logistics.box;
 
 import com.simibubi.create.AllEntityTypes;
+import com.simibubi.create.content.logistics.box.PackageEntity;
 import com.simibubi.create.content.logistics.box.PackageStyles;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeColor;
@@ -38,6 +40,12 @@ public class ColoredPackageItemForge extends ColoredPackageItem {
 
         // For constant type
         ColoredPackageStyles.ALL_COLORED_BOXES_CONSTANT.add(this);
+    }
+
+    // For when package item is dropped with Q
+    @Override
+    public Entity createEntity(Level world, Entity location, ItemStack itemstack) {
+        return RedPackageEntityForge.fromDroppedItem(world, location, itemstack);
     }
 
     @Override
