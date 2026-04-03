@@ -1,13 +1,25 @@
 {
-	"credit": "Made with Blockbench",
-	"parent": "create:item/package/cardboard_12x10",
-	"textures": {
-		"0": "colored_packages:item/package/red",
-		"particle": "create:item/package/cardboard_particle"
-	},
-    "overrides": [
-      { "predicate" : { "colored_packages:red": 1 }, "model":  "colored_packages:item/red_package_12x10" },
-      { "predicate" : { "colored_packages:lime": 1 }, "model":  "colored_packages:item/red_package_12x10" },
-      { "predicate" : { "colored_packages:black": 1 }, "model":  "minecraft:item/stick" }
-    ]
+  "parent": "create:item/package/cardboard_12x10",
+  "textures": {
+    "0": "colored_packages:item/package/red",
+    "particle": "create:item/package/cardboard_particle"
+  },
+  "overrides": [
+    { "predicate": { "colored_packages:black": 1 }, "model": "colored_packages:item/black_package_12x10" },
+    { "predicate": { "colored_packages:blue": 1 }, "model": "colored_packages:item/blue_package_12x10" },
+    { "predicate": { "colored_packages:brown": 1 }, "model": "colored_packages:item/brown_package_12x10" },
+    { "predicate": { "colored_packages:cyan": 1 }, "model": "colored_packages:item/cyan_package_12x10" },
+    { "predicate": { "colored_packages:gray": 1 }, "model": "colored_packages:item/gray_package_12x10" },
+    { "predicate": { "colored_packages:green": 1 }, "model": "colored_packages:item/green_package_12x10" },
+    { "predicate": { "colored_packages:light_blue": 1 }, "model": "colored_packages:item/light_blue_package_12x10" },
+    { "predicate": { "colored_packages:light_gray": 1 }, "model": "colored_packages:item/light_gray_package_12x10" },
+    { "predicate": { "colored_packages:lime": 1 }, "model": "colored_packages:item/lime_package_12x10" },
+    { "predicate": { "colored_packages:magenta": 1 }, "model": "colored_packages:item/magenta_package_12x10" },
+    { "predicate": { "colored_packages:orange": 1 }, "model": "colored_packages:item/orange_package_12x10" },
+    { "predicate": { "colored_packages:pink": 1 }, "model": "colored_packages:item/pink_package_12x10" },
+    { "predicate": { "colored_packages:purple": 1 }, "model": "colored_packages:item/purple_package_12x10" },
+    { "predicate": { "colored_packages:red": 1 }, "model": "colored_packages:item/red_package_12x10" },
+    { "predicate": { "colored_packages:white": 1 }, "model": "colored_packages:item/white_package_12x10" },
+    { "predicate": { "colored_packages:yellow": 1 }, "model": "colored_packages:item/yellow_package_12x10" }
+  ]
 }

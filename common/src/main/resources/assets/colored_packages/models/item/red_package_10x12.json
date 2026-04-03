@@ -1,5 +1,5 @@
 {
-  "parent": "create:item/package/cardboard_12x10",
+  "parent": "create:item/package/cardboard_10x12",
   "textures": {
     "0": "colored_packages:item/package/red",
     "particle": "colored_packages:item/package/particle/red"

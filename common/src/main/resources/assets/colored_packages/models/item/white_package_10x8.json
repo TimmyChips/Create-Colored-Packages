@@ -1,0 +1,7 @@
+{
+  "parent": "create:item/package/cardboard_10x8",
+  "textures": {
+    "0": "colored_packages:item/package/white",
+    "particle": "colored_packages:item/package/particle/white"
+  }
+}
