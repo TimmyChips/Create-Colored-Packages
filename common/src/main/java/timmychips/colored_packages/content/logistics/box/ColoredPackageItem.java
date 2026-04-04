@@ -35,14 +35,26 @@ public class ColoredPackageItem extends PackageItem {
 
     public static final String TAG_COLOR = "PackageColor";
 
-    public static void setColor(ItemStack packageStage, DyeColor color) {
-        CompoundTag colorTag = packageStage.getOrCreateTag();
+    // Set tag color
+    public static void setColor(ItemStack packageStack, DyeColor color) {
+        CompoundTag colorTag = packageStack.getOrCreateTag();
         colorTag.putString(TAG_COLOR, color.getName());
     }
 
+    // Check if tag contains color input
     public static boolean hasColor(ItemStack itemStack, DyeColor color) {
         CompoundTag compoundTag = itemStack.getTag();
         return compoundTag != null && compoundTag.getString(TAG_COLOR).equals(color.getName());
+    }
+
+    // Check if color tag is present (and not blank)
+    public static boolean hasColorTag(ItemStack itemStack) {
+        CompoundTag compoundTag = itemStack.getTag();
+        if (compoundTag != null) {
+            String colorStr = compoundTag.getString(TAG_COLOR);
+            return !colorStr.isBlank(); // Color tag isn't blank, has color string
+        }
+        return false;
     }
 
 //    @ExpectPlatform

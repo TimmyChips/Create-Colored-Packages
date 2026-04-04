@@ -46,6 +46,7 @@ public class RedPackageEntityForge extends PackageEntity implements IEntityAddit
         this.refreshDimensions();
     }
 
+    // Unused, refer to PackageEntityMixinForge.class
     public static RedPackageEntityForge fromItemStack(Level world, Vec3 position, ItemStack itemstack) {
         RedPackageEntityForge packageEntity = AllPackageEntityTypesForge.RED_COLORED_PACKAGE_FORGE.get()
                 .create(world);
