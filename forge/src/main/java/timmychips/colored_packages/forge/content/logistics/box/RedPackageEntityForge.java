@@ -11,6 +11,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
@@ -93,6 +94,23 @@ public class RedPackageEntityForge extends PackageEntity implements IEntityAddit
                 packageEntity.setYRot(((int) packageEntity.getYRot()) / 90 * 90);
 
         return packageEntity;
+    }
+
+    /*
+     * Forge created package entities even when an ItemEntity is spawned as 'fake'.
+     * See: GiveCommand#giveItem. This method discards the package if it originated
+     * from such a fake item
+     */
+    // COPIED FROM CREATE
+    @Override
+    protected void verifyInitialEntity() {
+        if (!(originalEntity instanceof ItemEntity itemEntity))
+            return;
+        CompoundTag nbt = new CompoundTag();
+        itemEntity.addAdditionalSaveData(nbt);
+        if (nbt.getInt("PickupDelay") != 32767) // See: ItemEntity#makeFakeItem
+            return;
+        discard();
     }
 
     @Override
