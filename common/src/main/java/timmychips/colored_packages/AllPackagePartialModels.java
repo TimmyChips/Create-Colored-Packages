@@ -51,12 +51,22 @@ public class AllPackagePartialModels {
         }
     }
 
-    // Get the associated PartialModel from the colored package ResourceLocation
+    /**
+     * Colored Package as a PartialModel
+     * @param stack The package item stack
+     * @param colorStr The package item's color nbt
+     * @return The associated PartialModel from the colored package ResourceLocation
+     */
     public static PartialModel coloredPartialFromColor(ItemStack stack, String colorStr) {
         return AllPartialModels.PACKAGES.get(coloredResourceFromColor(stack, colorStr));
     }
 
-    // Get ResourceLocation of the package with its color
+    /**
+     * Colored Package as a ResourceLocation item id
+     * @param stack The package item stack
+     * @param colorStr The package item's color nbt
+     * @return The ResourceLocation of the package with its color
+     */
     public static ResourceLocation coloredResourceFromColor(ItemStack stack, String colorStr) {
         ResourceLocation key = stack.getItem().arch$registryName();
         if (key == null) return null;
@@ -67,7 +77,6 @@ public class AllPackagePartialModels {
     // Splits string and appends the color for it
     // E.g. turns path string from "colored_package_12x12" to "blue_package_12x12"
     private static String splitStringForColor(String color, ResourceLocation itemId) {
-        ColoredPackages.LOGGER.info("string in: {}", itemId);
         return color + itemId.getPath().split("colored")[1];
     }
 

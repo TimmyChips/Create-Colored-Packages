@@ -16,10 +16,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 import timmychips.colored_packages.content.logistics.box.util.ColoredPackagePartialUtil;
 
-public class RedPackageVisual<T extends PackageEntity> extends AbstractEntityVisual<T> implements SimpleDynamicVisual {
+// The package flywheel renderer
+public class ColoredPackageVisual<T extends PackageEntity> extends AbstractEntityVisual<T> implements SimpleDynamicVisual {
     public final TransformedInstance instance;
 
-    public RedPackageVisual(VisualizationContext ctx, T entity, float partialTick) {
+    public ColoredPackageVisual(VisualizationContext ctx, T entity, float partialTick) {
         super(ctx, entity, partialTick);
 
         ItemStack box = entity.box;
@@ -27,7 +28,7 @@ public class RedPackageVisual<T extends PackageEntity> extends AbstractEntityVis
             box = AllBlocks.CARDBOARD_BLOCK.asStack();
 
         PartialModel model;
-        model = ColoredPackagePartialUtil.getPartialFromTagColor(box);
+        model = ColoredPackagePartialUtil.getPartialFromTagColor(box); // Get Partial Model from box ItemStack's PackageColor tag
 
         instance = instancerProvider().instancer(InstanceTypes.TRANSFORMED, Models.partial(model))
                 .createInstance();
@@ -40,7 +41,7 @@ public class RedPackageVisual<T extends PackageEntity> extends AbstractEntityVis
         animate(ctx.partialTick());
     }
 
-    // Copied from PackageVisual since it's a private method and I don't feel like using an access widener am lazy
+    // Copied from PackageVisual, nothing different
     private void animate(float partialTick) {
         float yaw = Mth.lerp(partialTick, entity.yRotO, entity.getYRot());
 

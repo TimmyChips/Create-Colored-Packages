@@ -12,7 +12,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import timmychips.colored_packages.ColoredPackages;
-import timmychips.colored_packages.content.logistics.box.red.RedPackageVisual;
+import timmychips.colored_packages.content.logistics.box.red.ColoredPackageVisual;
 import timmychips.colored_packages.forge.content.logistics.box.RedPackageEntityForge;
 import timmychips.colored_packages.forge.content.logistics.box.RedPackageRendererForge;
 
@@ -25,7 +25,7 @@ public class AllPackageEntityTypesImpl {
 
         RED_COLORED_PACKAGE_FORGE = register("red_package", RedPackageEntityForge::new, () -> RedPackageRendererForge::new,
                 MobCategory.MISC, 10, 3, true, false, RedPackageEntityForge::build)
-                .visual(() -> RedPackageVisual::new, true)
+                .visual(() -> ColoredPackageVisual::new, true)
                 .register();
     }
 

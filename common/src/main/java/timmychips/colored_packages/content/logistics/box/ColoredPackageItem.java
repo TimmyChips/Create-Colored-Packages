@@ -33,7 +33,7 @@ public class ColoredPackageItem extends PackageItem {
         super(properties, style);
     }
 
-    public static final String TAG_COLOR = "PackageColor";
+    public static final String TAG_COLOR = "PackageColor"; // The color tag the item will have that determines the color
 
     // Set tag color
     public static void setColor(ItemStack packageStack, DyeColor color) {
@@ -56,10 +56,4 @@ public class ColoredPackageItem extends PackageItem {
         }
         return false;
     }
-
-//    @ExpectPlatform
-//    public static Object ColoredPackageEntity(Level world, Vec3 point) {
-////        return new PackageEntity(world, point.x, point.y, point.z);
-//        return null;
-//    }
 }

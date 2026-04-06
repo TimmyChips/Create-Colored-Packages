@@ -98,12 +98,15 @@ public class DyedPackagerRendererForge extends SmartBlockEntityRenderer<DyedPack
         packagerBuffer.renderInto(ms, buffer.getBuffer(RenderType.cutoutMipped())); // Render color label on dyed packager
     }
 
+    /**
+     *
+     * @param color The input color
+     * @return Returns the sprite shift from the input color for DyedPackager's color label texture
+     */
     protected static SpriteShiftEntry getSpriteShiftEntry(DyeColor color) {
-//        ColoredPackages.LOGGER.info("color: {}", color);
         if (color != null) {
-//            ColoredPackages.LOGGER.info("sprite shift: {}", AllPackagerSpriteShifts.DYED_PACKAGERS.get(color));
             return AllPackagerSpriteShifts.DYED_PACKAGERS.get(color);
         }
-        else return AllPackagerSpriteShifts.DYED_PACKAGERS.get(DyeColor.RED);
+        else return AllPackagerSpriteShifts.DYED_PACKAGERS.get(DyeColor.BLUE);
     }
 }

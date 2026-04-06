@@ -35,10 +35,7 @@ public class ColoredPackageItemForge extends ColoredPackageItem {
     public ColoredPackageItemForge(Properties properties, PackageStyles.PackageStyle style) {
         super(properties, style);
 
-        // Add this item object to its respective colored list in the colored boxes array
-        ColoredPackageStyles.addColoredPackageItemToMap(this);
-
-        // For constant type
+        // Add this colored package item, and it's style to array list to later retrieve
         ColoredPackageStyles.ALL_COLORED_BOXES_CONSTANT.add(this);
     }
 
