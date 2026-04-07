@@ -11,6 +11,7 @@ import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import timmychips.colored_packages.content.logistics.box.ColoredPackageItem;
 import timmychips.colored_packages.content.logistics.box.ColoredPackageStyles;
 
 import java.util.Locale;
@@ -70,29 +71,10 @@ public class AllPackageItems {
                         + " Package");
     }
 
-    public static ItemBuilder<?, CreateRegistrate> coloredPackageItem(PackageStyles.PackageStyle style) {
-        String size = "_" + style.width() + "x" + style.height();
-        return ColoredPackages.REGISTRATE.item(style.getItemId()
-                        .getPath(), p -> {
-//                            if (Platform.isForge()) return new ColoredPackageItem(p, style);
-//                            return new ColoredPackageItem(p, style);
-                            return getPlatformPackageItem(p, style);
-                         })
-                .properties(p -> p.stacksTo(1))
-                .tag(AllTags.AllItemTags.PACKAGES.tag)
-                .lang((style.rare() ? "Rare"
-                        : style.type()
-                        .substring(0, 1)
-                        .toUpperCase(Locale.ROOT)
-                        + style.type()
-                        .substring(1))
-                        + " Package");
-    }
-
     public static ItemBuilder<?, CreateRegistrate> coloredPackageItemNew(PackageStyles.PackageStyle style) {
                 return ColoredPackages.REGISTRATE.item(style.getItemId()
                         .getPath(), p -> {
-                    return getPlatformPackageItem(p, style);
+                    return new ColoredPackageItem(p, style);
                 })
                 .properties(p -> p.stacksTo(1))
                 .tag(AllTags.AllItemTags.PACKAGES.tag)
@@ -106,10 +88,10 @@ public class AllPackageItems {
     }
 
     // Return package item per platform
-    @ExpectPlatform
-    public static Item getPlatformPackageItem(Item.Properties properties, PackageStyles.PackageStyle style) {
-        return Items.AIR;
-    }
+//    @ExpectPlatform
+//    public static Item getPlatformPackageItem(Item.Properties properties, PackageStyles.PackageStyle style) {
+//        return Items.AIR;
+//    }
 
     public static void register() {}
 }

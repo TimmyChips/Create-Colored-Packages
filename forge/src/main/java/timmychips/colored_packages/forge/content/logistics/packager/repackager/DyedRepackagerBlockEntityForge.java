@@ -5,22 +5,15 @@ import com.simibubi.create.compat.computercraft.events.RepackageEvent;
 import com.simibubi.create.content.logistics.BigItemStack;
 import com.simibubi.create.content.logistics.box.PackageItem;
 import com.simibubi.create.content.logistics.crate.BottomlessItemHandler;
-import com.simibubi.create.content.logistics.packager.InventorySummary;
 import com.simibubi.create.content.logistics.packager.PackagerItemHandler;
 import com.simibubi.create.content.logistics.packager.PackagingRequest;
-import com.simibubi.create.content.logistics.packager.repackager.PackageRepackageHelper;
-import com.simibubi.create.content.logistics.stockTicker.PackageOrderWithCrafts;
 import net.minecraft.core.BlockPos;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
-import timmychips.colored_packages.forge.content.logistics.box.ColoredPackageItemForge;
 import timmychips.colored_packages.forge.content.logistics.packager.DyedPackagerBlockEntityForge;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class DyedRepackagerBlockEntityForge extends DyedPackagerBlockEntityForge {

@@ -13,7 +13,6 @@ import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 import timmychips.colored_packages.ColoredPackages;
 import timmychips.colored_packages.content.logistics.box.ColoredPackageItem;
-import timmychips.colored_packages.forge.content.logistics.box.ColoredPackageItemForge;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -102,7 +101,7 @@ public class DyedPackageRepackageHelper extends PackageRepackageHelper {
 //            exportingPackages.add(new BigItemStack(PackageItem.containing(target), 1));
             /// Colored repackage containing
             ColoredPackages.LOGGER.info("TEST 1!");
-            exportingPackages.add(new BigItemStack(ColoredPackageItemForge.coloredContaining(target, color), 1));
+            exportingPackages.add(new BigItemStack(ColoredPackageItem.coloredContaining(target, color), 1));
             ///
             target = new ItemStackHandler(PackageItem.SLOTS);
             currentSlot = 0;
@@ -114,7 +113,7 @@ public class DyedPackageRepackageHelper extends PackageRepackageHelper {
 //                exportingPackages.add(new BigItemStack(PackageItem.containing(target), 1));
                 /// Colored repackage containing
                 ColoredPackages.LOGGER.info("TEST 5!");
-                exportingPackages.add(new BigItemStack(ColoredPackageItemForge.coloredContaining(target, color), 1));
+                exportingPackages.add(new BigItemStack(ColoredPackageItem.coloredContaining(target, color), 1));
                 ///
                 break;
             }
@@ -156,7 +155,7 @@ public class DyedPackageRepackageHelper extends PackageRepackageHelper {
             for (int currentSlot = 0; currentSlot < Math.min(stacks.size(), target.getSlots()); currentSlot++)
                 target.setStackInSlot(currentSlot, stacks.get(currentSlot).stack.copyWithCount(1));
 
-            ItemStack box = ColoredPackageItemForge.coloredContaining(target, color);
+            ItemStack box = ColoredPackageItem.coloredContaining(target, color);
             PackageItem.setOrder(box, r.nextInt(), 0, true, 0, true,
                     PackageOrderWithCrafts.singleRecipe(craftingEntry.pattern()
                             .stacks()));
