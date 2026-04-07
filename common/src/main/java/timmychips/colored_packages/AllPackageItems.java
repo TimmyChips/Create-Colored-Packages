@@ -74,7 +74,7 @@ public class AllPackageItems {
     public static ItemBuilder<?, CreateRegistrate> coloredPackageItemNew(PackageStyles.PackageStyle style) {
                 return ColoredPackages.REGISTRATE.item(style.getItemId()
                         .getPath(), p -> {
-                    return new ColoredPackageItem(p, style);
+                    return getPlatformPackageItem(p, style);
                 })
                 .properties(p -> p.stacksTo(1))
                 .tag(AllTags.AllItemTags.PACKAGES.tag)
@@ -88,10 +88,10 @@ public class AllPackageItems {
     }
 
     // Return package item per platform
-//    @ExpectPlatform
-//    public static Item getPlatformPackageItem(Item.Properties properties, PackageStyles.PackageStyle style) {
-//        return Items.AIR;
-//    }
+    @ExpectPlatform
+    public static Item getPlatformPackageItem(Item.Properties properties, PackageStyles.PackageStyle style) {
+        return Items.AIR;
+    }
 
     public static void register() {}
 }

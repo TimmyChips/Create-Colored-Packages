@@ -27,6 +27,7 @@ import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 import timmychips.colored_packages.ColoredPackages;
 import timmychips.colored_packages.content.logistics.box.ColoredPackageItem;
+import timmychips.colored_packages.forge.content.logistics.box.ColoredPackageItemForge;
 import timmychips.colored_packages.forge.mixin.accessors.PackagerBlockEntityAccessorForge;
 
 import java.util.List;
@@ -206,7 +207,7 @@ public class DyedPackagerBlockEntityForge extends PackagerBlockEntity {
 
         /// Call colored box containing method instead
         ItemStack createdBox =
-                extractedPackageItem.isEmpty() ? ColoredPackageItem.coloredContaining(extractedItems, color) : extractedPackageItem.copy();
+                extractedPackageItem.isEmpty() ? ColoredPackageItemForge.coloredContaining(extractedItems, color) : extractedPackageItem.copy();
         if (!extractedPackageItem.isEmpty()) ColoredPackages.LOGGER.info("extracedPackageItem!");
 //        ColoredPackages.LOGGER.info("createdBox: {}", createdBox);
         ///

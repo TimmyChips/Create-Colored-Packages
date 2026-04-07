@@ -1,6 +1,5 @@
 package timmychips.colored_packages.forge.content.logistics.box;
 
-import com.simibubi.create.AllEntityTypes;
 import com.simibubi.create.content.logistics.box.PackageEntity;
 import com.simibubi.create.content.logistics.chute.ChuteBlock;
 import net.minecraft.core.BlockPos;
