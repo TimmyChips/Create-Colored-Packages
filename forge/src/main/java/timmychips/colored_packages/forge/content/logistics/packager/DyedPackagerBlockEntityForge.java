@@ -12,11 +12,11 @@ import com.simibubi.create.content.logistics.packagerLink.PackagerLinkBlockEntit
 import com.simibubi.create.content.logistics.stockTicker.PackageOrderWithCrafts;
 import com.simibubi.create.foundation.advancement.AdvancementBehaviour;
 import com.simibubi.create.foundation.advancement.AllAdvancements;
-import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import net.createmod.catnip.data.Iterate;
 import net.createmod.catnip.nbt.NBTHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
@@ -26,7 +26,7 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 import timmychips.colored_packages.ColoredPackages;
-import timmychips.colored_packages.forge.content.logistics.box.ColoredPackageItemForge;
+import timmychips.colored_packages.content.logistics.box.ColoredPackageItem;
 import timmychips.colored_packages.forge.mixin.accessors.PackagerBlockEntityAccessorForge;
 
 import java.util.List;
@@ -206,7 +206,7 @@ public class DyedPackagerBlockEntityForge extends PackagerBlockEntity {
 
         /// Call colored box containing method instead
         ItemStack createdBox =
-                extractedPackageItem.isEmpty() ? ColoredPackageItemForge.coloredContaining(extractedItems, color) : extractedPackageItem.copy();
+                extractedPackageItem.isEmpty() ? ColoredPackageItem.coloredContaining(extractedItems, color) : extractedPackageItem.copy();
         if (!extractedPackageItem.isEmpty()) ColoredPackages.LOGGER.info("extracedPackageItem!");
 //        ColoredPackages.LOGGER.info("createdBox: {}", createdBox);
         ///
