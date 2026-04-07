@@ -4,6 +4,7 @@
     "0": "colored_packages:item/package/red",
     "particle": "create:item/package/cardboard_particle"
   },
+  "comment": "For resource pack creators; unfortunately the path the overrides are set are hardcoded and you should not change the resource location for the color models below. This is because the PartialModels for rendering the entity and the model on a conveyor are hardcoded to look in the models/item folder to fetch them.",
   "overrides": [
     { "predicate": { "colored_packages:black": 1 }, "model": "colored_packages:item/black_package_12x12" },
     { "predicate": { "colored_packages:blue": 1 }, "model": "colored_packages:item/blue_package_12x12" },
