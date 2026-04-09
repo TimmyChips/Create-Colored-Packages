@@ -40,19 +40,4 @@ public class PackageEntityMixinForge {
             cir.setReturnValue(packageEntity);
         }
     }
-
-    @Inject(method = "destroy", at = @At("HEAD"))
-    private void coloredPackages$destroy(DamageSource source, CallbackInfo ci) {
-
-//        ColoredPackages.LOGGER.info("destroy box: {}", box);
-//        ColoredPackages.LOGGER.info("has color tag? {}", ColoredPackageItem.hasColorTag(box));
-//
-//        PackageEntity self = (PackageEntity) (Object) this;
-//
-//        AllPackets.getChannel()
-//                .send(PacketDistributor.TRACKING_ENTITY.with(() -> self,
-//                        new PackageDestroyPacket(self.getBoundingBox().getCenter(), box));
-//        AllSoundEvents.PACKAGE_POP.playOnServer(level(), blockPosition());
-//        this.dropAllDeathLoot(source);
-    }
 }

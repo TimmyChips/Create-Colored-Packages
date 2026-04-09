@@ -1,34 +1,13 @@
 package timmychips.colored_packages.content.logistics.box;
 
-import com.mojang.brigadier.StringReader;
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import com.mojang.serialization.Codec;
-import com.simibubi.create.AllPartialModels;
-import com.simibubi.create.content.equipment.bell.BasicParticleData;
-import com.simibubi.create.content.equipment.bell.SoulParticle;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.BreakingItemParticle;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
-import net.minecraft.client.particle.ParticleRenderType;
-import net.minecraft.client.renderer.entity.ItemRenderer;
-import net.minecraft.client.renderer.texture.TextureAtlas;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.resources.model.BakedModel;
-import net.minecraft.commands.arguments.item.ItemInput;
-import net.minecraft.commands.arguments.item.ItemParser;
 import net.minecraft.core.particles.*;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.item.ItemStack;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import timmychips.colored_packages.AllPackagePartialModels;
-import timmychips.colored_packages.AllPackageParticles;
-import timmychips.colored_packages.ColoredPackages;
 
 public class ColoredPackageParticle extends BreakingItemParticle {
 
@@ -43,8 +22,12 @@ public class ColoredPackageParticle extends BreakingItemParticle {
         this.zd += i;
     }
 
-    protected ColoredPackageParticle(ClientLevel clientLevel, double d, double e, double f, ItemStack itemStack) {
-        super(clientLevel, d, e, f, itemStack);
+    /**  Main handler for particle rendering;
+     *  <p>Gets the colored particle sprite from the package ItemStack's PackageColor tag
+     * @param itemStack the input package stack with color tag; color tag should not be null since we set it in PackageDestroyPackageMixinForge class
+     */
+    protected ColoredPackageParticle(ClientLevel clientLevel, double x, double y, double z, ItemStack itemStack) {
+        super(clientLevel, x, y, z, itemStack);
 
         // Get the particle sprite from the partial model of the package's current color
         this.setSprite(AllPackagePartialModels.coloredPartialFromColor(itemStack,

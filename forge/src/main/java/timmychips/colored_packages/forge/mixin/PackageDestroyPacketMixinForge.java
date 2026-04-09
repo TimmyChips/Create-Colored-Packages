@@ -18,6 +18,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import timmychips.colored_packages.AllPackageParticles;
 import timmychips.colored_packages.ColoredPackages;
 import timmychips.colored_packages.content.logistics.box.ColoredPackageItem;
 
@@ -28,44 +29,37 @@ public class PackageDestroyPacketMixinForge {
     @Shadow protected Vec3 location;
     @Shadow private ItemStack box;
 
-//    @Inject(method = "<init>(Lnet/minecraft/world/phys/Vec3;Lnet/minecraft/world/item/ItemStack;)V", at = @At("RETURN"))
-//    public void coloredPackages$init(Vec3 location, ItemStack box, CallbackInfo ci) {
-//
-//        ColoredPackages.LOGGER.info("init box stack: {}", box);
-//        ColoredPackages.LOGGER.info("init has color tag? {}", ColoredPackageItem.hasColorTag(box));
-//
-//        if (ColoredPackageItem.hasColorTag(box)) {
-//            CompoundTag compound = box.getTag();
-//
-//            CompoundTag targetCompound = this.box.getOrCreateTag();
-//            targetCompound.putString(ColoredPackageItem.TAG_COLOR, compound.getString(ColoredPackageItem.TAG_COLOR));
-//            ColoredPackages.LOGGER.info("tags: {}", this.box.getTags());
-//
-//
-//            ColoredPackages.LOGGER.info("private box has tag? {}", ColoredPackageItem.hasColorTag(this.box));
-//        }
-//    }
+    // Re-add tag color to private shadowed (this.box) ItemStack after the init/constructor nulls all tags
+    @Inject(method = "<init>(Lnet/minecraft/world/phys/Vec3;Lnet/minecraft/world/item/ItemStack;)V", at = @At("RETURN"))
+    public void coloredPackages$init(Vec3 location, ItemStack box, CallbackInfo ci) {
 
+        // Only perform if original input box ItemStack has PackageColor tag
+        if (ColoredPackageItem.hasColorTag(box)) {
+            CompoundTag compound = box.getTag();
+
+            CompoundTag targetCompound = this.box.getOrCreateTag();
+            targetCompound.putString(ColoredPackageItem.TAG_COLOR, compound.getString(ColoredPackageItem.TAG_COLOR)); // Add color tag to this.box
+        }
+    }
+
+    // Add custom "colored package" particle instead if private shadowed box stack has PackageColor tag (after we re-add the color tag)
     @Inject(method = "handle", at = @At("HEAD"), cancellable = true)
     public void coloredPackages$handleColored(NetworkEvent.Context ctx, CallbackInfoReturnable<Boolean> cir) {
 
-        ColoredPackages.LOGGER.info("handle box stack: {}", box);
-        ColoredPackages.LOGGER.info("has color tag? {}", ColoredPackageItem.hasColorTag(box));
-
+        // Only for colored packages with our color tag
         if (ColoredPackageItem.hasColorTag(box)) {
-
-            ColoredPackages.LOGGER.info("box color tag: {}", box.getTag().getString(ColoredPackageItem.TAG_COLOR));
 
             ctx.enqueueWork(() -> {
                 for (int i = 0; i < 20; i++) {
                     ClientLevel level = Minecraft.getInstance().level;
                     Vec3 motion = VecHelper.offsetRandomly(Vec3.ZERO, level.getRandom(), .125f);
                     Vec3 pos = location.add(motion.scale(4));
-                    level.addParticle(new ItemParticleOption(ParticleTypes.ITEM, box), pos.x, pos.y,
+                    // Summon colored package particle instead
+                    level.addParticle(new ItemParticleOption(AllPackageParticles.COLORED_PACKAGE.get(), box), pos.x, pos.y,
                             pos.z, motion.x, motion.y, motion.z);
                 }
             });
-            cir.setReturnValue(true);
+            cir.setReturnValue(true); // Return for colored packages
         }
     }
 }

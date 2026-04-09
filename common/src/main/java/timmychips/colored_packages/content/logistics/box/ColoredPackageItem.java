@@ -43,10 +43,6 @@ public class ColoredPackageItem extends PackageItem {
         colorTag.putString(TAG_COLOR, color.getName());
     }
 
-    public static void copyColorTag(ItemStack targetStack, CompoundTag tag) {
-        targetStack.setTag(tag);
-    }
-
     // Check if tag contains color input
     public static boolean hasColor(ItemStack itemStack, DyeColor color) {
         CompoundTag compoundTag = itemStack.getTag();
