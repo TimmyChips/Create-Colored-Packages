@@ -1,11 +1,13 @@
 package timmychips.colored_packages;
 
+import com.simibubi.create.AllParticleTypes;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import net.minecraft.resources.ResourceLocation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import timmychips.colored_packages.client.PackageItemModelPredicate;
 import timmychips.colored_packages.content.logistics.box.AllPackageEntityTypes;
+import timmychips.colored_packages.content.logistics.box.ColoredPackageParticle;
 import timmychips.colored_packages.content.logistics.box.ColoredPackageStyles;
 
 public final class ColoredPackages {
@@ -25,6 +27,8 @@ public final class ColoredPackages {
         PackageItemModelPredicate.register();
         AllPackageItems.register();
         AllDyedBlocks.register();
+        AllPackageParticles.register();
+        AllPackageParticles.registerFactories();
         AllPackagerSpriteShifts.init();
         AllPackagePartialModels.init();
     }

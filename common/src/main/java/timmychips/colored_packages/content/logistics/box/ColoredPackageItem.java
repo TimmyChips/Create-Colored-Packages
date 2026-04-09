@@ -43,6 +43,10 @@ public class ColoredPackageItem extends PackageItem {
         colorTag.putString(TAG_COLOR, color.getName());
     }
 
+    public static void copyColorTag(ItemStack targetStack, CompoundTag tag) {
+        targetStack.setTag(tag);
+    }
+
     // Check if tag contains color input
     public static boolean hasColor(ItemStack itemStack, DyeColor color) {
         CompoundTag compoundTag = itemStack.getTag();
@@ -57,6 +61,11 @@ public class ColoredPackageItem extends PackageItem {
             return !colorStr.isBlank(); // Color tag isn't blank, has color string
         }
         return false;
+    }
+
+    public static String getCurrentColor(ItemStack packageStack) {
+        CompoundTag compoundTag = packageStack.getTag();
+        return compoundTag.getString(TAG_COLOR);
     }
 
     @Override

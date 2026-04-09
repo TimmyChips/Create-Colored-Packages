@@ -2,6 +2,7 @@ package timmychips.colored_packages.forge;
 
 import net.createmod.ponder.foundation.PonderIndex;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import timmychips.colored_packages.AllPackageParticles;
 import timmychips.colored_packages.ColoredPackages;
 import timmychips.colored_packages.ColoredPackagesClient;
 import timmychips.colored_packages.forge.foundation.ColoredPonderPluginForge;

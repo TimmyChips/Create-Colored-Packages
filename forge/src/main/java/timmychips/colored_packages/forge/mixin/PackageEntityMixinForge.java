@@ -1,20 +1,31 @@
 package timmychips.colored_packages.forge.mixin;
 
 import com.simibubi.create.AllEntityTypes;
+import com.simibubi.create.AllPackets;
+import com.simibubi.create.AllSoundEvents;
+import com.simibubi.create.content.logistics.box.PackageDestroyPacket;
 import com.simibubi.create.content.logistics.box.PackageEntity;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.network.PacketDistributor;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import timmychips.colored_packages.ColoredPackages;
 import timmychips.colored_packages.content.logistics.box.ColoredPackageItem;
 import timmychips.colored_packages.forge.AllPackageEntityTypesForge;
 import timmychips.colored_packages.forge.content.logistics.box.RedPackageEntityForge;
 
 @Mixin(PackageEntity.class)
 public class PackageEntityMixinForge {
+
+    @Shadow public ItemStack box;
 
     // Method is called when breaking Chain Conveyor; done so it drops Colored Package entity instead
     @Inject(method = "fromItemStack", at = @At("HEAD"), cancellable = true)
@@ -28,5 +39,20 @@ public class PackageEntityMixinForge {
             packageEntity.setBox(itemstack);
             cir.setReturnValue(packageEntity);
         }
+    }
+
+    @Inject(method = "destroy", at = @At("HEAD"))
+    private void coloredPackages$destroy(DamageSource source, CallbackInfo ci) {
+
+//        ColoredPackages.LOGGER.info("destroy box: {}", box);
+//        ColoredPackages.LOGGER.info("has color tag? {}", ColoredPackageItem.hasColorTag(box));
+//
+//        PackageEntity self = (PackageEntity) (Object) this;
+//
+//        AllPackets.getChannel()
+//                .send(PacketDistributor.TRACKING_ENTITY.with(() -> self,
+//                        new PackageDestroyPacket(self.getBoundingBox().getCenter(), box));
+//        AllSoundEvents.PACKAGE_POP.playOnServer(level(), blockPosition());
+//        this.dropAllDeathLoot(source);
     }
 }

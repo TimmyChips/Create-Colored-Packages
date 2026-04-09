@@ -9,6 +9,7 @@
     "ChainConveyerPackageMixinForge",
     "FrogportRendererMixinForge",
     "FrogportVisualMixinForge",
+    "PackageDestroyPacketMixinForge",
     "PackageEntityMixinForge",
     "PackagerBlockMixinForge",
     "accessors.PackagerBlockEntityAccessorForge"
