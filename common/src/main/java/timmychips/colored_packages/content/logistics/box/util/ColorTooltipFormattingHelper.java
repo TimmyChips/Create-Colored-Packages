@@ -36,8 +36,6 @@ public enum ColorTooltipFormattingHelper {
     WHITE("White", styleWithColor(new Color(212, 212, 212).getRGB())),
     YELLOW("Yellow", styleWithColor(ChatFormatting.YELLOW.getColor()));
 
-    //TODO: need to update the other names to have capitalization and spacing
-
     // Store enumerate values to map for getting (i.e. converts BLUE, and it's enum to blue=enum and places in map)
     private static final Map<String, ColorTooltipFormattingHelper> LOOKUP = Arrays.stream(values())
             .collect(Collectors.toMap(ColorTooltipFormattingHelper::getName, helper -> helper));
