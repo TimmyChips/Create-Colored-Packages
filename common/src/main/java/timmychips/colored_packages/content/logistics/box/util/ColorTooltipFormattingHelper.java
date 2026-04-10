@@ -19,33 +19,32 @@ import java.util.stream.Collectors;
  * <li>  Create a new color with rgb values, then convert it to the integer value with getRGB()
  */
 public enum ColorTooltipFormattingHelper {
-    BLACK("black", styleWithColor(new Color(30, 30, 52).getRGB())),
-    BLUE("blue", styleWithColor(ChatFormatting.BLUE.getColor())),
-    BROWN("brown", styleWithColor(new Color(153, 93, 51).getRGB())),
-    CYAN("cyan", styleWithColor(ChatFormatting.DARK_AQUA.getColor())),
-    GRAY("gray", styleWithColor(ChatFormatting.DARK_GRAY.getColor())),
-    GREEN("green", styleWithColor(new Color(99, 134, 46).getRGB())),
+    BLACK("Black", styleWithColor(new Color(30, 30, 52).getRGB())),
+    BLUE("Blue", styleWithColor(ChatFormatting.BLUE.getColor())),
+    BROWN("Brown", styleWithColor(new Color(153, 93, 51).getRGB())),
+    CYAN("Cyan", styleWithColor(ChatFormatting.DARK_AQUA.getColor())),
+    GRAY("Gray", styleWithColor(ChatFormatting.DARK_GRAY.getColor())),
+    GREEN("Green", styleWithColor(new Color(101, 147, 32).getRGB())),
     LIGHT_BLUE("Light Blue", styleWithColor(new Color(113, 169, 255).getRGB())),
-    LIGHT_GRAY("light gray", styleWithColor(ChatFormatting.GRAY.getColor())),
-    LIME("lime", styleWithColor(new Color(131, 212, 28).getRGB())),
-    MAGENTA("magenta", styleWithColor(ChatFormatting.LIGHT_PURPLE.getColor())),
-    ORANGE("orange", styleWithColor(new Color(255, 159, 42).getRGB())),
-    PINK("pink", styleWithColor(new Color(247, 180, 214).getRGB())),
-    PURPLE("purple", styleWithColor(new Color(207, 115, 255).getRGB())),
-    RED("red", styleWithColor(ChatFormatting.RED.getColor())),
-    WHITE("white", styleWithColor(new Color(212, 212, 212).getRGB())),
-    YELLOW("yellow", styleWithColor(ChatFormatting.YELLOW.getColor()));
+    LIGHT_GRAY("Light Gray", styleWithColor(ChatFormatting.GRAY.getColor())),
+    LIME("Lime", styleWithColor(new Color(131, 212, 28).getRGB())),
+    MAGENTA("Magenta", styleWithColor(ChatFormatting.LIGHT_PURPLE.getColor())),
+    ORANGE("Orange", styleWithColor(new Color(255, 159, 42).getRGB())),
+    PINK("Pink", styleWithColor(new Color(247, 180, 214).getRGB())),
+    PURPLE("Purple", styleWithColor(new Color(159, 58, 212).getRGB())),
+    RED("Red", styleWithColor(ChatFormatting.RED.getColor())),
+    WHITE("White", styleWithColor(new Color(212, 212, 212).getRGB())),
+    YELLOW("Yellow", styleWithColor(ChatFormatting.YELLOW.getColor()));
 
     //TODO: need to update the other names to have capitalization and spacing
 
-    // Store enumerate values to map for getting (i.e. converts BLUE it's style to blue=style and places in map)
-    private static final Map<String, Style> FORMAT_BY_NAME = Arrays.stream(values())
-            .collect(Collectors.toMap(ColorTooltipFormattingHelper::getName, style -> style.style));
+    // Store enumerate values to map for getting (i.e. converts BLUE, and it's enum to blue=enum and places in map)
+    private static final Map<String, ColorTooltipFormattingHelper> LOOKUP = Arrays.stream(values())
+            .collect(Collectors.toMap(ColorTooltipFormattingHelper::getName, helper -> helper));
     private final String langName;
     private final Style style;
 
     ColorTooltipFormattingHelper(String langName, Style style) {
-        ColoredPackages.LOGGER.info("test!!!");
         this.langName = langName;
         this.style = style;
     }
@@ -65,22 +64,33 @@ public enum ColorTooltipFormattingHelper {
     }
 
     /**
-     * Gets the style from the enum value Map
+     * Gets the style from the enum value Map with enum.style
      * @param color The input color string to get the style from
      * @return The Style color associated with input
      */
     public static Style getByName(String color) {
         color = color.toLowerCase();
         try {
-            return FORMAT_BY_NAME.get(color);
+            return LOOKUP.get(color).style;
         } catch (Exception e) {
             ColoredPackages.LOGGER.info("Unable to get style object from color: {}", color);
         }
         return Style.EMPTY;
     }
 
-    // Return the name with proper capitalization and spacing; i.e. "Light Blue" instead of "light_blue"
-//    public static String getLangName(String name) {
-//
-//    }
+    /**
+     * Gets the color/name with proper capitalization and spacing; i.e. "Light Blue" instead of "light_blue"
+     * @param color the input color to get the lang for
+     * @return the lang name of the color
+     */
+    public static String getLangName(String color) {
+        try {
+            return LOOKUP.get(color).langName;
+        } catch (Exception e) {
+            ColoredPackages.LOGGER.info("Unable to find lang name for color: {}", color);
+        }
+        return color; // Fallback to color id if it can't find
+    }
+
+    public static void init() {};
 }

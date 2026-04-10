@@ -13,16 +13,14 @@ import timmychips.colored_packages.client.PackageItemModelPredicate;
 import timmychips.colored_packages.content.logistics.box.AllPackageEntityTypes;
 import timmychips.colored_packages.content.logistics.box.ColoredPackageParticle;
 import timmychips.colored_packages.content.logistics.box.ColoredPackageStyles;
+import timmychips.colored_packages.content.logistics.box.util.ColorTooltipFormattingHelper;
 
 public final class ColoredPackages {
     public static final String MOD_ID = "colored_packages";
     public static final Logger LOGGER = LoggerFactory.getLogger("Create Colored Packages");
 
     // Create Registrate for this mod
-    public static final CreateRegistrate REGISTRATE = CreateRegistrate.create(MOD_ID)
-            .setTooltipModifierFactory(item ->
-                    new ItemDescription.Modifier(item, FontHelper.Palette.STANDARD_CREATE)
-                            .andThen(TooltipModifier.mapNull(KineticStats.create(item))));
+    public static final CreateRegistrate REGISTRATE = CreateRegistrate.create(MOD_ID);
 
     public static ResourceLocation asResource(String path) {
         return new ResourceLocation(MOD_ID, path);
@@ -38,5 +36,6 @@ public final class ColoredPackages {
         AllPackageParticles.registerFactories();
         AllPackagerSpriteShifts.init();
         AllPackagePartialModels.init();
+        ColorTooltipFormattingHelper.init();
     }
 }

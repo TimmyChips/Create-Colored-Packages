@@ -42,7 +42,6 @@ public class ColoredPackageItemForge extends ColoredPackageItem {
 
     @Override
     public PackageEntity platformNewColoredPackage(Level world, Vec3 point) {
-        ColoredPackages.LOGGER.info("uwu");
         return new RedPackageEntityForge(world, point.x, point.y, point.z);
     }
 
