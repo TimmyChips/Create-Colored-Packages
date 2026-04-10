@@ -93,6 +93,7 @@ public class DyedPackagerRendererForge extends SmartBlockEntityRenderer<DyedPack
                 .light(light);
 
         SpriteShiftEntry spriteShift = getSpriteShiftEntry(color); // Get color label sprite from color input
+        if (spriteShift == null) return;
 
         packagerBuffer.shiftUV(spriteShift); // Shift texture atlas UV to get new texture
         packagerBuffer.renderInto(ms, buffer.getBuffer(RenderType.cutoutMipped())); // Render color label on dyed packager
@@ -107,6 +108,6 @@ public class DyedPackagerRendererForge extends SmartBlockEntityRenderer<DyedPack
         if (color != null) {
             return AllPackagerSpriteShifts.DYED_PACKAGERS.get(color);
         }
-        else return AllPackagerSpriteShifts.DYED_PACKAGERS.get(DyeColor.BLUE);
+        else return null;
     }
 }

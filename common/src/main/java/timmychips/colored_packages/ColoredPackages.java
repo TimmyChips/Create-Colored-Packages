@@ -10,6 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import timmychips.colored_packages.client.PackageItemModelPredicate;
+import timmychips.colored_packages.content.logistics.DisplayItemsGenerator;
 import timmychips.colored_packages.content.logistics.box.AllPackageEntityTypes;
 import timmychips.colored_packages.content.logistics.box.ColoredPackageParticle;
 import timmychips.colored_packages.content.logistics.box.ColoredPackageStyles;
@@ -37,5 +38,6 @@ public final class ColoredPackages {
         AllPackagerSpriteShifts.init();
         AllPackagePartialModels.init();
         ColorTooltipFormattingHelper.init();
+        PackageCreativeModeTab.register();
     }
 }

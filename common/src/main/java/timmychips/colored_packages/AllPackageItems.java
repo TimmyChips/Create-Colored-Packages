@@ -6,6 +6,8 @@ import com.simibubi.create.content.logistics.box.PackageStyles;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.builders.ItemBuilder;
 import com.tterrag.registrate.providers.ProviderType;
+import com.tterrag.registrate.util.entry.ItemEntry;
+import com.tterrag.registrate.util.entry.ItemProviderEntry;
 import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.world.item.DyeColor;
@@ -13,13 +15,17 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import timmychips.colored_packages.content.logistics.box.ColoredPackageItem;
 import timmychips.colored_packages.content.logistics.box.ColoredPackageStyles;
+import timmychips.colored_packages.content.logistics.box.ColoredPackageTag;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 import static timmychips.colored_packages.ColoredPackages.LOGGER;
 import static timmychips.colored_packages.content.logistics.box.ColoredPackageStyles.PACKAGE_STYLE_SIZES;
 
 public class AllPackageItems {
+
+    public static ArrayList<ItemProviderEntry<?>> packageItemEntries = new ArrayList<>();
 
     static {
 
@@ -41,7 +47,9 @@ public class AllPackageItems {
             ItemBuilder<?, CreateRegistrate> packageItem = coloredPackageItemNew(sizeStyle);
 
             packageItem.setData(ProviderType.LANG, NonNullBiConsumer.noop());
-            packageItem.register();
+            ItemEntry<?> packageEntry = packageItem.register();
+
+            packageItemEntries.add(packageEntry); // Add registered item entry to map for inCreativeModeTab item generator
         }
     }
 
@@ -62,6 +70,7 @@ public class AllPackageItems {
 //                    }
                     LOGGER.info("TEST");
                 })
+                .tag(ColoredPackageTag.PACKAGE_COLOR.tag)
                 .lang((style.rare() ? "Rare"
                         : style.type()
                         .substring(0, 1)
