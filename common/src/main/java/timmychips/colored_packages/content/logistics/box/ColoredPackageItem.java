@@ -6,8 +6,12 @@ import com.simibubi.create.content.logistics.box.PackageItem;
 import com.simibubi.create.content.logistics.box.PackageStyles;
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import io.github.fabricators_of_create.porting_lib.transfer.item.ItemStackHandler;
+import net.minecraft.ChatFormatting;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -18,21 +22,39 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
+import timmychips.colored_packages.content.logistics.box.util.ColorTooltipFormattingHelper;
 
 import java.lang.ref.WeakReference;
+import java.util.List;
 
 public class ColoredPackageItem extends PackageItem {
     public ColoredPackageItem(Properties properties, PackageStyles.PackageStyle style) {
         super(properties, style);
+    }
+
+    @Override
+    public void appendHoverText(ItemStack pStack, Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
+        // Get color from stack, or default "Red" if it doesn't have PackageColor tag
+        String colorStr;
+        if (hasColorTag(pStack)) {
+            String input = getCurrentColor(pStack);
+            colorStr = input.substring(0, 1).toUpperCase() + input.substring(1); // Capitalize first letter
+        }
+        else colorStr = "Red"; // Default string if ColoredPackageItem PackageColor tag is empty
+
+//        colorStr
+
+        // Add tooltip for color
+//        pTooltipComponents.add(Component.literal(colorStr)
+//                .withStyle(ChatFormatting.GRAY));
+        pTooltipComponents.add(Component.literal(colorStr)
+                .withStyle(ColorTooltipFormattingHelper.getByName(colorStr)));
     }
 
     public static final String TAG_COLOR = "PackageColor"; // The color tag the item will have that determines the color
