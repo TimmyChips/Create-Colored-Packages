@@ -40,6 +40,7 @@ public class ColoredPackageItem extends PackageItem {
 
     @Override
     public void appendHoverText(ItemStack pStack, Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
+        super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
         // Get color from stack, or default "Red" if it doesn't have PackageColor tag
 
         // Red by default if ColoredPackageItem PackageColor tag is empty
