@@ -1,7 +1,6 @@
 package timmychips.colored_packages.forge;
 
 import net.minecraftforge.eventbus.api.IEventBus;
-import timmychips.colored_packages.AllDyedBlocks;
 import timmychips.colored_packages.ColoredPackages;
 import dev.architectury.platform.forge.EventBuses;
 import net.minecraftforge.fml.common.Mod;
@@ -26,7 +25,8 @@ public final class ColoredPackagesForge {
         AllDyedBlockEntityTypesForge.register();
         AllPackageEntityTypesForge.register();
         bus.addListener(AllPackageEntityTypesForge::registerEntityAttributes);
-
+//        ModifyCreativeMenuForge.modify(bus);
+        bus.addListener(ModifyCreativeMenuForge::addTaggedPackagesForge);
         // Client bus listener
         bus.addListener(ColoredPackagesClientForge::init);
     }

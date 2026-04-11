@@ -1,31 +1,22 @@
-package timmychips.colored_packages.content.logistics;
+package timmychips.colored_packages;
 
-import com.tterrag.registrate.util.entry.ItemEntry;
 import com.tterrag.registrate.util.entry.ItemProviderEntry;
-import com.tterrag.registrate.util.entry.RegistryEntry;
 import it.unimi.dsi.fastutil.objects.Reference2ReferenceOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ReferenceArrayList;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import timmychips.colored_packages.AllPackageItems;
-import timmychips.colored_packages.ColoredPackages;
 import timmychips.colored_packages.content.logistics.box.ColoredPackageItem;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
-public class DisplayItemsGenerator implements CreativeModeTab.DisplayItemsGenerator {
-
-    public DisplayItemsGenerator() {}
-
-    public static List<ItemStack> appliedStacks = new ArrayList<>();
-
+public class ModifyCreativeMenu {
+    /**
+     * Applies a function to the colored package ItemStacks to set their PackageColor to a default color (red)
+     * @return The function to apply
+     */
     public static Function<Item, ItemStack> inCreativeMenuStackFunc() {
         Map<Item, Function<Item, ItemStack>> factories = new Reference2ReferenceOpenHashMap<>(); // Factory with Item and function to apply for items in creative menu
 
@@ -36,7 +27,7 @@ public class DisplayItemsGenerator implements CreativeModeTab.DisplayItemsGenera
         AllPackageItems.packageItemEntries.forEach(packageEntry -> {
             itemInCreativeMenuFactory.put(packageEntry, item -> {
                 ItemStack stack = new ItemStack(item);
-                ColoredPackageItem.setColor(stack, DyeColor.RED);
+                ColoredPackageItem.setColor(stack, DyeColor.BROWN);
                 return stack;
             });
         });
@@ -50,34 +41,21 @@ public class DisplayItemsGenerator implements CreativeModeTab.DisplayItemsGenera
         return item -> {
             Function<Item, ItemStack> factory = factories.get(item);
             if (factory != null) {
-                appliedStacks.add(factory.apply(item));
                 return factory.apply(item);
             }
             return new ItemStack(item);
         };
     }
 
-    @Override
-    public void accept(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output) {
-        ColoredPackages.LOGGER.info("Accepting display items generator");
-        Function<Item, ItemStack> creativeModeStackFunc = inCreativeMenuStackFunc();
 
-        List<Item> items = collectItems();
-
-        outputAll(output, items, creativeModeStackFunc);
-    }
-
-    private static void outputAll(CreativeModeTab.Output output, List<Item> items, Function<Item, ItemStack> stackFunc) {
-        for (Item item : items) {
-            output.accept(stackFunc.apply(item));
-        }
-    }
-
-    private List<Item> collectItems() {
+    /**
+     * @return Collect and returns the list of colored package items
+     */
+    public static List<Item> collectPackageItems() {
         List<Item> items = new ReferenceArrayList<>();
-        for (RegistryEntry<Item> entry : ColoredPackages.REGISTRATE.getAll(Registries.ITEM)) {
-            Item item = entry.get();
-            items.add(item);
+        for (ItemProviderEntry<?> packageEntry : AllPackageItems.packageItemEntries) {
+            Item packageItem = packageEntry.asItem();
+            items.add(packageItem);
         }
         return items;
     }

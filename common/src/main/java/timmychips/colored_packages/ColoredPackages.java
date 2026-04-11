@@ -31,6 +31,7 @@ public final class ColoredPackages {
         // Write common init code here.
         ColoredPackageStyles.initColoredPackageStyles();
         PackageItemModelPredicate.register();
+//        PackageCreativeModeTab.register();
         AllPackageItems.register();
         AllDyedBlocks.register();
         AllPackageParticles.register();
@@ -38,6 +39,5 @@ public final class ColoredPackages {
         AllPackagerSpriteShifts.init();
         AllPackagePartialModels.init();
         ColorTooltipFormattingHelper.init();
-        PackageCreativeModeTab.register();
     }
 }

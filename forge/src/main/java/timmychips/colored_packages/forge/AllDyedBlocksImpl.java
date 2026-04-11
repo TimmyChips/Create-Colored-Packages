@@ -1,6 +1,7 @@
 package timmychips.colored_packages.forge;
 
 import com.simibubi.create.foundation.data.BuilderTransformers;
+import net.minecraft.world.item.CreativeModeTabs;
 import timmychips.colored_packages.ColoredPackages;
 import timmychips.colored_packages.forge.content.logistics.packager.DyedPackagerBlockForge;
 import timmychips.colored_packages.forge.content.logistics.packager.repackager.DyedRepackagerBlockForge;
@@ -12,10 +13,15 @@ public class AllDyedBlocksImpl {
     public static void platformRegisterBlocks() {
         DYED_PACKAGER = ColoredPackages.REGISTRATE.block("dyed_packager", DyedPackagerBlockForge::new)
                 .transform(BuilderTransformers.packager())
+                .item()
+                    .removeTab(CreativeModeTabs.SEARCH)
+                    .build()
                 .register();
 
         DYED_REPACKAGER = ColoredPackages.REGISTRATE.block("dyed_repackager", DyedRepackagerBlockForge::new)
                 .transform(BuilderTransformers.packager())
                 .register();
+
+
     }
 }

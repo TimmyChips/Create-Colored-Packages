@@ -10,6 +10,7 @@ import com.tterrag.registrate.util.entry.ItemEntry;
 import com.tterrag.registrate.util.entry.ItemProviderEntry;
 import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
 import dev.architectury.injectables.annotations.ExpectPlatform;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -85,9 +86,10 @@ public class AllPackageItems {
                         .getPath(), p -> {
                     return getPlatformPackageItem(p, style);
                 })
-                .properties(p -> p.stacksTo(1))
-                .tag(AllTags.AllItemTags.PACKAGES.tag)
-                .lang((style.rare() ? "Rare"
+                    .properties(p -> p.stacksTo(1))
+                    .tag(AllTags.AllItemTags.PACKAGES.tag)
+                    .removeTab(CreativeModeTabs.SEARCH) // Remove packages from creative tab since we're adding it later
+                    .lang((style.rare() ? "Rare"
                         : style.type()
                         .substring(0, 1)
                         .toUpperCase(Locale.ROOT)
