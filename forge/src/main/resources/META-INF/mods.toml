@@ -6,7 +6,7 @@ license = "GNU GPL 3.0"
 [[mods]]
 modId = "colored_packages"
 version = "${version}"
-displayName = "colored_packages"
+displayName = "Create: Colored Packages"
 authors = "TimmyChips"
 description = '''
 Hytale-like ledge grab to vault the player up blocks

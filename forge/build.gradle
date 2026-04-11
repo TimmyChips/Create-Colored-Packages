@@ -40,6 +40,7 @@ repositories {
             includeGroup("com.simibubi.create")
         }
     }
+    maven { url = "https://maven.blamejared.com" } // JEI, Vazkii's Mods
 }
 
 dependencies {
@@ -53,6 +54,9 @@ dependencies {
     modImplementation "com.tterrag.registrate:Registrate:${registrate_forge_version}"
     modCompileOnly("dev.engine-room.flywheel:flywheel-forge-api-${minecraft_version}:${flywheel_forge_version}")
     modRuntimeOnly("dev.engine-room.flywheel:flywheel-forge-${minecraft_version}:${flywheel_forge_version}")
+//    modCompileOnly("mezz.jei:jei-${minecraft_version}:${jei_version}:api") // compile against the JEI API but do not include it at runtime
+    modCompileOnly("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}")
+    modCompileOnly("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
 
     compileOnly("io.github.llamalad7:mixinextras-common:${mixin_extras_version}")
     annotationProcessor(implementation(include("io.github.llamalad7:mixinextras-forge:${mixin_extras_version}")))
