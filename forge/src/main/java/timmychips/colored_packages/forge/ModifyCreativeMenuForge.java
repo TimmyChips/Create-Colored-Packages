@@ -2,7 +2,6 @@ package timmychips.colored_packages.forge;
 
 import net.minecraft.world.item.*;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
-import timmychips.colored_packages.ColoredPackages;
 import timmychips.colored_packages.ModifyCreativeMenu;
 import java.util.List;
 import java.util.function.Function;
@@ -21,7 +20,6 @@ public class ModifyCreativeMenuForge extends ModifyCreativeMenu {
         Function<Item, ItemStack> creativeModeStackFunc = inCreativeMenuStackFunc(); // The function to modify the package items
 
         for (Item item : packageItems) {
-            ColoredPackages.LOGGER.info("item: {}", item);
             event.accept(creativeModeStackFunc.apply(item), CreativeModeTab.TabVisibility.SEARCH_TAB_ONLY);
         }
     }

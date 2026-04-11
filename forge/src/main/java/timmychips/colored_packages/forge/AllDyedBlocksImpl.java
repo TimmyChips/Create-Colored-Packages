@@ -14,12 +14,15 @@ public class AllDyedBlocksImpl {
         DYED_PACKAGER = ColoredPackages.REGISTRATE.block("dyed_packager", DyedPackagerBlockForge::new)
                 .transform(BuilderTransformers.packager())
                 .item()
-                    .removeTab(CreativeModeTabs.SEARCH)
+                    .removeTab(CreativeModeTabs.SEARCH) // Remove from creative menu
                     .build()
                 .register();
 
         DYED_REPACKAGER = ColoredPackages.REGISTRATE.block("dyed_repackager", DyedRepackagerBlockForge::new)
                 .transform(BuilderTransformers.packager())
+                .item()
+                    .removeTab(CreativeModeTabs.SEARCH) // Remove from creative menu
+                    .build()
                 .register();
 
 

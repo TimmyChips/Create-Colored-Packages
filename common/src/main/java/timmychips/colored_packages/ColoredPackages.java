@@ -1,18 +1,10 @@
 package timmychips.colored_packages;
 
-import com.simibubi.create.AllParticleTypes;
 import com.simibubi.create.foundation.data.CreateRegistrate;
-import com.simibubi.create.foundation.item.ItemDescription;
-import com.simibubi.create.foundation.item.KineticStats;
-import com.simibubi.create.foundation.item.TooltipModifier;
-import net.createmod.catnip.lang.FontHelper;
 import net.minecraft.resources.ResourceLocation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import timmychips.colored_packages.client.PackageItemModelPredicate;
-import timmychips.colored_packages.content.logistics.DisplayItemsGenerator;
-import timmychips.colored_packages.content.logistics.box.AllPackageEntityTypes;
-import timmychips.colored_packages.content.logistics.box.ColoredPackageParticle;
 import timmychips.colored_packages.content.logistics.box.ColoredPackageStyles;
 import timmychips.colored_packages.content.logistics.box.util.ColorTooltipFormattingHelper;
 
@@ -31,7 +23,6 @@ public final class ColoredPackages {
         // Write common init code here.
         ColoredPackageStyles.initColoredPackageStyles();
         PackageItemModelPredicate.register();
-//        PackageCreativeModeTab.register();
         AllPackageItems.register();
         AllDyedBlocks.register();
         AllPackageParticles.register();

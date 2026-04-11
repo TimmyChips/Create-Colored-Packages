@@ -3,6 +3,7 @@ package timmychips.colored_packages;
 import com.tterrag.registrate.util.entry.ItemProviderEntry;
 import it.unimi.dsi.fastutil.objects.Reference2ReferenceOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ReferenceArrayList;
+import net.minecraft.ChatFormatting;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -15,6 +16,7 @@ import java.util.function.Function;
 public class ModifyCreativeMenu {
     /**
      * Applies a function to the colored package ItemStacks to set their PackageColor to a default color (red)
+     * <p>From Create's {@link com.simibubi.create.AllCreativeModeTabs.RegistrateDisplayItemsGenerator#makeStackFunc} method}
      * @return The function to apply
      */
     public static Function<Item, ItemStack> inCreativeMenuStackFunc() {
@@ -27,7 +29,7 @@ public class ModifyCreativeMenu {
         AllPackageItems.packageItemEntries.forEach(packageEntry -> {
             itemInCreativeMenuFactory.put(packageEntry, item -> {
                 ItemStack stack = new ItemStack(item);
-                ColoredPackageItem.setColor(stack, DyeColor.BROWN);
+                ColoredPackageItem.setColor(stack, DyeColor.RED);
                 return stack;
             });
         });
