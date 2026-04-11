@@ -35,12 +35,13 @@ import java.util.List;
 @Mixin(FactoryPanelBlockEntity.class)
 public class FactoryGaugeBEMixinForge extends SmartBlockEntity {
 
-    @Shadow public boolean restocker;
+    @Shadow public boolean restocker; // Shadow field so that coloredPackages$lazyTickDyedPackager can properly set the factory gauge's restock packager block
 
     public FactoryGaugeBEMixinForge(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
     }
 
+    // Copied from Factory Gauges addBehaviours
     @Override
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
         FactoryPanelBlockEntity self = (FactoryPanelBlockEntity) (Object) this;
@@ -54,19 +55,15 @@ public class FactoryGaugeBEMixinForge extends SmartBlockEntity {
         }
     }
 
+    // Copied from lazyTick from target class, but for Dyed Packager as well
     @Inject(method = "lazyTick", at = @At(value = "RETURN"))
     public void coloredPackages$lazyTickDyedPackager(CallbackInfo ci) {
         FactoryPanelBlockEntity self = (FactoryPanelBlockEntity) (Object) this;
 
-//        ColoredPackages.LOGGER.info("lazytick!");
-
         Level level = self.getLevel();
 
-//        self.lazyTick();
         if (level.isClientSide())
             return;
-
-//        if (self.panels == null) return;
 
         if (self.activePanels() == 0)
             level.setBlockAndUpdate(self.getBlockPos(), Blocks.AIR.defaultBlockState());
@@ -76,39 +73,15 @@ public class FactoryGaugeBEMixinForge extends SmartBlockEntity {
                     .has(level.getBlockState(worldPosition.relative(FactoryPanelBlock.connectedDirection(getBlockState())
                             .getOpposite())))
                     ||
-                    AllBlocks.PACKAGER
+                    AllBlocks.PACKAGER // Perform for packager too
                             .has(level.getBlockState(worldPosition.relative(FactoryPanelBlock.connectedDirection(getBlockState())
                                     .getOpposite())));
 
-//            ColoredPackages.LOGGER.info("should be restocker? {}", shouldBeRestocker);
             if (self.restocker == shouldBeRestocker)
                 return;
             restocker = shouldBeRestocker;
-//            self.restocker = false;
             self.redraw = true;
             self.sendData();
         }
     }
-
-//    @Inject(method = "getRestockedPackager", at = @At("HEAD"), cancellable = true)
-//    public void coloredPackages$getRestockedPackager(CallbackInfoReturnable<PackagerBlockEntity> cir) {
-//        FactoryPanelBlockEntity self = (FactoryPanelBlockEntity) (Object) this;
-//
-////        ColoredPackages.LOGGER.info("getRestockedPackager");
-//
-//        BlockState state = getBlockState();
-//        if (!self.restocker || !AllBlocks.FACTORY_GAUGE.has(state))
-//            return;
-//        BlockPos packagerPos = worldPosition.relative(FactoryPanelBlock.connectedDirection(state)
-//                .getOpposite());
-//        if (!level.isLoaded(packagerPos))
-//            return;
-//        BlockEntity be = level.getBlockEntity(packagerPos);
-////        ColoredPackages.LOGGER.info("be: {}", be);
-//        if (be == null || !(be instanceof DyedPackagerBlockEntityForge pbe))
-//            return;
-//        if (pbe instanceof DyedRepackagerBlockEntityForge)
-//            return;
-//        cir.setReturnValue(pbe);
-//    }
 }

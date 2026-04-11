@@ -7,6 +7,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -14,6 +15,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
 import timmychips.colored_packages.forge.AllDyedBlockEntityTypesForge;
 import timmychips.colored_packages.forge.content.logistics.packager.DyedPackagerBlockEntityForge;
 import timmychips.colored_packages.forge.content.logistics.packager.DyedPackagerBlockForge;
@@ -49,5 +51,11 @@ public class DyedRepackagerBlockForge extends DyedPackagerBlockForge {
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(FACING, POWERED, LINKED);
+    }
+
+    // Replace pick block item with Create packager
+    @Override
+    public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter level, BlockPos pos, Player player) {
+        return new ItemStack(AllBlocks.REPACKAGER);
     }
 }
