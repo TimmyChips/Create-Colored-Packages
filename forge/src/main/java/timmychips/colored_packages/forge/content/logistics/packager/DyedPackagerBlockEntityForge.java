@@ -16,7 +16,6 @@ import net.createmod.catnip.data.Iterate;
 import net.createmod.catnip.nbt.NBTHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
@@ -25,18 +24,18 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
+import org.jetbrains.annotations.NotNull;
 import timmychips.colored_packages.ColoredPackages;
-import timmychips.colored_packages.content.logistics.box.ColoredPackageItem;
+import timmychips.colored_packages.content.logistics.DyedPackagerBlockEntity;
 import timmychips.colored_packages.forge.content.logistics.box.ColoredPackageItemForge;
-import timmychips.colored_packages.forge.mixin.accessors.PackagerBlockEntityAccessorForge;
+import timmychips.colored_packages.forge.mixin.accessors.PackagerBEAdvancementAccessorForge;
 
 import java.util.List;
 import java.util.Optional;
 
-public class DyedPackagerBlockEntityForge extends PackagerBlockEntity {
+public class DyedPackagerBlockEntityForge extends DyedPackagerBlockEntity {
 
     public Optional<DyeColor> color;
-    private AdvancementBehaviour advancementsJunk; // Copied from PackagerBlockEntity since advancements field in that class is private
 
     public DyedPackagerBlockEntityForge(BlockEntityType<?> typeIn, BlockPos pos, BlockState state) {
         super(typeIn, pos, state);
@@ -239,35 +238,14 @@ public class DyedPackagerBlockEntityForge extends PackagerBlockEntity {
         animationInward = false;
         animationTicks = CYCLE;
 
-        // Try to cast for accessor, idk if needed but it crashed once from not being able to cast to accessor class
-//        try {
-//            PackagerBlockEntityAccessorForge packagerAccessor = (PackagerBlockEntityAccessorForge) this;
-//
-//            AdvancementBehaviour advancements = packagerAccessor.coloredPackages$getPackagerAdvancements(); // Get advancements via accessor
-//            advancements.awardPlayer(AllAdvancements.PACKAGER);
-//        } catch (ClassCastException e) {
-//            ColoredPackages.LOGGER.info("Unable to cast DyedPackagerBlockEntity: {} to {}", this, PackagerBlockEntityAccessorForge.class);
-//        }
-
         try {
-            PackagerBlockEntityAccessorForge advancementAccessor = (PackagerBlockEntityAccessorForge) (Object) this;
-
+            PackagerBEAdvancementAccessorForge advancementAccessor = (PackagerBEAdvancementAccessorForge) (Object) this;
             AdvancementBehaviour advancements = advancementAccessor.coloredPackages$getPackagerAdvancements();
-            ColoredPackages.LOGGER.info("try to award advancement, {}", advancements);
+
             advancements.awardPlayer(AllAdvancements.PACKAGER);
         } catch (ClassCastException e) {
-            ColoredPackages.LOGGER.info("Unable to cast DyedPackagerBlockEntityForge: {} to {}", this, PackagerBlockEntityAccessorForge.class);
+            ColoredPackages.LOGGER.info("Unable to cast DyedPackagerBlockEntityForge: {} to {}", this, PackagerBEAdvancementAccessorForge.class);
         }
-
-//        try {
-//            advancementsJunk.awardPlayer(AllAdvancements.PACKAGER);
-//        } catch (Exception e) {
-//            ColoredPackages.LOGGER.error(String.valueOf(e));
-//        }
-
-
-//        ColoredPackages.LOGGER.info("try to award advancement");
-//        award(AllAdvancements.PACKAGER);
 
         triggerStockCheck();
         notifyUpdate();

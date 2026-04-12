@@ -92,7 +92,7 @@ public class DyedPackagerRendererForge extends SmartBlockEntityRenderer<DyedPack
         SuperByteBuffer packagerBuffer = CachedBuffers.partial(colorLabelPartial, blockState) // Get buffer from color label partial for rendering
                 .light(light);
 
-        SpriteShiftEntry spriteShift = getSpriteShiftEntry(color); // Get color label sprite from color input
+        SpriteShiftEntry spriteShift = getSpriteShiftEntry(color, be); // Get color label sprite from color input
         if (spriteShift == null) return;
 
         packagerBuffer.shiftUV(spriteShift); // Shift texture atlas UV to get new texture
@@ -104,9 +104,12 @@ public class DyedPackagerRendererForge extends SmartBlockEntityRenderer<DyedPack
      * @param color The input color
      * @return Returns the sprite shift from the input color for DyedPackager's color label texture
      */
-    protected static SpriteShiftEntry getSpriteShiftEntry(DyeColor color) {
+    protected static SpriteShiftEntry getSpriteShiftEntry(DyeColor color, DyedPackagerBlockEntityForge be) {
         if (color != null) {
             return AllPackagerSpriteShifts.DYED_PACKAGERS.get(color);
+        }
+        if (be.isPonder) { // If dyed packager block entity is in ponder, this field is set to true so it can render the color label (since 'color' is null)
+            return AllPackagerSpriteShifts.DYED_PACKAGERS.get(DyeColor.RED);
         }
         else return null;
     }

@@ -13,7 +13,7 @@
     "PackageDestroyPacketMixinForge",
     "PackageEntityMixinForge",
     "PackagerBlockMixinForge",
-    "accessors.PackagerBlockEntityAccessorForge"
+    "accessors.PackagerBEAdvancementAccessorForge"
   ],
   "injectors": {
     "defaultRequire": 1

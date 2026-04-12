@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Debug(export = true)
 @Mixin(PackagerBlockEntity.class)
-public interface PackagerBlockEntityAccessorForge {
+public interface PackagerBEAdvancementAccessorForge {
     @Accessor("advancements")
     AdvancementBehaviour coloredPackages$getPackagerAdvancements();
 }

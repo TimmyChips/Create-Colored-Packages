@@ -40,19 +40,14 @@ public class RedPackageRendererForge extends EntityRenderer<RedPackageEntityForg
             ItemStack box = entity.box;
             if (box.isEmpty() || !PackageItem.isPackage(box)) box = AllBlocks.CARDBOARD_BLOCK.asStack();
 
-            ColoredPackages.LOGGER.info("test!!");
-
             PartialModel model;
             CompoundTag compoundTag = box.getTag();
-            ColoredPackages.LOGGER.info("compound tag: {}", box.getTag().getString(ColoredPackageItem.TAG_COLOR));
             if (compoundTag != null) {
                 String color = compoundTag.getString(ColoredPackageItem.TAG_COLOR);
                 model = AllPackagePartialModels.coloredPartialFromColor(box, color);
             }
             model = ColoredPackagePartialUtil.getPartialFromTagColor(box);
 //            else model = AllPartialModels.PACKAGES.get(ForgeRegistries.ITEMS.getKey(box.getItem()));
-
-            ColoredPackages.LOGGER.info("Partial model for render: {}", model);
 
             renderBox(entity, yaw, ms, buffer, light, model);
         }

@@ -17,7 +17,4 @@ public class AllColoredPonderScenes {
         HELPER.forComponents(new ItemProviderEntry[]{AllBlocks.PACKAGER}).addStoryBoard("high_logistics/dyed_packager", ColoredPackagerScenes::coloredPackager);
 //        platformRegisterPonder(helper);
     }
-
-    @ExpectPlatform
-    public static void platformRegisterPonder(PonderSceneRegistrationHelper<ResourceLocation> helper) {}
 }

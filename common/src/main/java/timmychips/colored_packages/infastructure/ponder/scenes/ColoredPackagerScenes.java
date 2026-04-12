@@ -3,6 +3,7 @@ package timmychips.colored_packages.infastructure.ponder.scenes;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.logistics.box.PackageItem;
 import com.simibubi.create.content.logistics.box.PackageStyles;
+import com.simibubi.create.content.logistics.packager.PackagerBlockEntity;
 import com.simibubi.create.foundation.ponder.CreateSceneBuilder;
 import com.simibubi.create.infrastructure.ponder.scenes.highLogistics.PonderHilo;
 import net.createmod.catnip.math.Pointing;
@@ -19,9 +20,12 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import timmychips.colored_packages.AllDyedBlocks;
+import timmychips.colored_packages.ColoredPackages;
 import timmychips.colored_packages.content.logistics.DyedPackagerBlockEntity;
 import timmychips.colored_packages.content.logistics.box.ColoredPackageStyles;
+import timmychips.colored_packages.infastructure.ponder.AllColoredPonderScenes;
 
 import java.util.Optional;
 
@@ -132,7 +136,8 @@ public class ColoredPackagerScenes {
 
         scene.world().setBlocks(packager1S, AllDyedBlocks.DYED_PACKAGER.getDefaultState(), false);
         scene.world().modifyBlockEntity(packager1, DyedPackagerBlockEntity.class, be -> {
-            be.color = Optional.of(DyeColor.RED); // Set color
+            // Since "be.color = Optional.of(DyeColor.RED);" doesn't work, we just set a field in the dyed packager so the renderer renders color label
+            be.isPonder = true;
         });
         scene.idle(20);
         scene.overlay()

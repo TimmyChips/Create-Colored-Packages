@@ -22,6 +22,8 @@ public class ColoredPackageItemForge extends ColoredPackageItem {
         // Add this colored package item, and it's style to array list to later retrieve
         ColoredPackageStyles.ALL_COLORED_BOXES_CONSTANT.add(this);
         PackageStyles.STANDARD_BOXES.removeIf(stack -> stack.style.type().equals("colored")); // Make sure to remove it from Create's list so default Create Packager doesn't pick the wrong package
+        PackageStyles.ALL_BOXES.removeIf(stack -> stack.style.type().equals("colored"));
+
     }
 
     @Override
