@@ -12,6 +12,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -28,10 +29,12 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
+import timmychips.colored_packages.ColoredPackages;
 import timmychips.colored_packages.content.logistics.box.util.ColorTooltipFormattingHelper;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
+import java.util.Locale;
 
 public class ColoredPackageItem extends PackageItem {
     public ColoredPackageItem(Properties properties, PackageStyles.PackageStyle style) {
@@ -49,6 +52,9 @@ public class ColoredPackageItem extends PackageItem {
 
         // Set color and lang from PackageColor tag
         if (hasColorTag(pStack)) {
+//            CompoundTag compound = pStack.getTag();
+
+
             String input = getCurrentColor(pStack);
             colorStr = input;
             colorLang = ColorTooltipFormattingHelper.getLangName(input);
@@ -86,6 +92,42 @@ public class ColoredPackageItem extends PackageItem {
     public static String getCurrentColor(ItemStack packageStack) {
         CompoundTag compoundTag = packageStack.getTag();
         return compoundTag.getString(TAG_COLOR);
+    }
+
+    // Ensure proper PackageColor tag (no upper case, no special characters)
+    // Try to set lowercase if it can
+    @Override
+    public void verifyTagAfterLoad(CompoundTag compoundTag) {
+        super.verifyTagAfterLoad(compoundTag);
+
+        if (!compoundTag.contains(TAG_COLOR)) return; // Ignore if PackageColor tag not present
+
+        String colorStr = compoundTag.getString(TAG_COLOR);
+
+        boolean reassignTag = false;
+
+        // Set to lower case (if any character is uppercase)
+        char[] charArray = colorStr.toCharArray();
+        for (char c : charArray) {
+            if (!isLowerCase(c)) {
+                colorStr = colorStr.toLowerCase(Locale.ROOT);
+                reassignTag = true;
+                break;
+            }
+        }
+
+        if (DyeColor.CODEC.byName(colorStr) == null) {
+            ColoredPackages.LOGGER.warn("Could not find colored package tag string in DyeColor enum: {}", colorStr);
+            colorStr = "red";
+            reassignTag = true;
+        }
+
+        // Only reassign compound tag if PackageColor was uppercase, or not in DyeColor enum
+        if (reassignTag) compoundTag.putString(TAG_COLOR, colorStr);
+    }
+
+    public static boolean isLowerCase(char c) {
+        return Character.isLetter(c) && Character.isLowerCase(c);
     }
 
     @Override

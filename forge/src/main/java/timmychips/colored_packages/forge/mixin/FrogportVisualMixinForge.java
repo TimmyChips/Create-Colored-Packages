@@ -19,6 +19,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import timmychips.colored_packages.content.logistics.box.ColoredPackageItem;
 import timmychips.colored_packages.content.logistics.box.util.ColoredPackagePartialUtil;
 
 @Debug(export = true)
@@ -57,6 +58,8 @@ public abstract class FrogportVisualMixinForge extends AbstractBlockEntityVisual
         boolean animating = blockEntity.isAnimationInProgress();
         boolean depositing = blockEntity.currentlyDepositing;
 
+        /// Return if package item doesn't have color tag
+        if (!ColoredPackageItem.hasColorTag(blockEntity.animatedPackage)) return;
         /// Set model to either colored package based on the animatedPackage PackageColor tag, or regular Create package from getPartialFromTagColor() method
         PartialModel model = ColoredPackagePartialUtil.getPartialFromTagColor(blockEntity.animatedPackage); // Get colored partial model from ItemStack if possible
 

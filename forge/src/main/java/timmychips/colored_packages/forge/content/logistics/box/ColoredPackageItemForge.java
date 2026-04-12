@@ -39,6 +39,7 @@ public class ColoredPackageItemForge extends ColoredPackageItem {
 
     /**
      * Creates a random colored box based on the DyedPackager block's color
+     * <p>Forge version of this method ({@link ItemStackHandler} is on Forge api side only)
      * @param stacks The handler to serialize the NBT for the box item
      * @param color The input box passed in from the DyedPackager block entity the randomly created box will be
      * @return New random colored box with the items packaged

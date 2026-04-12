@@ -22,7 +22,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import timmychips.colored_packages.AllPackagePartialModels;
 import timmychips.colored_packages.AllPackagerSpriteShifts;
-import timmychips.colored_packages.content.logistics.DyedPackagerBlock;
 import timmychips.colored_packages.content.logistics.packager.DyedPackagerVisual;
 
 public class DyedPackagerRendererForge extends SmartBlockEntityRenderer<DyedPackagerBlockEntityForge> {
@@ -43,7 +42,7 @@ public class DyedPackagerRendererForge extends SmartBlockEntityRenderer<DyedPack
         ItemStack renderedBox = be.getRenderedBox();
         float trayOffset = be.getTrayOffset(partialTicks);
         BlockState blockState = be.getBlockState();
-        Direction facing = blockState.getValue(DyedPackagerBlock.FACING)
+        Direction facing = blockState.getValue(DyedPackagerBlockForge.FACING)
                 .getOpposite();
 
         if (!VisualizationManager.supportsVisualization(be.getLevel())) {
