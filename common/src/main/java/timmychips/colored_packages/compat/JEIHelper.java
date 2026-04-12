@@ -1,4 +1,4 @@
-package timmychips.colored_packages.forge.util.compat.jei;
+package timmychips.colored_packages.compat;
 
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
@@ -42,7 +42,7 @@ public class JEIHelper implements IModPlugin {
         // Create item stacks from colored package items and set PackageColor tag
         for (Item item : packageItems) {
             ItemStack stack = new ItemStack(item);
-            ColoredPackageItem.setColor(stack, DyeColor.CYAN); // Set PackageColor to color we want
+            ColoredPackageItem.setColor(stack, DyeColor.RED); // Set PackageColor to color we want
 
             packageStacks.add(stack);
         }
