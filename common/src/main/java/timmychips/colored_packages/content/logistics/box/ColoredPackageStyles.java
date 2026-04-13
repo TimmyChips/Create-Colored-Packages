@@ -1,6 +1,7 @@
 package timmychips.colored_packages.content.logistics.box;
 
 import com.google.common.collect.ImmutableList;
+import com.simibubi.create.Create;
 import com.simibubi.create.content.logistics.box.PackageItem;
 import com.simibubi.create.content.logistics.box.PackageStyles;
 import net.minecraft.nbt.CompoundTag;
@@ -81,5 +82,14 @@ public class ColoredPackageStyles extends PackageStyles {
         ItemStack box = new ItemStack(ALL_COLORED_BOXES_CONSTANT.get(0));
         ColoredPackageItem.setColor(box, DyeColor.RED);
         return box;
+    }
+
+    // Returns rigging model for the "layered package" styles
+    public static ResourceLocation getLayeredRiggingModel(PackageStyle sizeStyle) {
+        int width = sizeStyle.width();
+        int height = sizeStyle.height();
+
+        String size = width + "x" + height;
+        return ColoredPackages.asResource("item/rigging/layered_" + size);
     }
 }

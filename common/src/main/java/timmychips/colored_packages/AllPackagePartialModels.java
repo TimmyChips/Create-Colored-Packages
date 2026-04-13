@@ -46,7 +46,12 @@ public class AllPackagePartialModels {
 
                 // Add to Create Partial Models for packages
                 AllPartialModels.PACKAGES.put(coloredPackageKey, model);
-                AllPartialModels.PACKAGE_RIGGING.put(coloredPackageKey, PartialModel.of(sizeStyle.getRiggingModel()));
+
+                switch (color) {
+                    case LIGHT_BLUE -> AllPartialModels.PACKAGE_RIGGING.put(coloredPackageKey, PartialModel.of(ColoredPackageStyles.getLayeredRiggingModel(sizeStyle)));
+                    default -> AllPartialModels.PACKAGE_RIGGING.put(coloredPackageKey, PartialModel.of(sizeStyle.getRiggingModel()));
+                }
+//                AllPartialModels.PACKAGE_RIGGING.put(coloredPackageKey, PartialModel.of(sizeStyle.getRiggingModel()));
             }
         }
     }
