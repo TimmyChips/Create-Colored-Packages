@@ -1,0 +1,50 @@
+{
+	"format_version": "1.21.11",
+	"credit": "Made with Blockbench",
+	"parent": "create:item/package_transforms",
+    "render_type": "minecraft:cutout",
+	"textures": {
+		"0": "create:item/package/cardboard",
+		"particle": "create:item/package/cardboard_particle",
+		"layer": "block/box_layer"
+	},
+	"elements": [
+		{
+			"name": "box",
+			"from": [3, 0, 3],
+			"to": [13, 12, 13],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 6, 8]},
+			"faces": {
+				"north": {"uv": [6.25, 6.25, 8.75, 9.25], "texture": "#0"},
+				"east": {"uv": [6.25, 0.25, 8.75, 3.25], "texture": "#0"},
+				"south": {"uv": [8.75, 6.25, 6.25, 9.25], "texture": "#0"},
+				"west": {"uv": [6.25, 3.25, 8.75, 6.25], "texture": "#0"},
+				"up": {"uv": [6.25, 9.25, 8.75, 11.75], "rotation": 180, "texture": "#0"},
+				"down": {"uv": [6.25, 11.75, 8.75, 14.25], "rotation": 270, "texture": "#0"}
+			}
+		},
+		{
+			"name": "box",
+			"from": [2.625, -0.375, 2.625],
+			"to": [13.375, 12.375, 13.375],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 6, 8]},
+			"faces": {
+				"north": {"uv": [6.25, 6.25, 8.75, 9.25], "texture": "#layer"},
+				"east": {"uv": [6.25, 0.25, 8.75, 3.25], "texture": "#layer"},
+				"south": {"uv": [8.75, 6.25, 6.25, 9.25], "texture": "#layer"},
+				"west": {"uv": [6.25, 3.25, 8.75, 6.25], "texture": "#layer"},
+				"up": {"uv": [6.25, 9.25, 8.75, 11.75], "rotation": 180, "texture": "#layer"},
+				"down": {"uv": [6.25, 11.75, 8.75, 14.25], "rotation": 270, "texture": "#layer"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "package_3",
+			"origin": [8, 8, 8],
+			"scope": 0,
+			"color": 0,
+			"children": [0, 1]
+		}
+	]
+}

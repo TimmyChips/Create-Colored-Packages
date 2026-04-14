@@ -1,5 +1,5 @@
 {
-  "parent": "create:item/package/cardboard_12x12",
+  "parent": "colored_packages:item/symmetrical_12x12_template",
   "textures": {
     "0": "colored_packages:item/package/light_gray",
     "particle": "colored_packages:item/package/particle/light_gray"

@@ -1,7 +1,8 @@
 {
-  "parent": "create:item/package/cardboard_12x10",
+  "parent": "colored_packages:item/layered_12x10_template",
   "textures": {
     "0": "colored_packages:item/package/light_blue",
+    "layer": "colored_packages:item/package/light_blue_layer",
     "particle": "colored_packages:item/package/particle/light_blue"
   }
 }

@@ -47,11 +47,11 @@ public class AllPackagePartialModels {
                 // Add to Create Partial Models for packages
                 AllPartialModels.PACKAGES.put(coloredPackageKey, model);
 
+                // Cases for the rigging model for each color. E.g. light blue uses a thicker, "layered" package model, thus needs a wider rigging model to compensate. Unfortunately is hardcoded.
                 switch (color) {
                     case LIGHT_BLUE -> AllPartialModels.PACKAGE_RIGGING.put(coloredPackageKey, PartialModel.of(ColoredPackageStyles.getLayeredRiggingModel(sizeStyle)));
                     default -> AllPartialModels.PACKAGE_RIGGING.put(coloredPackageKey, PartialModel.of(sizeStyle.getRiggingModel()));
                 }
-//                AllPartialModels.PACKAGE_RIGGING.put(coloredPackageKey, PartialModel.of(sizeStyle.getRiggingModel()));
             }
         }
     }
