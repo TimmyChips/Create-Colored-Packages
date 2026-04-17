@@ -3,7 +3,6 @@ package timmychips.colored_packages.forge.mixin;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.fluids.transfer.GenericItemEmptying;
 import com.simibubi.create.content.logistics.packager.PackagerBlock;
-import com.simibubi.create.content.logistics.packager.PackagerBlockEntity;
 import com.simibubi.create.foundation.advancement.AdvancementBehaviour;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.core.BlockPos;

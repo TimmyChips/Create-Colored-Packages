@@ -2,9 +2,7 @@ package timmychips.colored_packages.forge.content.logistics.box;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.AllBlocks;
-import com.simibubi.create.AllPartialModels;
 import com.simibubi.create.content.logistics.box.PackageItem;
-import com.simibubi.create.content.logistics.box.PackageRenderer;
 import dev.engine_room.flywheel.api.visualization.VisualizationManager;
 import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 import net.createmod.catnip.math.AngleHelper;
@@ -20,14 +18,13 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 import timmychips.colored_packages.AllPackagePartialModels;
 import timmychips.colored_packages.ColoredPackages;
 import timmychips.colored_packages.content.logistics.box.ColoredPackageItem;
 import timmychips.colored_packages.content.logistics.box.util.ColoredPackagePartialUtil;
 
-public class RedPackageRendererForge extends EntityRenderer<RedPackageEntityForge> {
+public class RedPackageRendererForge extends EntityRenderer<ColoredPackageEntityForge> {
 
     public RedPackageRendererForge(EntityRendererProvider.Context pContext) {
         super(pContext);
@@ -35,7 +32,7 @@ public class RedPackageRendererForge extends EntityRenderer<RedPackageEntityForg
     }
 
     @Override
-    public void render(RedPackageEntityForge entity, float yaw, float pt, PoseStack ms, MultiBufferSource buffer, int light) {
+    public void render(ColoredPackageEntityForge entity, float yaw, float pt, PoseStack ms, MultiBufferSource buffer, int light) {
         if (!VisualizationManager.supportsVisualization(entity.level())) {
             ItemStack box = entity.box;
             if (box.isEmpty() || !PackageItem.isPackage(box)) box = AllBlocks.CARDBOARD_BLOCK.asStack();
@@ -68,7 +65,7 @@ public class RedPackageRendererForge extends EntityRenderer<RedPackageEntityForg
 
     // Not needed, just return new null ResourceLocation to avoid error/warning
     @Override
-    public @NotNull ResourceLocation getTextureLocation(@NotNull RedPackageEntityForge pEntity) {
+    public @NotNull ResourceLocation getTextureLocation(@NotNull ColoredPackageEntityForge pEntity) {
         return ColoredPackages.asResource("null");
     }
 }

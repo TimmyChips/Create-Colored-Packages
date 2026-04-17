@@ -19,12 +19,12 @@ import net.minecraftforge.network.PlayMessages;
 import timmychips.colored_packages.ColoredPackages;
 import timmychips.colored_packages.forge.AllPackageEntityTypesForge;
 
-public class RedPackageEntityForge extends PackageEntity implements IEntityAdditionalSpawnData {
+public class ColoredPackageEntityForge extends PackageEntity implements IEntityAdditionalSpawnData {
 
     private Entity originalEntity;
     public String model;
 
-    public RedPackageEntityForge(EntityType<?> entityTypeIn, Level worldIn) {
+    public ColoredPackageEntityForge(EntityType<?> entityTypeIn, Level worldIn) {
         super(entityTypeIn, worldIn);
         box = ItemStack.EMPTY;
         setYRot(this.random.nextFloat() * 360.0F);
@@ -33,31 +33,24 @@ public class RedPackageEntityForge extends PackageEntity implements IEntityAddit
         insertionDelay = 30;
     }
 
-    public RedPackageEntityForge(EntityType<?> entityType, Level world, double x, double y, double z, String model) {
-        super(entityType, world);
-        this.setPos(x, y, z);
-        this.model = model;
-        this.refreshDimensions();
-    }
-
-    public RedPackageEntityForge(Level worldIn, double x, double y, double z) {
-        this(AllPackageEntityTypesForge.RED_COLORED_PACKAGE_FORGE.get(), worldIn);
+    public ColoredPackageEntityForge(Level worldIn, double x, double y, double z) {
+        this(AllPackageEntityTypesForge.COLORED_PACKAGE_ENTITY_FORGE.get(), worldIn);
         this.setPos(x, y, z);
         this.refreshDimensions();
     }
 
     // Unused, refer to PackageEntityMixinForge.class
-    public static RedPackageEntityForge fromItemStack(Level world, Vec3 position, ItemStack itemstack) {
-        RedPackageEntityForge packageEntity = AllPackageEntityTypesForge.RED_COLORED_PACKAGE_FORGE.get()
+    public static ColoredPackageEntityForge fromItemStack(Level world, Vec3 position, ItemStack itemstack) {
+        ColoredPackageEntityForge packageEntity = AllPackageEntityTypesForge.COLORED_PACKAGE_ENTITY_FORGE.get()
                 .create(world);
         packageEntity.setPos(position);
         packageEntity.setBox(itemstack);
         return packageEntity;
     }
 
-    public static RedPackageEntityForge spawn(PlayMessages.SpawnEntity spawnEntity, Level world) {
-        RedPackageEntityForge packageEntity =
-                new RedPackageEntityForge(world, spawnEntity.getPosX(), spawnEntity.getPosY(), spawnEntity.getPosZ());
+    public static ColoredPackageEntityForge spawn(PlayMessages.SpawnEntity spawnEntity, Level world) {
+        ColoredPackageEntityForge packageEntity =
+                new ColoredPackageEntityForge(world, spawnEntity.getPosX(), spawnEntity.getPosY(), spawnEntity.getPosZ());
         packageEntity.setDeltaMovement(spawnEntity.getVelX(), spawnEntity.getVelY(), spawnEntity.getVelZ());
         packageEntity.clientPosition = packageEntity.position();
         return packageEntity;
@@ -71,14 +64,14 @@ public class RedPackageEntityForge extends PackageEntity implements IEntityAddit
 
     public static EntityType.Builder<?> build(EntityType.Builder<?> builder) {
         @SuppressWarnings("unchecked")
-        EntityType.Builder<RedPackageEntityForge> boxBuilder = (EntityType.Builder<RedPackageEntityForge>) builder;
-        return boxBuilder.setCustomClientFactory(RedPackageEntityForge::spawn)
+        EntityType.Builder<ColoredPackageEntityForge> boxBuilder = (EntityType.Builder<ColoredPackageEntityForge>) builder;
+        return boxBuilder.setCustomClientFactory(ColoredPackageEntityForge::spawn)
                 .sized(1, 1);
     }
 
     // From dropped item
-    public static RedPackageEntityForge fromDroppedItem(Level world, Entity originalEntity, ItemStack itemstack) {
-        RedPackageEntityForge packageEntity = AllPackageEntityTypesForge.RED_COLORED_PACKAGE_FORGE.get()
+    public static ColoredPackageEntityForge fromDroppedItem(Level world, Entity originalEntity, ItemStack itemstack) {
+        ColoredPackageEntityForge packageEntity = AllPackageEntityTypesForge.COLORED_PACKAGE_ENTITY_FORGE.get()
                 .create(world);
 
         Vec3 position = originalEntity.position();

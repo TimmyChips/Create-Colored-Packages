@@ -12,7 +12,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 import timmychips.colored_packages.ColoredPackages;
-import timmychips.colored_packages.content.logistics.box.ColoredPackageItem;
 import timmychips.colored_packages.forge.content.logistics.box.ColoredPackageItemForge;
 
 import java.util.ArrayList;

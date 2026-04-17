@@ -28,13 +28,13 @@ public class ColoredPackageItemForge extends ColoredPackageItem {
 
     @Override
     public PackageEntity platformNewColoredPackage(Level world, Vec3 point) {
-        return new RedPackageEntityForge(world, point.x, point.y, point.z);
+        return new ColoredPackageEntityForge(world, point.x, point.y, point.z);
     }
 
     // For when package item is dropped with Q
     @Override
     public Entity createEntity(Level world, Entity location, ItemStack itemstack) {
-        return RedPackageEntityForge.fromDroppedItem(world, location, itemstack);
+        return ColoredPackageEntityForge.fromDroppedItem(world, location, itemstack);
     }
 
     /**

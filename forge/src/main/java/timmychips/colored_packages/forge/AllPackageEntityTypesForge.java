@@ -14,18 +14,20 @@ import net.minecraft.world.entity.MobCategory;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import timmychips.colored_packages.ColoredPackages;
 import timmychips.colored_packages.content.logistics.box.ColoredPackageVisual;
-import timmychips.colored_packages.forge.content.logistics.box.RedPackageEntityForge;
+import timmychips.colored_packages.forge.content.logistics.box.ColoredPackageEntityForge;
 import timmychips.colored_packages.forge.content.logistics.box.RedPackageRendererForge;
 
 public class AllPackageEntityTypesForge {
 
-    public static final EntityEntry<RedPackageEntityForge> RED_COLORED_PACKAGE_FORGE = register("red_package", RedPackageEntityForge::new, () -> RedPackageRendererForge::new,
-            MobCategory.MISC, 10, 3, true, false, RedPackageEntityForge::build)
+    private static final String COLORED_PACKAGE_PATH = "colored_package";
+
+    public static final EntityEntry<ColoredPackageEntityForge> COLORED_PACKAGE_ENTITY_FORGE = register(COLORED_PACKAGE_PATH, ColoredPackageEntityForge::new, () -> RedPackageRendererForge::new,
+            MobCategory.MISC, 10, 3, true, false, ColoredPackageEntityForge::build)
             .visual(() -> ColoredPackageVisual::new, true)
             .register();
 
     public static void registerEntityAttributes(EntityAttributeCreationEvent event) {
-        event.put(RED_COLORED_PACKAGE_FORGE.get(), RedPackageEntityForge.createPackageAttributes()
+        event.put(COLORED_PACKAGE_ENTITY_FORGE.get(), ColoredPackageEntityForge.createPackageAttributes()
                 .build());
     }
 

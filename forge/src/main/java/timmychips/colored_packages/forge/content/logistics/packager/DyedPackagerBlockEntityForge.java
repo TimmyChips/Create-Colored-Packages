@@ -4,7 +4,6 @@ import com.simibubi.create.AllBlocks;
 import com.simibubi.create.compat.computercraft.events.PackageEvent;
 import com.simibubi.create.content.logistics.BigItemStack;
 import com.simibubi.create.content.logistics.box.PackageItem;
-import com.simibubi.create.content.logistics.packager.PackagerBlockEntity;
 import com.simibubi.create.content.logistics.packager.PackagerItemHandler;
 import com.simibubi.create.content.logistics.packager.PackagingRequest;
 import com.simibubi.create.content.logistics.packagerLink.PackagerLinkBlock;
@@ -24,7 +23,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
-import org.jetbrains.annotations.NotNull;
 import timmychips.colored_packages.ColoredPackages;
 import timmychips.colored_packages.content.logistics.DyedPackagerBlockEntity;
 import timmychips.colored_packages.forge.content.logistics.box.ColoredPackageItemForge;
@@ -58,23 +56,6 @@ public class DyedPackagerBlockEntityForge extends DyedPackagerBlockEntity {
         color = compound.contains("Dye") ? Optional.of(NBTHelper.readEnum(compound, "Dye", DyeColor.class))
                 : Optional.empty();
     }
-
-    // Copied from PackagerBlockEntity since advancements field in that class is private
-//    @Override
-//    public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
-//        super.addBehaviours(behaviours);
-//        for (BlockEntityBehaviour behaviour : behaviours) {
-////            ColoredPackages.LOGGER.info("block entity: {}", behaviour.blockEntity);
-//            if (behaviour instanceof AdvancementBehaviour advancementBehaviour) {
-//                advancementBehaviour.initialize();
-//                ColoredPackages.LOGGER.info("matching advancement type");
-//                ColoredPackages.LOGGER.info("owner? {}", advancementBehaviour.isOwnerPresent());
-////                advancementsJunk = advancementBehaviour;
-////                ColoredPackages.LOGGER.info("advancement behavior: {}", advancementBehaviour);
-//            }
-//        }
-////        behaviours.add(advancementsJunk = new AdvancementBehaviour(this, AllAdvancements.PACKAGER));
-//    }
 
     // Apply color and return true if successful
     public boolean applyColor(DyeColor colorIn) {
@@ -208,10 +189,7 @@ public class DyedPackagerBlockEntityForge extends DyedPackagerBlockEntity {
         ItemStack createdBox =
                 extractedPackageItem.isEmpty() ? ColoredPackageItemForge.coloredContaining(extractedItems, color) : extractedPackageItem.copy();
         if (!extractedPackageItem.isEmpty()) ColoredPackages.LOGGER.info("extracedPackageItem!");
-//        ColoredPackages.LOGGER.info("createdBox: {}", createdBox);
         ///
-
-//        ItemStack test =
 
         computerBehaviour.prepareComputerEvent(new PackageEvent(createdBox, "package_created"));
         PackageItem.clearAddress(createdBox);
