@@ -6,7 +6,6 @@ import timmychips.colored_packages.ColoredPackagesClient;
 
 public class ColoredPackagesClientForge {
     public static void init(final FMLClientSetupEvent event) {
-        ColoredPackages.LOGGER.info("Forge client bus!");
         ColoredPackagesClient.init();
     }
 }
