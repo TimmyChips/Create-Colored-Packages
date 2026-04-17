@@ -90,7 +90,10 @@ public class ColoredPackageItem extends PackageItem {
     public void verifyTagAfterLoad(CompoundTag compoundTag) {
         super.verifyTagAfterLoad(compoundTag);
 
-        if (!compoundTag.contains(TAG_COLOR)) return; // Ignore if PackageColor tag not present
+        if (!compoundTag.contains(TAG_COLOR)) { // If tag not present, default red
+            compoundTag.putString(TAG_COLOR, DyeColor.RED.getName());
+            return;
+        }
 
         String colorStr = compoundTag.getString(TAG_COLOR);
 

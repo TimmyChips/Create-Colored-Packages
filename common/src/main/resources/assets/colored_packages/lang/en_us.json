@@ -1,6 +1,7 @@
 {
   "block.colored_packages.dyed_packager": "Dyed Packager",
   "block.colored_packages.dyed_repackager": "Dyed Re-Packager",
+  "entity.colored_packages.colored_package": "Colored Package",
 
   "colored_packages.ponder.dyed_packager.header": "Create Colored Packages: Creating colored packages",
   "colored_packages.ponder.dyed_packager.text_1": "By default, Packagers will create standard packages",
