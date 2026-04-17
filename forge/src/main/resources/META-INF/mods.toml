@@ -9,7 +9,7 @@ version = "${version}"
 displayName = "Create: Colored Packages"
 authors = "TimmyChips"
 description = '''
-Hytale-like ledge grab to vault the player up blocks
+Adds several colored packages from applying dye to the Create: Packager block
 '''
 #logoFile = ""
 
@@ -32,4 +32,11 @@ modId = "architectury"
 mandatory = true
 versionRange = "[9.2.14,)"
 ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.colored_packages]]
+modId = "create"
+mandatory = true
+versionRange = "[6.0.8,)"
+ordering = "BEFORE"
 side = "BOTH"
