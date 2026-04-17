@@ -30,6 +30,5 @@ dependencies {
     modCompileOnly("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
 
     // Create
-    // So we can refer to the fabric classes since they're almost always the same on both platforms (almost)
-    modCompileOnly("com.simibubi.create:create-fabric:$create_fabric_version")
+    modCompileOnly ("com.simibubi.create:create-${minecraft_version}:${create_neoforge_version}:slim") { transitive = false }
 }

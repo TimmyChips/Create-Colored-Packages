@@ -1,5 +1,5 @@
 modLoader = "javafml"
-loaderVersion = "[47,)"
+loaderVersion = "[2,)"
 #issueTrackerURL = ""
 license = "GNU GPL 3.0"
 
@@ -14,29 +14,29 @@ Adds several colored packages from applying dye to the Create: Packager block
 #logoFile = ""
 
 [[dependencies.colored_packages]]
-modId = "forge"
+modId = "neoforge"
 mandatory = true
-versionRange = "[47,)"
+versionRange = "[21,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.colored_packages]]
 modId = "minecraft"
-mandatory = true
-versionRange = "[1.20.1,)"
+type="required"
+versionRange = "[1.21.1,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.colored_packages]]
 modId = "architectury"
-mandatory = true
-versionRange = "[9.2.14,)"
+type="required"
+versionRange = "[13.0.8,)"
 ordering = "AFTER"
 side = "BOTH"
 
 [[dependencies.colored_packages]]
 modId = "create"
-mandatory = true
-versionRange = "[6.0.8,)"
+type="required"
+versionRange="[6.0.9,6.1.0)"
 ordering = "BEFORE"
 side = "BOTH"

@@ -32,8 +32,9 @@ public class ColoredPackageItem extends PackageItem {
     }
 
     @Override
-    public void appendHoverText(ItemStack pStack, Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
-        super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
+    public void appendHoverText(ItemStack stack, TooltipContext tooltipContext, List<Component> tooltipComponents,
+                                TooltipFlag tooltipFlag) {
+        super.appendHoverText(stack, tooltipContext, tooltipComponents, tooltipFlag);
         // Get color from stack, or default "Red" if it doesn't have PackageColor tag
 
         // Red by default if ColoredPackageItem PackageColor tag is empty
@@ -41,17 +42,17 @@ public class ColoredPackageItem extends PackageItem {
         String colorLang = "Red"; // The tooltip text with capitalization and spacing
 
         // Set color and lang from PackageColor tag
-        if (hasColorTag(pStack)) {
-//            CompoundTag compound = pStack.getTag();
+        if (hasColorTag(stack)) {
+//            CompoundTag compound = stack.getTag();
 
 
-            String input = getCurrentColor(pStack);
+            String input = getCurrentColor(stack);
             colorStr = input;
             colorLang = ColorTooltipFormattingHelper.getLangName(input);
         }
 
         // Add tooltip with color
-        pTooltipComponents.add(Component.literal(colorLang)
+        tooltipComponents.add(Component.literal(colorLang)
                 .withStyle(ColorTooltipFormattingHelper.getByName(colorStr)));
     }
 
