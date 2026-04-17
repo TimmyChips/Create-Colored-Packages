@@ -1,6 +1,5 @@
 package timmychips.colored_packages;
 
-import com.simibubi.create.Create;
 import net.createmod.catnip.render.SpriteShiftEntry;
 import net.createmod.catnip.render.SpriteShifter;
 import net.minecraft.world.item.DyeColor;
@@ -21,7 +20,6 @@ public class AllPackagerSpriteShifts {
             // E.g. Dyed packager color labels will go from "textures/block/dyed_packager_color_label" to "textures/block/dyed_packager_color_label/red"
             DYED_PACKAGERS.put(color, get("block/dyed_packager_color_label", "block/dyed_packager_color_label/" + id));
         }
-        ColoredPackages.LOGGER.info("DYED_PACKAGES map: {}", DYED_PACKAGERS);
     }
 
     // Copied from Create's AllSpriteShifts class with namespace tweak

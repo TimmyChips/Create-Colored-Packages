@@ -1,11 +1,9 @@
 package timmychips.colored_packages.content.logistics.packager;
 
-import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllPartialModels;
 import com.simibubi.create.content.logistics.packager.PackagerBlock;
 import com.simibubi.create.content.logistics.packager.PackagerBlockEntity;
 import com.simibubi.create.content.logistics.packager.PackagerRenderer;
-import com.simibubi.create.content.logistics.packager.PackagerVisual;
 import dev.engine_room.flywheel.api.instance.Instance;
 import dev.engine_room.flywheel.api.visualization.VisualizationContext;
 import dev.engine_room.flywheel.lib.instance.InstanceTypes;
@@ -16,8 +14,6 @@ import dev.engine_room.flywheel.lib.visual.AbstractBlockEntityVisual;
 import dev.engine_room.flywheel.lib.visual.SimpleDynamicVisual;
 import net.createmod.catnip.math.AngleHelper;
 import net.minecraft.core.Direction;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
@@ -58,8 +54,7 @@ public class DyedPackagerVisual<T extends PackagerBlockEntity> extends AbstractB
         animate(partialTick);
     }
 
-    // From PackagerRenderer class with slight tweak to return correct tray model
-    // For whatever reason the PackagerVisual class had the tray in "defrag" sicko mode
+    // From PackagerRenderer class with slight tweak to return correct tray model based on if dyed packager or dyed repackager
     public static PartialModel getTrayModel(BlockState blockState) {
         return AllDyedBlocks.DYED_PACKAGER.has(blockState) ? AllPartialModels.PACKAGER_TRAY_REGULAR
                 : AllPartialModels.PACKAGER_TRAY_DEFRAG;

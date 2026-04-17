@@ -1,16 +1,12 @@
 package timmychips.colored_packages.content.logistics;
 
-import com.simibubi.create.content.logistics.packager.PackagerBlock;
 import com.simibubi.create.content.logistics.packager.PackagerBlockEntity;
-import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.createmod.catnip.nbt.NBTHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.NotNull;
-import timmychips.colored_packages.ColoredPackages;
 
 import java.util.Optional;
 

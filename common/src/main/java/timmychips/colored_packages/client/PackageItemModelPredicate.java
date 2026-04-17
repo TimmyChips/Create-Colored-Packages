@@ -1,8 +1,6 @@
 package timmychips.colored_packages.client;
 
 import dev.architectury.registry.item.ItemPropertiesRegistry;
-import net.minecraft.client.renderer.item.ItemProperties;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
 import timmychips.colored_packages.ColoredPackages;
 import timmychips.colored_packages.content.logistics.box.ColoredPackageItem;

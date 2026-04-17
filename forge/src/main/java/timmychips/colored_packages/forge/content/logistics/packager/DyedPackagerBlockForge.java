@@ -45,9 +45,6 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.items.IItemHandler;
-import timmychips.colored_packages.AllDyedBlockEntityTypes;
-import timmychips.colored_packages.content.logistics.DyedPackagerBlockEntity;
-import timmychips.colored_packages.content.logistics.PackagerBlockFramework;
 import timmychips.colored_packages.forge.AllDyedBlockEntityTypesForge;
 
 public class DyedPackagerBlockForge extends WrenchableDirectionalBlock implements IBE<DyedPackagerBlockEntityForge>, IWrenchable {

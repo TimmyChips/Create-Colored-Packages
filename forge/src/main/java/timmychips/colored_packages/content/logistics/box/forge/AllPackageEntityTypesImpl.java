@@ -12,7 +12,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import timmychips.colored_packages.ColoredPackages;
-import timmychips.colored_packages.content.logistics.box.red.ColoredPackageVisual;
+import timmychips.colored_packages.content.logistics.box.ColoredPackageVisual;
 import timmychips.colored_packages.forge.content.logistics.box.RedPackageEntityForge;
 import timmychips.colored_packages.forge.content.logistics.box.RedPackageRendererForge;
 

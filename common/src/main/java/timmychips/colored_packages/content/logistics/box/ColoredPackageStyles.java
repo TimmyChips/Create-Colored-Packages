@@ -1,16 +1,16 @@
 package timmychips.colored_packages.content.logistics.box;
 
 import com.google.common.collect.ImmutableList;
-import com.simibubi.create.Create;
 import com.simibubi.create.content.logistics.box.PackageItem;
 import com.simibubi.create.content.logistics.box.PackageStyles;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import timmychips.colored_packages.ColoredPackages;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class ColoredPackageStyles extends PackageStyles {
 
@@ -73,7 +73,6 @@ public class ColoredPackageStyles extends PackageStyles {
                 // Get Create rare boxes list rarely, or else get the list of the specified color package items
         List<? extends PackageItem> pool = STYLE_PICKER.nextInt(RARE_CHANCE) == 0 ?
                 PackageStyles.RARE_BOXES : ALL_COLORED_BOXES_CONSTANT;
-        ColoredPackages.LOGGER.info("returned random item stack box: {}", new ItemStack(pool.get(STYLE_PICKER.nextInt(pool.size()))));
         return new ItemStack(pool.get(STYLE_PICKER.nextInt(pool.size()))); // Return random package item from list
     }
 

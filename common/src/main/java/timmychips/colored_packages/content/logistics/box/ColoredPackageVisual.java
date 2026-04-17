@@ -1,4 +1,4 @@
-package timmychips.colored_packages.content.logistics.box.red;
+package timmychips.colored_packages.content.logistics.box;
 
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.logistics.box.PackageEntity;

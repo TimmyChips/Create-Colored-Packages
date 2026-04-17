@@ -8,11 +8,6 @@ import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import timmychips.colored_packages.content.logistics.box.ColoredPackageStyles;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import static com.mojang.text2speech.Narrator.LOGGER;
-
 public class AllPackagePartialModels {
 
     public static final PartialModel DYED_PACKAGER_COLOR_LABEL = block("dyed_packager/color_label"); // Partial model of the color label that will be rendered with Dyed Packager block

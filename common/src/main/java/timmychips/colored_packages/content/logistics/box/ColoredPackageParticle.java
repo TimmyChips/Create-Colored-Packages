@@ -9,6 +9,7 @@ import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 import timmychips.colored_packages.AllPackagePartialModels;
 
+// Item breaking particle that spawns correct colored version when breaking colored package
 public class ColoredPackageParticle extends BreakingItemParticle {
 
     /// The particle behavior and rendering
