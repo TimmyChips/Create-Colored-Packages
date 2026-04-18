@@ -32,7 +32,7 @@ public class ColoredPackageParticle extends BreakingItemParticle {
 
         // Get the particle sprite from the partial model of the package's current color
         this.setSprite(AllPackagePartialModels.coloredPartialFromColor(itemStack,
-                ColoredPackageItem.getCurrentColor(itemStack)).get().getParticleIcon());
+                ColoredPackageItem.getCurrentColor(itemStack).getName()).get().getParticleIcon());
     }
 
     /// The particle provider

@@ -15,6 +15,18 @@ repositories {
         url = "https://jitpack.io/"
         content { includeGroupAndSubgroups("com.github") }
     }
+    maven { // Create Forge and Registrate Forge
+        url = "https://maven.tterrag.com/"
+        content {
+            includeGroup("com.tterrag.registrate")
+            includeGroup("com.simibubi.create")
+        }
+    }
+    maven { url = "https://maven.ithundxr.dev/snapshots" } // Registrate
+    maven { // Neoforge for Ponder registration TODO: replace with Fabric when that comes out
+        name = 'NeoForged'
+        url = 'https://maven.neoforged.net/releases'
+    }
 }
 
 dependencies {
@@ -22,6 +34,8 @@ dependencies {
     // which get remapped to the correct annotations on each platform.
     // Do NOT use other classes from Fabric Loader.
     modImplementation "net.fabricmc:fabric-loader:$rootProject.fabric_loader_version"
+
+    modImplementation("net.neoforged:neoforge:$rootProject.neoforge_version")
 
     modImplementation "dev.architectury:architectury:$rootProject.architectury_api_version"
 
@@ -31,4 +45,7 @@ dependencies {
 
     // Create
     modCompileOnly ("com.simibubi.create:create-${minecraft_version}:${create_neoforge_version}:slim") { transitive = false }
+    modCompileOnly ("com.tterrag.registrate:Registrate:${registrate_neoforge_version}")
+    modCompileOnly("dev.engine-room.flywheel:flywheel-neoforge-api-${minecraft_version}:${flywheel_neoforge_version}")
+    modImplementation("net.createmod.ponder:ponder-neoforge:${ponder_neoforge_version}+mc${minecraft_version}")
 }

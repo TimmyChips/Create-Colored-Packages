@@ -6,6 +6,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import timmychips.colored_packages.AllPackagePartialModels;
+import timmychips.colored_packages.ColoredDataComponent;
 import timmychips.colored_packages.content.logistics.box.ColoredPackageItem;
 
 // Useful methods for getting the Partial or Resource from the colored package ItemStack
@@ -33,9 +34,9 @@ public class ColoredPackagePartialUtil {
     public static ResourceLocation getResourceKeyFromTagColor(ItemStack box) {
 
         if (box.getItem().arch$registryName().getNamespace().equals("colored_packages")) { // Get for items with "colored_packages" id namespace
-            CompoundTag compoundTag = box.getTag();
-            if (compoundTag != null && !compoundTag.isEmpty()) {
-                String color = compoundTag.getString(ColoredPackageItem.TAG_COLOR);
+
+            if (box.has(ColoredDataComponent.PACKAGE_COLOR)) {
+                String color = box.get(ColoredDataComponent.PACKAGE_COLOR).getName();
                 return AllPackagePartialModels.coloredResourceFromColor(box, color);
             }
         }

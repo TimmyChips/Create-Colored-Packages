@@ -22,7 +22,7 @@ public class ModifyCreativeMenu {
         Map<Item, Function<Item, ItemStack>> factories = new Reference2ReferenceOpenHashMap<>(); // Factory with Item and function to apply for items in creative menu
 
         // Map of all the item entries and the function to set the PackageColor tag for the item stack in the creative mode menu
-        Map<ItemProviderEntry<?>, Function<Item, ItemStack>> itemInCreativeMenuFactory = new Reference2ReferenceOpenHashMap<>();
+        Map<ItemProviderEntry<?, ?>, Function<Item, ItemStack>> itemInCreativeMenuFactory = new Reference2ReferenceOpenHashMap<>();
 
         // Set PackageColor for each package item entry
         AllPackageItems.packageItemEntries.forEach(packageEntry -> {
@@ -54,7 +54,7 @@ public class ModifyCreativeMenu {
      */
     public static List<Item> collectPackageItems() {
         List<Item> items = new ReferenceArrayList<>();
-        for (ItemProviderEntry<?> packageEntry : AllPackageItems.packageItemEntries) {
+        for (ItemProviderEntry<?, ?> packageEntry : AllPackageItems.packageItemEntries) {
             Item packageItem = packageEntry.asItem();
             items.add(packageItem);
         }

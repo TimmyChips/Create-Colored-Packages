@@ -19,7 +19,7 @@ import java.util.Locale;
 
 public class AllPackageItems {
 
-    public static ArrayList<ItemProviderEntry<?>> packageItemEntries = new ArrayList<>();
+    public static ArrayList<ItemProviderEntry<?, ?>> packageItemEntries = new ArrayList<>();
 
     static {
         // For constant package item type

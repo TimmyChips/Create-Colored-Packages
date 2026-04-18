@@ -40,3 +40,6 @@ type="required"
 versionRange="[6.0.9,6.1.0)"
 ordering = "BEFORE"
 side = "BOTH"
+
+[[mixins]]
+config = "colored_packages.mixins.json"

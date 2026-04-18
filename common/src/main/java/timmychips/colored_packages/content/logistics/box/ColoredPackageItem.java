@@ -19,12 +19,15 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import timmychips.colored_packages.ColoredDataComponent;
 import timmychips.colored_packages.ColoredPackages;
 import timmychips.colored_packages.content.logistics.box.util.ColorTooltipFormattingHelper;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
 import java.util.Locale;
+
+import static timmychips.colored_packages.ColoredDataComponent.PACKAGE_COLOR;
 
 public class ColoredPackageItem extends PackageItem {
     public ColoredPackageItem(Properties properties, PackageStyles.PackageStyle style) {
@@ -46,7 +49,7 @@ public class ColoredPackageItem extends PackageItem {
 //            CompoundTag compound = stack.getTag();
 
 
-            String input = getCurrentColor(stack);
+            String input = getCurrentColor(stack).getName();
             colorStr = input;
             colorLang = ColorTooltipFormattingHelper.getLangName(input);
         }
@@ -60,68 +63,33 @@ public class ColoredPackageItem extends PackageItem {
 
     // Set tag color
     public static void setColor(ItemStack packageStack, DyeColor color) {
-        CompoundTag colorTag = packageStack.getOrCreateTag();
-        colorTag.putString(TAG_COLOR, color.getName());
+        packageStack.set(PACKAGE_COLOR, color);
     }
 
     // Check if tag contains color input
     public static boolean hasColor(ItemStack itemStack, DyeColor color) {
-        CompoundTag compoundTag = itemStack.getTag();
-        return compoundTag != null && compoundTag.getString(TAG_COLOR).equals(color.getName());
+        return itemStack.has(PACKAGE_COLOR) && itemStack.get(PACKAGE_COLOR) == color;
     }
 
     // Check if color tag is present (and not blank)
     public static boolean hasColorTag(ItemStack itemStack) {
-        CompoundTag compoundTag = itemStack.getTag();
-        if (compoundTag != null) {
-            String colorStr = compoundTag.getString(TAG_COLOR);
-            return !colorStr.isBlank(); // Color tag isn't blank, has color string
-        }
-        return false;
+        return itemStack.has(PACKAGE_COLOR) && itemStack.get(PACKAGE_COLOR) != null;
     }
 
-    public static String getCurrentColor(ItemStack packageStack) {
-        CompoundTag compoundTag = packageStack.getTag();
-        return compoundTag.getString(TAG_COLOR);
+    public static DyeColor getCurrentColor(ItemStack packageStack) {
+        return packageStack.get(PACKAGE_COLOR);
     }
 
     // Ensure proper PackageColor tag (no upper case, no special characters)
     // Try to set lowercase if it can
     @Override
-    public void verifyTagAfterLoad(CompoundTag compoundTag) {
-        super.verifyTagAfterLoad(compoundTag);
+    public void verifyComponentsAfterLoad(ItemStack stack) {
+        super.verifyComponentsAfterLoad(stack);
 
-        if (!compoundTag.contains(TAG_COLOR)) { // If tag not present, default red
-            compoundTag.putString(TAG_COLOR, DyeColor.RED.getName());
+        if (!stack.has(PACKAGE_COLOR)) {
+            setColor(stack, DyeColor.RED);
             return;
         }
-
-        String colorStr = compoundTag.getString(TAG_COLOR);
-
-        boolean reassignTag = false;
-
-        // Set to lower case (if any character is uppercase)
-        char[] charArray = colorStr.toCharArray();
-        for (char c : charArray) {
-            if (!isLowerCase(c)) {
-                colorStr = colorStr.toLowerCase(Locale.ROOT);
-                reassignTag = true;
-                break;
-            }
-        }
-
-        if (DyeColor.CODEC.byName(colorStr) == null) {
-            ColoredPackages.LOGGER.warn("Could not find colored package tag string in DyeColor enum: {}", colorStr);
-            colorStr = "red";
-            reassignTag = true;
-        }
-
-        // Only reassign compound tag if PackageColor was uppercase, or not in DyeColor enum
-        if (reassignTag) compoundTag.putString(TAG_COLOR, colorStr);
-    }
-
-    public static boolean isLowerCase(char c) {
-        return Character.isLetter(c) && Character.isLowerCase(c);
     }
 
     @Override
@@ -162,7 +130,7 @@ public class ColoredPackageItem extends PackageItem {
     public void releaseUsing(ItemStack stack, Level world, LivingEntity entity, int ticks) {
         if (!(entity instanceof Player player))
             return;
-        int i = this.getUseDuration(stack) - ticks;
+        int i = this.getUseDuration(stack, entity) - ticks;
         if (i < 0)
             return;
 

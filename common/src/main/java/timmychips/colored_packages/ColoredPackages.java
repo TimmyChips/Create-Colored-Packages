@@ -23,6 +23,7 @@ public final class ColoredPackages {
         // Write common init code here.
         ColoredPackageStyles.initColoredPackageStyles();
         PackageItemModelPredicate.register();
+        ColoredDataComponent.init();
         AllPackageItems.register();
         AllDyedBlocks.register();
         AllPackageParticles.register();
