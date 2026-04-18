@@ -15,8 +15,6 @@ public class ModifyCreativeMenuForge extends ModifyCreativeMenu {
      */
     public static void addTaggedPackagesForge(BuildCreativeModeTabContentsEvent event) {
 
-        ColoredPackages.LOGGER.info("add tagged packages to creative menu");
-
         if (event.getTab() != CreativeModeTabs.searchTab()) return; // Only perform for Search tab (so it doesn't do it for every single tab)
 
         List<Item> packageItems = collectPackageItems();

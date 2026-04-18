@@ -73,13 +73,6 @@ public class DyedPackagerBlockEntityForge extends DyedPackagerBlockEntity {
                 : Optional.empty();
     }
 
-    @Override
-    protected void wakeTheFrogs() {
-        ColoredPackages.LOGGER.info("trying to wake the frogs");
-        if (level.getBlockEntity(worldPosition.relative(Direction.UP)) instanceof FrogportBlockEntity port)
-            port.tryPullingFromOwnAndAdjacentInventories();
-    }
-
     // Apply color and return true if successful
     public boolean applyColor(DyeColor colorIn) {
         if (colorIn == null) {
@@ -211,7 +204,7 @@ public class DyedPackagerBlockEntityForge extends DyedPackagerBlockEntity {
         /// Call colored box containing method instead
         ItemStack createdBox =
                 extractedPackageItem.isEmpty() ? ColoredPackageItemForge.coloredContaining(extractedItems, color) : extractedPackageItem.copy();
-        if (!extractedPackageItem.isEmpty()) ColoredPackages.LOGGER.info("extracedPackageItem!");
+//        if (!extractedPackageItem.isEmpty()) ColoredPackages.LOGGER.info("extracedPackageItem!");
         ///
         computerBehaviour.prepareComputerEvent(new PackageEvent(createdBox, "package_created"));
         PackageItem.clearAddress(createdBox);
