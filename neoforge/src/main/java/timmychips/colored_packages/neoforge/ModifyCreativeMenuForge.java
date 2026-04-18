@@ -2,6 +2,7 @@ package timmychips.colored_packages.neoforge;
 
 import net.minecraft.world.item.*;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
+import timmychips.colored_packages.ColoredPackages;
 import timmychips.colored_packages.ModifyCreativeMenu;
 import java.util.List;
 import java.util.function.Function;
@@ -14,13 +15,15 @@ public class ModifyCreativeMenuForge extends ModifyCreativeMenu {
      */
     public static void addTaggedPackagesForge(BuildCreativeModeTabContentsEvent event) {
 
+        ColoredPackages.LOGGER.info("add tagged packages to creative menu");
+
         if (event.getTab() != CreativeModeTabs.searchTab()) return; // Only perform for Search tab (so it doesn't do it for every single tab)
 
         List<Item> packageItems = collectPackageItems();
         Function<Item, ItemStack> creativeModeStackFunc = inCreativeMenuStackFunc(); // The function to modify the package items
 
         for (Item item : packageItems) {
-            event.accept(creativeModeStackFunc.apply(item), CreativeModeTab.TabVisibility.SEARCH_TAB_ONLY);
+            event.accept(creativeModeStackFunc.apply(item), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
         }
     }
 }
