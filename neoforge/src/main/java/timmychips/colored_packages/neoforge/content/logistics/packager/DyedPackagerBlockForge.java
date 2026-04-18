@@ -146,19 +146,19 @@ public class DyedPackagerBlockForge extends WrenchableDirectionalBlock implement
             if (be.heldBox.isEmpty()) {
                 if (be.animationTicks > 0)
                     return ItemInteractionResult.SUCCESS;
-//                if (PackageItem.isPackage(stack)) {
-//                    if (level.isClientSide())
-//                        return ItemInteractionResult.SUCCESS;
-//                    if (!be.unwrapBox(stack.copy(), true))
-//                        return ItemInteractionResult.SUCCESS;
-//                    be.unwrapBox(stack.copy(), false);
-//                    be.triggerStockCheck();
-//                    stack.shrink(1);
-//                    AllSoundEvents.DEPOT_PLOP.playOnServer(level, pos);
-//                    if (stack.isEmpty())
-//                        player.setItemInHand(handIn, ItemStack.EMPTY);
-//                    return ItemInteractionResult.SUCCESS;
-//                }
+                if (PackageItem.isPackage(stack)) {
+                    if (level.isClientSide())
+                        return ItemInteractionResult.SUCCESS;
+                    if (!be.unwrapBox(stack.copy(), true))
+                        return ItemInteractionResult.SUCCESS;
+                    be.unwrapBox(stack.copy(), false);
+                    be.triggerStockCheck();
+                    stack.shrink(1);
+                    AllSoundEvents.DEPOT_PLOP.playOnServer(level, pos);
+                    if (stack.isEmpty())
+                        player.setItemInHand(handIn, ItemStack.EMPTY);
+                    return ItemInteractionResult.SUCCESS;
+                }
                 return ItemInteractionResult.SUCCESS;
             }
             if (be.animationTicks > 0)

@@ -5,6 +5,7 @@ import com.simibubi.create.compat.computercraft.events.PackageEvent;
 import com.simibubi.create.content.logistics.BigItemStack;
 import com.simibubi.create.content.logistics.box.PackageItem;
 import com.simibubi.create.content.logistics.packagePort.frogport.FrogportBlockEntity;
+import com.simibubi.create.content.logistics.packager.PackagerBlock;
 import com.simibubi.create.content.logistics.packager.PackagerBlockEntity;
 import com.simibubi.create.content.logistics.packager.PackagerItemHandler;
 import com.simibubi.create.content.logistics.packager.PackagingRequest;
@@ -248,6 +249,20 @@ public class DyedPackagerBlockEntityForge extends DyedPackagerBlockEntity {
 
         triggerStockCheck();
         notifyUpdate();
+    }
+
+    @Override
+    public void recheckIfLinksPresent() {
+        if (level.isClientSide())
+            return;
+        BlockState blockState = getBlockState();
+        if (!blockState.hasProperty(DyedPackagerBlockForge.LINKED))
+            return;
+        boolean shouldBeLinked = getLinkPos() != null;
+        boolean isLinked = blockState.getValue(DyedPackagerBlockForge.LINKED);
+        if (shouldBeLinked == isLinked)
+            return;
+        level.setBlockAndUpdate(worldPosition, blockState.cycle(DyedPackagerBlockForge.LINKED));
     }
 
     // Copied from PackagerBlockEntity since it's a private method
