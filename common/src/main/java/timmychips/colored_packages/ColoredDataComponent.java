@@ -16,7 +16,7 @@ public class ColoredDataComponent {
     private static <T> DataComponentType<T> register(String name, UnaryOperator<DataComponentType.Builder<T>> builder) {
         DataComponentType<T> type = builder.apply(DataComponentType.builder()).build();
         COMPONENT_TYPES.register(name, () -> {
-            ColoredPackages.LOGGER.info("name: {}", name);
+//            ColoredPackages.LOGGER.info("name: {}", name);
             return type;
         });
         return type;
