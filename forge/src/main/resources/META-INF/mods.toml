@@ -11,7 +11,7 @@ displayURL = "https://github.com/TimmyChips/Create-Colored-Packages"
 logoFile = "icon.png"
 authors = "TimmyChips"
 description = '''
-Adds several colored packages from applying dye to the Create: Packager block
+Adds several colored packages from applying dye to Create's "Packager" block
 '''
 
 [[dependencies.colored_packages]]
