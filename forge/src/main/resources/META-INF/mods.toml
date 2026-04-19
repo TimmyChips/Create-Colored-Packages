@@ -1,17 +1,18 @@
 modLoader = "javafml"
 loaderVersion = "[47,)"
-#issueTrackerURL = ""
+issueTrackerURL = "https://github.com/TimmyChips/Create-Colored-Packages/issues"
 license = "GNU GPL 3.0"
 
 [[mods]]
 modId = "colored_packages"
 version = "${version}"
 displayName = "Create: Colored Packages"
+displayURL = "https://github.com/TimmyChips/Create-Colored-Packages"
+logoFile = "icon.png"
 authors = "TimmyChips"
 description = '''
 Adds several colored packages from applying dye to the Create: Packager block
 '''
-#logoFile = ""
 
 [[dependencies.colored_packages]]
 modId = "forge"
@@ -39,4 +40,18 @@ modId = "create"
 mandatory = true
 versionRange = "[6.0.8,)"
 ordering = "BEFORE"
+side = "BOTH"
+
+[[dependencies.colored_packages]]
+modId = "flywheel"
+mandatory = true
+versionRange = "[1.0.0,2.0)"
+ordering = "AFTER"
+side = "CLIENT"
+
+[[dependencies.colored_packages]]
+modId = "ponder"
+mandatory = true
+versionRange = "[0.8,)"
+ordering = "AFTER"
 side = "BOTH"
