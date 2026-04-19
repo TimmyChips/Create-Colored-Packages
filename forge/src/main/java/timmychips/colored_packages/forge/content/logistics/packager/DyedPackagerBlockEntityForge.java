@@ -188,7 +188,7 @@ public class DyedPackagerBlockEntityForge extends DyedPackagerBlockEntity {
         /// Call colored box containing method instead
         ItemStack createdBox =
                 extractedPackageItem.isEmpty() ? ColoredPackageItemForge.coloredContaining(extractedItems, color) : extractedPackageItem.copy();
-        if (!extractedPackageItem.isEmpty()) ColoredPackages.LOGGER.info("extracedPackageItem!");
+//        if (!extractedPackageItem.isEmpty()) ColoredPackages.LOGGER.info("extracedPackageItem!");
         ///
 
         computerBehaviour.prepareComputerEvent(new PackageEvent(createdBox, "package_created"));

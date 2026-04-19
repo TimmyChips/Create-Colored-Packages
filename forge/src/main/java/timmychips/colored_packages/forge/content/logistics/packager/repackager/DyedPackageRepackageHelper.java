@@ -100,7 +100,6 @@ public class DyedPackageRepackageHelper extends PackageRepackageHelper {
                 continue;
 //            exportingPackages.add(new BigItemStack(PackageItem.containing(target), 1));
             /// Colored repackage containing
-            ColoredPackages.LOGGER.info("TEST 1!");
             exportingPackages.add(new BigItemStack(ColoredPackageItemForge.coloredContaining(target, color), 1));
             ///
             target = new ItemStackHandler(PackageItem.SLOTS);
@@ -112,7 +111,6 @@ public class DyedPackageRepackageHelper extends PackageRepackageHelper {
                     .isEmpty()) {
 //                exportingPackages.add(new BigItemStack(PackageItem.containing(target), 1));
                 /// Colored repackage containing
-                ColoredPackages.LOGGER.info("TEST 5!");
                 exportingPackages.add(new BigItemStack(ColoredPackageItemForge.coloredContaining(target, color), 1));
                 ///
                 break;

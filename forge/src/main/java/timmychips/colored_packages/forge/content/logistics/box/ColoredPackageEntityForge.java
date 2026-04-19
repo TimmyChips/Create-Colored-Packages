@@ -124,7 +124,6 @@ public class ColoredPackageEntityForge extends PackageEntity implements IEntityA
     public void readAdditionalSaveData(CompoundTag compound) {
         super.readAdditionalSaveData(compound);
         box = ItemStack.of(compound.getCompound("Box"));
-        ColoredPackages.LOGGER.info("read box: {}", box); // Always air item
         refreshDimensions();
     }
 
