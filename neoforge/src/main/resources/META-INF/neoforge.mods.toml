@@ -1,44 +1,59 @@
 modLoader = "javafml"
 loaderVersion = "[2,)"
-#issueTrackerURL = ""
+issueTrackerURL = "https://github.com/TimmyChips/Create-Colored-Packages/issues"
 license = "GNU GPL 3.0"
 
 [[mods]]
 modId = "colored_packages"
 version = "${version}"
 displayName = "Create: Colored Packages"
+displayURL = "https://github.com/TimmyChips/Create-Colored-Packages"
+logoFile = "icon.png"
 authors = "TimmyChips"
 description = '''
-Adds several colored packages from applying dye to the Create: Packager block
+Adds several colored packages from applying dye to Create's "Packager" block
 '''
-#logoFile = ""
 
-[[dependencies.colored_packages]]
+[[dependencies."colored_packages"]]
 modId = "neoforge"
 mandatory = true
-versionRange = "[21,)"
+versionRange = "[21.1.206,)"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.colored_packages]]
+[[dependencies."colored_packages"]]
 modId = "minecraft"
 type="required"
 versionRange = "[1.21.1,)"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.colored_packages]]
+[[dependencies."colored_packages"]]
 modId = "architectury"
 type="required"
 versionRange = "[13.0.8,)"
 ordering = "AFTER"
 side = "BOTH"
 
-[[dependencies.colored_packages]]
+[[dependencies."colored_packages"]]
 modId = "create"
 type="required"
 versionRange="[6.0.9,6.1.0)"
 ordering = "BEFORE"
+side = "BOTH"
+
+[[dependencies."colored_packages"]]
+modId = "flywheel"
+type = "required"
+versionRange = "[1.0.0,2.0)"
+ordering = "AFTER"
+side = "CLIENT"
+
+[[dependencies."colored_packages"]]
+modId = "ponder"
+type = "required"
+versionRange = "[1.0.81,)"
+ordering = "AFTER"
 side = "BOTH"
 
 [[mixins]]
