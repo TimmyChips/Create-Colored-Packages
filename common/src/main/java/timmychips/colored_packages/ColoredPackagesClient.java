@@ -8,5 +8,6 @@ public class ColoredPackagesClient {
     public static void init() {
         PonderIndex.addPlugin(new ColoredPonderPlugin());
         PackageItemModelPredicate.register();
+        AllPackageParticles.registerFactories();
     }
 }

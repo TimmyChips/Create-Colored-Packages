@@ -20,7 +20,6 @@ public class AllPackageParticles {
 
     public static final DeferredRegister<ParticleType<?>> PARTICLE_TYPES = DeferredRegister.create(ColoredPackages.MOD_ID, Registries.PARTICLE_TYPE);
 
-    @Environment(EnvType.CLIENT)
     // Particle provider registry for colored package particle
     public static final RegistrySupplier<ParticleType<ItemParticleOption>> COLORED_PACKAGE =
 //        PARTICLE_TYPES.register("colored_package", () -> new ParticleType<>(false, ItemParticleOption::codec, ItemParticleOption::streamCodec) {
@@ -36,6 +35,7 @@ public class AllPackageParticles {
             }
         });
 
+    @Environment(EnvType.CLIENT)
     // Register client particle providers
     public static void registerFactories() {
         ParticleProviderRegistry.register(COLORED_PACKAGE, new ColoredPackageParticle.Provider());

@@ -25,7 +25,6 @@ public final class ColoredPackages {
         AllPackageItems.register();
         AllDyedBlocks.register();
         AllPackageParticles.register();
-        AllPackageParticles.registerFactories();
         AllPackagerSpriteShifts.init();
         AllPackagePartialModels.init();
         ColorTooltipFormattingHelper.init();
