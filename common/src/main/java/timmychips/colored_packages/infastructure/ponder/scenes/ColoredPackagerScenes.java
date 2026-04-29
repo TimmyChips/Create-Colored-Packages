@@ -24,7 +24,7 @@ public class ColoredPackagerScenes {
     public static void coloredPackager(SceneBuilder builder, SceneBuildingUtil util) {
         CreateSceneBuilder scene = new CreateSceneBuilder(builder);
         scene.title("dyed_packager", "Creating colored packages");
-        scene.configureBasePlate(0, 0, 7);
+        scene.configureBasePlate(0, 0, 5);
         scene.showBasePlate();
 
         Selection chest1 = util.select()

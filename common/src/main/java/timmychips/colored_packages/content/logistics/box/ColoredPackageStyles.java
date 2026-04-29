@@ -83,6 +83,13 @@ public class ColoredPackageStyles extends PackageStyles {
         return box;
     }
 
+    // For Ponder scene, returns box and sets color from input
+    public static ItemStack getDefaultBoxFromColor(DyeColor color) {
+        ItemStack box = new ItemStack(ALL_COLORED_BOXES_CONSTANT.get(0));
+        ColoredPackageItem.setColor(box, color);
+        return box;
+    }
+
     // Returns rigging model for the "layered package" styles
     public static ResourceLocation getLayeredRiggingModel(PackageStyle sizeStyle) {
         int width = sizeStyle.width();

@@ -37,6 +37,8 @@ public class ColoredPackageEntityForge extends PackageEntity implements IEntityW
         this.refreshDimensions();
     }
 
+//    public ColoredPackageEntityForge(Level worldIn, double x, double y, double z) {
+
     // Unused, refer to PackageEntityMixinForge.class
     public static ColoredPackageEntityForge fromItemStack(Level world, Vec3 position, ItemStack itemstack) {
         ColoredPackageEntityForge packageEntity = AllPackageEntityTypesForge.COLORED_PACKAGE_ENTITY_FORGE.get()

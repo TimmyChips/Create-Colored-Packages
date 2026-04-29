@@ -7,5 +7,7 @@
   "colored_packages.ponder.dyed_packager.text_1": "By default, Packagers will create standard packages",
   "colored_packages.ponder.dyed_packager.text_2": "Right clicking on a Packager or Re-Packager will dye it",
   "colored_packages.ponder.dyed_packager.text_3": "The package will now be colored off the dye applied",
-  "colored_packages.ponder.dyed_packager.text_4": "Dyed Packagers can be reverted to normal with a water bucket or water bottle"
+  "colored_packages.ponder.dyed_packager.text_4": "Dyed Packagers can be reverted to normal with a water bucket or water bottle",
+
+  "colored_packages.ponder.colored_packages.header": "Create Colored Packages: All colored package styles"
 }
