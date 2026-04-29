@@ -1,6 +1,8 @@
 package timmychips.colored_packages.forge;
 
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.registries.RegisterEvent;
+import timmychips.colored_packages.AllDyedArmInteractionPointTypes;
 import timmychips.colored_packages.ColoredPackages;
 import dev.architectury.platform.forge.EventBuses;
 import net.minecraftforge.fml.common.Mod;
@@ -27,7 +29,14 @@ public final class ColoredPackagesForge {
         bus.addListener(AllPackageEntityTypesForge::registerEntityAttributes);
 //        ModifyCreativeMenuForge.modify(bus);
         bus.addListener(ModifyCreativeMenuForge::addTaggedPackagesForge);
+        // Reload listener
+        bus.addListener(ColoredPackagesForge::onRegister);
         // Client bus listener
         bus.addListener(ColoredPackagesClientForge::init);
+    }
+
+    // After registering vanilla registries, initialize modded objects (so it doesn't freeze/crash)
+    public static void onRegister(RegisterEvent event) {
+        AllDyedArmInteractionPointTypes.init();
     }
 }
