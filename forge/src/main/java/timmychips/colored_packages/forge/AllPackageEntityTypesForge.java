@@ -1,4 +1,4 @@
-package timmychips.colored_packages.forge;
+package timmychips.colored_packages.neoforge;
 
 import com.simibubi.create.foundation.data.CreateEntityBuilder;
 import com.tterrag.registrate.util.entry.EntityEntry;
@@ -11,17 +11,17 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
+import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import timmychips.colored_packages.ColoredPackages;
 import timmychips.colored_packages.content.logistics.box.ColoredPackageVisual;
-import timmychips.colored_packages.forge.content.logistics.box.ColoredPackageEntityForge;
-import timmychips.colored_packages.forge.content.logistics.box.RedPackageRendererForge;
+import timmychips.colored_packages.neoforge.content.logistics.box.ColoredPackageEntityForge;
+import timmychips.colored_packages.neoforge.content.logistics.box.ColoredPackageRendererForge;
 
 public class AllPackageEntityTypesForge {
 
     private static final String COLORED_PACKAGE_PATH = "colored_package";
 
-    public static final EntityEntry<ColoredPackageEntityForge> COLORED_PACKAGE_ENTITY_FORGE = register(COLORED_PACKAGE_PATH, ColoredPackageEntityForge::new, () -> RedPackageRendererForge::new,
+    public static final EntityEntry<ColoredPackageEntityForge> COLORED_PACKAGE_ENTITY_FORGE = register(COLORED_PACKAGE_PATH, ColoredPackageEntityForge::new, () -> ColoredPackageRendererForge::new,
             MobCategory.MISC, 10, 3, true, false, ColoredPackageEntityForge::build)
             .visual(() -> ColoredPackageVisual::new, true)
             .register();
