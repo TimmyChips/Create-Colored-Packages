@@ -21,9 +21,9 @@ import org.jetbrains.annotations.NotNull;
 import timmychips.colored_packages.ColoredPackages;
 import timmychips.colored_packages.content.logistics.box.util.ColoredPackagePartialUtil;
 
-public class RedPackageRendererForge extends EntityRenderer<ColoredPackageEntityForge> {
+public class ColoredPackageRendererForge extends EntityRenderer<ColoredPackageEntityForge> {
 
-    public RedPackageRendererForge(EntityRendererProvider.Context pContext) {
+    public ColoredPackageRendererForge(EntityRendererProvider.Context pContext) {
         super(pContext);
         shadowRadius = 0.5f;
     }
@@ -51,7 +51,7 @@ public class RedPackageRendererForge extends EntityRenderer<ColoredPackageEntity
                 .rotateCentered(-AngleHelper.rad(yaw + 90), Direction.UP)
                 .light(light)
                 .nudge(entity.getId());
-        sbb.renderInto(ms, buffer.getBuffer(RenderType.solid()));
+        sbb.renderInto(ms, buffer.getBuffer(RenderType.cutout()));
     }
 
     // Not needed, just return new null ResourceLocation to avoid error/warning
