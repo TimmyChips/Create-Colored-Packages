@@ -4,6 +4,8 @@ import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.logistics.factoryBoard.FactoryPanelBehaviour;
 import com.simibubi.create.content.logistics.factoryBoard.FactoryPanelBlock;
 import com.simibubi.create.content.logistics.factoryBoard.FactoryPanelBlockEntity;
+import com.simibubi.create.foundation.advancement.AdvancementBehaviour;
+import com.simibubi.create.foundation.advancement.AllAdvancements;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import net.minecraft.core.BlockPos;
@@ -27,6 +29,7 @@ import java.util.List;
 public class FactoryGaugeBEMixinForge extends SmartBlockEntity {
 
     @Shadow public boolean restocker; // Shadow field so that coloredPackages$lazyTickDyedPackager can properly set the factory gauge's restock packager block
+    @Shadow public AdvancementBehaviour advancements;
 
     public FactoryGaugeBEMixinForge(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
@@ -44,6 +47,8 @@ public class FactoryGaugeBEMixinForge extends SmartBlockEntity {
             self.panels.put(slot, e);
             behaviours.add(e);
         }
+
+        behaviours.add(advancements = new AdvancementBehaviour(this, AllAdvancements.FACTORY_GAUGE));
     }
 
     // Copied from lazyTick from target class, but for Dyed Packager as well
