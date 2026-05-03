@@ -1,7 +1,10 @@
 package timmychips.colored_packages.content.logistics.box.util;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 import timmychips.colored_packages.ColoredPackages;
 
 import java.awt.*;
@@ -36,11 +39,15 @@ public enum ColorTooltipFormattingHelper {
     WHITE("White", styleWithColor(new Color(212, 212, 212).getRGB())),
     YELLOW("Yellow", styleWithColor(ChatFormatting.YELLOW.getColor()));
 
+    // TODO Dye Depot colors
+
     // Store enumerate values to map for getting (i.e. converts BLUE, and it's enum to blue=enum and places in map)
     private static final Map<String, ColorTooltipFormattingHelper> LOOKUP = Arrays.stream(values())
             .collect(Collectors.toMap(ColorTooltipFormattingHelper::getName, helper -> helper));
     private final String langName;
     private final Style style;
+
+    private static final String COLOR_TRANSLATABLE_PATH = "color.minecraft.";
 
     ColorTooltipFormattingHelper(String langName, Style style) {
         this.langName = langName;
@@ -83,7 +90,7 @@ public enum ColorTooltipFormattingHelper {
      */
     public static String getLangName(String color) {
         try {
-            return LOOKUP.get(color).langName;
+            return Component.translatable(COLOR_TRANSLATABLE_PATH + color).getString(); // E.g. Gets the color name from the lang file from "color.minecraft.light_blue" = Light Blue (or another name if a resource pack changes it)
         } catch (Exception e) {
             ColoredPackages.LOGGER.info("Unable to find lang name for color: {}", color);
         }

@@ -45,6 +45,18 @@ repositories {
         }
     }
     maven { url = "https://maven.blamejared.com" } // JEI, Vazkii's Mods
+
+    exclusiveContent { // For mods from modrinth
+        forRepository {
+            maven {
+                name = "Modrinth"
+                url = "https://api.modrinth.com/maven"
+            }
+        }
+        filter {
+            includeGroup "maven.modrinth"
+        }
+    }
 }
 
 dependencies {
@@ -60,6 +72,10 @@ dependencies {
     implementation("com.tterrag.registrate:Registrate:${registrate_neoforge_version}")
     modCompileOnly("mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}")
     modCompileOnly("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
+
+    // Dye Depot (optional)
+    modCompileOnly("maven.modrinth:dye-depot:${dye_depot_version}-neoforge")
+    modRuntimeOnly("maven.modrinth:dye-depot:${dye_depot_version}-neoforge") // For testing
 
     compileOnly("io.github.llamalad7:mixinextras-common:${mixin_extras_version}")
     annotationProcessor(implementation(include("io.github.llamalad7:mixinextras-neoforge:${mixin_extras_version}")))

@@ -1,16 +1,20 @@
 package timmychips.colored_packages;
 
+import com.ninni.dye_depot.registry.DDDyes;
 import com.simibubi.create.AllPartialModels;
 import com.simibubi.create.content.logistics.box.PackageStyles;
+import dev.architectury.platform.Platform;
 import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
+import timmychips.colored_packages.compat.DyeDepotCompat;
 import timmychips.colored_packages.content.logistics.box.ColoredPackageStyles;
 
 public class AllPackagePartialModels {
 
     public static final PartialModel DYED_PACKAGER_COLOR_LABEL = block("dyed_packager/color_label"); // Partial model of the color label that will be rendered with Dyed Packager block
+    private static final String DYE_DEPOT_DIR = "dye_depot/";
 
     static  {
 
@@ -37,7 +41,7 @@ public class AllPackagePartialModels {
                 String path = splitStringForColor(color.getName(), key);
 
                 ResourceLocation coloredPackageKey = ColoredPackages.asResource(path); // "Key" id of colored package
-                PartialModel model = PartialModel.of(ColoredPackages.asResource("item/" + path)); // Model location (e.g. "assets/colored_packages/models/item/purple_package_10x12")
+                PartialModel model = partialModelLocation(color, path); // Partial Model location
 
                 // Add to Create Partial Models for packages
                 AllPartialModels.PACKAGES.put(coloredPackageKey, model);
@@ -50,6 +54,17 @@ public class AllPackagePartialModels {
             }
         }
     }
+
+    // Model location (e.g. "assets/colored_packages/models/item/purple_package_10x12")
+    private static PartialModel partialModelLocation(DyeColor color, String path) {
+        if (Platform.isModLoaded(DyeDepotCompat.DYE_DEPOT_ID)) {
+            if (DDDyes.isModDye(color)) return PartialModel.of(ColoredPackages.asResource("item/" + DYE_DEPOT_DIR + path)); // Model will be in: 'models/item/dye_depot/verdant_package_12x12'
+        }
+
+        return PartialModel.of(ColoredPackages.asResource("item/" + path));
+    }
+
+
 
     /**
      * Colored Package as a PartialModel
