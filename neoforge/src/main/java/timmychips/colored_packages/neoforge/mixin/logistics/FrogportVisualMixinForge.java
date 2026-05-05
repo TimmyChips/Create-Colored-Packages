@@ -1,4 +1,8 @@
+<<<<<<<< HEAD:forge/src/main/java/timmychips/colored_packages/forge/mixin/FrogportVisualMixinForge.java
 package timmychips.colored_packages.forge.mixin;
+========
+package timmychips.colored_packages.neoforge.mixin.logistics;
+>>>>>>>> c8f3f78 (Moved a few mixin files to new dir):neoforge/src/main/java/timmychips/colored_packages/neoforge/mixin/logistics/FrogportVisualMixinForge.java
 
 import com.simibubi.create.AllPartialModels;
 import com.simibubi.create.content.logistics.packagePort.frogport.FrogportBlockEntity;

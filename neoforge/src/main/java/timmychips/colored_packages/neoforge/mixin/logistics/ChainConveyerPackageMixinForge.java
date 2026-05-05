@@ -1,4 +1,8 @@
+<<<<<<<< HEAD:forge/src/main/java/timmychips/colored_packages/forge/mixin/ChainConveyerPackageMixinForge.java
 package timmychips.colored_packages.forge.mixin;
+========
+package timmychips.colored_packages.neoforge.mixin.logistics;
+>>>>>>>> c8f3f78 (Moved a few mixin files to new dir):neoforge/src/main/java/timmychips/colored_packages/neoforge/mixin/logistics/ChainConveyerPackageMixinForge.java
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.simibubi.create.content.kinetics.chainConveyor.ChainConveyorPackage;

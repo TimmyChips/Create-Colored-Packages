@@ -1,4 +1,8 @@
+<<<<<<<< HEAD:forge/src/main/java/timmychips/colored_packages/forge/mixin/FrogportRendererMixinForge.java
 package timmychips.colored_packages.forge.mixin;
+========
+package timmychips.colored_packages.neoforge.mixin.logistics;
+>>>>>>>> c8f3f78 (Moved a few mixin files to new dir):neoforge/src/main/java/timmychips/colored_packages/neoforge/mixin/logistics/FrogportRendererMixinForge.java
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.AllPartialModels;
