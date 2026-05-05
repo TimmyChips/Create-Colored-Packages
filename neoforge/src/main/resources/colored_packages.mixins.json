@@ -1,18 +1,21 @@
 {
   "required": true,
   "package": "timmychips.colored_packages.neoforge.mixin",
-  "compatibilityLevel": "JAVA_17",
+  "plugin": "timmychips.colored_packages.neoforge.mixin.ColoredPackagesMixinPlugin",
+  "compatibilityLevel": "JAVA_21",
   "minVersion": "0.8",
   "client": [
   ],
   "mixins": [
-    "ChainConveyerPackageMixinForge",
-    "FactoryGaugeBEMixinForge",
-    "FrogportRendererMixinForge",
-    "FrogportVisualMixinForge",
-    "PackageEntityMixinForge",
-    "PackagerBlockMixinForge",
-    "accessors.PackagerBEAdvancementAccessorForge"
+    "accessors.PackagerBEAdvancementAccessorForge",
+    "compat.fluidlogistic.HandPointerInteractionHandlerMixin",
+    "compat.fluidlogistic.HandPointerPackagerTogglePacketMixin",
+    "logistics.ChainConveyerPackageMixinForge",
+    "logistics.FactoryGaugeBEMixinForge",
+    "logistics.FrogportRendererMixinForge",
+    "logistics.FrogportVisualMixinForge",
+    "logistics.PackageEntityMixinForge",
+    "logistics.PackagerBlockMixinForge"
   ],
   "injectors": {
     "defaultRequire": 1

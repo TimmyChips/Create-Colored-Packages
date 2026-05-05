@@ -15,9 +15,6 @@ import timmychips.colored_packages.AllDyedBlocks;
 @Mixin(FactoryPanelBlockEntity.class)
 public class FactoryGaugeBEMixinForge {
 
-    @Shadow public boolean restocker; // Shadow field so that coloredPackages$lazyTickDyedPackager can properly set the factory gauge's restock packager block
-    @Shadow public AdvancementBehaviour advancements;
-
     @ModifyExpressionValue(method = "lazyTick", at = @At(value = "INVOKE", target = "Lcom/tterrag/registrate/util/entry/BlockEntry;has(Lnet/minecraft/world/level/block/state/BlockState;)Z", remap = false))
     private boolean coloredPackages$modifyShouldBeRestocker(boolean original) {
         if (original) return true;
