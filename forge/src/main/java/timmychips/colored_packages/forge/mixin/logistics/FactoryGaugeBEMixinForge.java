@@ -1,4 +1,4 @@
-package timmychips.colored_packages.forge.mixin;
+package timmychips.colored_packages.forge.mixin.logistics;
 
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.logistics.factoryBoard.FactoryPanelBehaviour;

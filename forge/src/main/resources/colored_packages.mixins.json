@@ -7,11 +7,11 @@
   ],
   "mixins": [
     "ChainConveyerPackageMixinForge",
-    "FactoryGaugeBEMixinForge",
+    "logistics.FactoryGaugeBEMixinForge",
     "FrogportRendererMixinForge",
     "FrogportVisualMixinForge",
-    "PackageDestroyPacketMixinForge",
-    "PackageEntityMixinForge",
+    "logistics.PackageDestroyPacketMixinForge",
+    "logistics.PackageEntityMixinForge",
     "PackagerBlockMixinForge",
     "accessors.PackagerBEAdvancementAccessorForge"
   ],

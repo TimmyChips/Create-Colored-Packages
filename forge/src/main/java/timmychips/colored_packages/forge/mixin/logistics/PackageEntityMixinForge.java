@@ -1,4 +1,4 @@
-package timmychips.colored_packages.forge.mixin;
+package timmychips.colored_packages.forge.mixin.logistics;
 
 import com.simibubi.create.content.logistics.box.PackageEntity;
 import net.minecraft.world.item.ItemStack;
