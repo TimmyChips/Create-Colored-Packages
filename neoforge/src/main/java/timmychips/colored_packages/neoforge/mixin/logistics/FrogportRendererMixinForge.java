@@ -1,4 +1,4 @@
-package timmychips.colored_packages.neoforge.mixin;
+package timmychips.colored_packages.neoforge.mixin.logistics;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.AllPartialModels;

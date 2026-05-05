@@ -1,4 +1,4 @@
-package timmychips.colored_packages.neoforge.mixin;
+package timmychips.colored_packages.neoforge.mixin.logistics;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.simibubi.create.content.kinetics.chainConveyor.ChainConveyorPackage;

@@ -1,4 +1,4 @@
-package timmychips.colored_packages.neoforge.mixin;
+package timmychips.colored_packages.neoforge.mixin.logistics;
 
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.fluids.transfer.GenericItemEmptying;
