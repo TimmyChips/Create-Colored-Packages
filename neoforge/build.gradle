@@ -73,6 +73,10 @@ dependencies {
     modCompileOnly("mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}")
     modCompileOnly("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
 
+    // Create: FluidLogistic (optional)
+    modCompileOnly("maven.modrinth:createfluidlogistic:${fluid_logistic_version}-neoforge")
+    modRuntimeOnly("maven.modrinth:createfluidlogistic:${fluid_logistic_version}-neoforge") // For testing
+
     // Dye Depot (optional)
     modCompileOnly("maven.modrinth:dye-depot:${dye_depot_version}-neoforge")
     modRuntimeOnly("maven.modrinth:dye-depot:${dye_depot_version}-neoforge") // For testing
