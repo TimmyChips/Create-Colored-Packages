@@ -8,6 +8,10 @@
   ],
   "mixins": [
     "accessors.PackagerBEAdvancementAccessorForge",
+    "compat.fluidlogistic.ClipboardPackagerUseBlockerMixin",
+    "compat.fluidlogistic.ClipboardPasteHandlerMixin",
+    "compat.fluidlogistic.ClipboardSetAddressPacketMixin",
+    "compat.fluidlogistic.HandPointerClearAddressPacketMixin",
     "compat.fluidlogistic.HandPointerInteractionHandlerMixin",
     "compat.fluidlogistic.HandPointerPackagerTogglePacketMixin",
     "logistics.ChainConveyerPackageMixinForge",

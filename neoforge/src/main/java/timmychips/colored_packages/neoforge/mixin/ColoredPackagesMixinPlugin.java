@@ -18,9 +18,15 @@ public class ColoredPackagesMixinPlugin implements IMixinConfigPlugin {
     public static final String FACTORY_LOGISTIC_ID = "fluidlogistics";
     private static final String REFMAP_CONFIG = "colored_packages.mixins.json";
 
+    // All Create: FluidLogistic mixin classes to only load if that mod is loaded
     private static final List<String> LOGISTICS_MIXINS = List.of(
-            "timmychips.colored_packages.neoforge.mixin.compat.fluidlogistic.HandPointerPackagerTogglePacketMixin",
-            "timmychips.colored_packages.neoforge.mixin.compat.fluidlogistic.HandPointerInteractionHandler"
+            "timmychips.colored_packages.neoforge.mixin.compat.fluidlogistic.ClipboardPackagerUseBlockerMixin",
+            "timmychips.colored_packages.neoforge.mixin.compat.fluidlogistic.ClipboardPasteHandlerMixin",
+            "timmychips.colored_packages.neoforge.mixin.compat.fluidlogistic.ClipboardSetAddressPacketMixin",
+            "timmychips.colored_packages.neoforge.mixin.compat.fluidlogistic.HandPointerClearAddressPacketMixin",
+            "timmychips.colored_packages.neoforge.mixin.compat.fluidlogistic.HandPointerInteractionHandlerMixin",
+            "timmychips.colored_packages.neoforge.mixin.compat.fluidlogistic.HandPointerPackagerTogglePacketMixin"
+
     );
 
     @Override
