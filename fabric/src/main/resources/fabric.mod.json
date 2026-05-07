@@ -21,7 +21,7 @@
       "timmychips.colored_packages.fabric.client.colored_packagesFabricClient"
     ]
   },
-  "mixins": [
+  "mixins_disabled": [
     "colored_packages.mixins.json"
   ],
   "depends": {
