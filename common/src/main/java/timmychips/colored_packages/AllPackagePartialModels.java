@@ -11,10 +11,18 @@ import net.minecraft.world.item.ItemStack;
 import timmychips.colored_packages.compat.DyeDepotCompat;
 import timmychips.colored_packages.content.logistics.box.ColoredPackageStyles;
 
+import java.util.List;
+
 public class AllPackagePartialModels {
 
     public static final PartialModel DYED_PACKAGER_COLOR_LABEL = block("dyed_packager/color_label"); // Partial model of the color label that will be rendered with Dyed Packager block
     private static final String DYE_DEPOT_DIR = "dye_depot/";
+
+    public static List<String> HAS_LAYERED_RIGGING = List.of(
+            "light_blue",
+            // Dye Depot
+            "tan"
+    );
 
     static  {
 
@@ -46,11 +54,11 @@ public class AllPackagePartialModels {
                 // Add to Create Partial Models for packages
                 AllPartialModels.PACKAGES.put(coloredPackageKey, model);
 
-                // Cases for the rigging model for each color. E.g. light blue uses a thicker, "layered" package model, thus needs a wider rigging model to compensate. Unfortunately is hardcoded.
-                switch (color) {
-                    case LIGHT_BLUE -> AllPartialModels.PACKAGE_RIGGING.put(coloredPackageKey, PartialModel.of(ColoredPackageStyles.getLayeredRiggingModel(sizeStyle)));
-                    default -> AllPartialModels.PACKAGE_RIGGING.put(coloredPackageKey, PartialModel.of(sizeStyle.getRiggingModel()));
+                // Change the rigging model for layered package models E.g. uses a thicker, "layered" package model, thus needs a wider rigging model to compensate. Unfortunately is hardcoded.
+                if (HAS_LAYERED_RIGGING.contains(color.getName())) {
+                    AllPartialModels.PACKAGE_RIGGING.put(coloredPackageKey, PartialModel.of(ColoredPackageStyles.getLayeredRiggingModel(sizeStyle)));
                 }
+                else AllPartialModels.PACKAGE_RIGGING.put(coloredPackageKey, PartialModel.of(sizeStyle.getRiggingModel()));
             }
         }
     }

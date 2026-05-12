@@ -1,0 +1,7 @@
+{
+  "parent": "colored_packages:item/symmetrical_12x10_template",
+  "textures": {
+    "0": "colored_packages:item/package/dye_depot/maroon",
+    "particle": "colored_packages:item/package/particle/maroon"
+  }
+}

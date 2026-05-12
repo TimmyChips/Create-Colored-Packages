@@ -1,0 +1,7 @@
+{
+  "parent": "colored_packages:item/symmetrical_12x12_template",
+  "textures": {
+    "0": "colored_packages:item/package/dye_depot/aqua",
+    "particle": "colored_packages:item/package/particle/aqua"
+  }
+}

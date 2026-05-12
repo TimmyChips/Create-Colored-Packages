@@ -23,6 +23,8 @@
     { "predicate": { "colored_packages:white": 1 }, "model": "colored_packages:item/white_package_10x12" },
     { "predicate": { "colored_packages:yellow": 1 }, "model": "colored_packages:item/yellow_package_10x12" },
 
-    { "predicate": { "colored_packages:verdant": 1 }, "model": "colored_packages:item/dye_depot/verdant_package_10x12" }
+    { "predicate": { "colored_packages:verdant": 1 }, "model": "colored_packages:item/dye_depot/verdant_package_10x12" },
+    { "predicate": { "colored_packages:maroon": 1 }, "model": "colored_packages:item/dye_depot/maroon_package_10x12" },
+    { "predicate": { "colored_packages:mint": 1 }, "model": "colored_packages:item/dye_depot/mint_package_10x12" }
   ]
 }

@@ -1,0 +1,8 @@
+{
+  "parent": "colored_packages:item/layered_12x12_template",
+  "textures": {
+    "0": "colored_packages:item/package/dye_depot/tan",
+    "layer": "colored_packages:item/package/dye_depot/tan_layer",
+    "particle": "colored_packages:item/package/particle/tan"
+  }
+}

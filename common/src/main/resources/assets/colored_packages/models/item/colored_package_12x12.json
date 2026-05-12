@@ -24,6 +24,14 @@
     { "predicate": { "colored_packages:yellow": 1 }, "model": "colored_packages:item/yellow_package_12x12" },
 
     { "predicate": { "colored_packages:verdant": 1 }, "model": "colored_packages:item/dye_depot/verdant_package_12x12" },
-    { "predicate": { "colored_packages:forest": 1 }, "model": "colored_packages:item/dye_depot/forest_package_12x12" }
+    { "predicate": { "colored_packages:forest": 1 }, "model": "colored_packages:item/dye_depot/forest_package_12x12" },
+    { "predicate": { "colored_packages:olive": 1 }, "model": "colored_packages:item/dye_depot/olive_package_12x12" },
+    { "predicate": { "colored_packages:amber": 1 }, "model": "colored_packages:item/dye_depot/amber_package_12x12" },
+    { "predicate": { "colored_packages:beige": 1 }, "model": "colored_packages:item/dye_depot/beige_package_12x12" },
+    { "predicate": { "colored_packages:tan": 1 }, "model": "colored_packages:item/dye_depot/tan_package_12x12" },
+    { "predicate": { "colored_packages:ginger": 1 }, "model": "colored_packages:item/dye_depot/ginger_package_12x12" },
+    { "predicate": { "colored_packages:maroon": 1 }, "model": "colored_packages:item/dye_depot/maroon_package_12x12" },
+    { "predicate": { "colored_packages:aqua": 1 }, "model": "colored_packages:item/dye_depot/aqua_package_12x12" },
+    { "predicate": { "colored_packages:mint": 1 }, "model": "colored_packages:item/dye_depot/mint_package_12x12" }
   ]
 }
