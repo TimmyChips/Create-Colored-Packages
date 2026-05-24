@@ -32,6 +32,9 @@
     { "predicate": { "colored_packages:ginger": 1 }, "model": "colored_packages:item/dye_depot/ginger_package_12x12" },
     { "predicate": { "colored_packages:maroon": 1 }, "model": "colored_packages:item/dye_depot/maroon_package_12x12" },
     { "predicate": { "colored_packages:aqua": 1 }, "model": "colored_packages:item/dye_depot/aqua_package_12x12" },
-    { "predicate": { "colored_packages:mint": 1 }, "model": "colored_packages:item/dye_depot/mint_package_12x12" }
+    { "predicate": { "colored_packages:mint": 1 }, "model": "colored_packages:item/dye_depot/mint_package_12x12" },
+    { "predicate": { "colored_packages:teal": 1 }, "model": "colored_packages:item/dye_depot/teal_package_12x12" },
+    { "predicate": { "colored_packages:slate": 1 }, "model": "colored_packages:item/dye_depot/slate_package_12x12" },
+    { "predicate": { "colored_packages:navy": 1 }, "model": "colored_packages:item/dye_depot/navy_package_12x12" }
   ]
 }
