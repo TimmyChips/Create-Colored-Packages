@@ -1,4 +1,4 @@
-package timmychips.colored_packages.neoforge;
+package timmychips.colored_packages.forge;
 
 import com.simibubi.create.foundation.data.CreateEntityBuilder;
 import com.tterrag.registrate.util.entry.EntityEntry;
@@ -11,11 +11,11 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
-import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
+import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import timmychips.colored_packages.ColoredPackages;
 import timmychips.colored_packages.content.logistics.box.ColoredPackageVisual;
-import timmychips.colored_packages.neoforge.content.logistics.box.ColoredPackageEntityForge;
-import timmychips.colored_packages.neoforge.content.logistics.box.ColoredPackageRendererForge;
+import timmychips.colored_packages.forge.content.logistics.box.ColoredPackageEntityForge;
+import timmychips.colored_packages.forge.content.logistics.box.ColoredPackageRendererForge;
 
 public class AllPackageEntityTypesForge {
 

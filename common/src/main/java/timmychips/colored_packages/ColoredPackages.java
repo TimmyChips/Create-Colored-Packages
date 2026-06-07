@@ -22,11 +22,9 @@ public final class ColoredPackages {
     public static void init() {
         // Write common init code here.
         ColoredPackageStyles.initColoredPackageStyles();
-        PackageItemModelPredicate.register();
         AllPackageItems.register();
         AllDyedBlocks.register();
         AllPackageParticles.register();
-        AllPackageParticles.registerFactories();
         AllPackagerSpriteShifts.init();
         AllPackagePartialModels.init();
         ColorTooltipFormattingHelper.init();
