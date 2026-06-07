@@ -1,4 +1,8 @@
+<<<<<<<< HEAD:forge/src/main/java/timmychips/colored_packages/forge/mixin/PackagerBlockMixinForge.java
 package timmychips.colored_packages.forge.mixin;
+========
+package timmychips.colored_packages.neoforge.mixin.logistics;
+>>>>>>>> c8f3f78 (Moved a few mixin files to new dir):neoforge/src/main/java/timmychips/colored_packages/neoforge/mixin/logistics/PackagerBlockMixinForge.java
 
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.fluids.transfer.GenericItemEmptying;
