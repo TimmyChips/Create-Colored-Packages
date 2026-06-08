@@ -1,7 +1,7 @@
 package timmychips.colored_packages.forge.mixin.compat.fluidlogistic;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-import com.yision.fluidlogistics.network.HandPointerClearClipboardAddressPacket;
+import com.yision.fluidlogistics.network.HandPointerPackagerTogglePacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.Level;
@@ -15,17 +15,20 @@ import org.spongepowered.asm.mixin.injection.At;
 import timmychips.colored_packages.AllDyedBlocks;
 
 @Debug(export = true)
-@Mixin(HandPointerClearClipboardAddressPacket.class)
-public class HandPointerClearAddressPacketMixin {
+@Mixin(HandPointerPackagerTogglePacket.class)
+public class HandPointerPackagerTogglePacketMixin {
 
-    @Shadow @Final private BlockPos pos;
+    @Shadow
+    @Final
+    private BlockPos pos;
 
-    @ModifyExpressionValue(method = "lambda$handle$0", at = @At(value = "INVOKE", target = "Lcom/tterrag/registrate/util/entry/BlockEntry;has(Lnet/minecraft/world/level/block/state/BlockState;)Z"
-    ,remap = false, ordinal = 0))
+    // For the server packet that actually updates the Packager's state when right-clicked with Hand Pointer item
+    @ModifyExpressionValue(method = "lambda$handle$0", at = @At(value = "INVOKE", target = "Lcom/tterrag/registrate/util/entry/BlockEntry;has(Lnet/minecraft/world/level/block/state/BlockState;)Z",
+            ordinal = 0, remap = false))
     private boolean coloredPackages$modifyPackagerBool(boolean original, NetworkEvent.Context context) {
         if (original) return true;
 
-        HandPointerClearClipboardAddressPacket self = (HandPointerClearClipboardAddressPacket) (Object) this;
+        HandPointerPackagerTogglePacket self = (HandPointerPackagerTogglePacket) (Object) this;
 
         ServerPlayer player = context.getSender();
         Level level = player.level();

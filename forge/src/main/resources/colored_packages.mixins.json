@@ -1,19 +1,25 @@
 {
   "required": true,
   "package": "timmychips.colored_packages.forge.mixin",
+  "plugin": "timmychips.colored_packages.forge.mixin.ColoredPackagesMixinPlugin",
   "compatibilityLevel": "JAVA_17",
   "minVersion": "0.8",
   "client": [
   ],
   "mixins": [
-    "ChainConveyerPackageMixinForge",
+    "accessors.PackagerBEAdvancementAccessorForge",
+    "compat.fluidlogistic.ClipboardPasteHandlerMixin",
+    "compat.fluidlogistic.ClipboardSetAddressPacketMixin",
+    "compat.fluidlogistic.HandPointerClearAddressPacketMixin",
+    "compat.fluidlogistic.HandPointerInteractionHandlerMixin",
+    "compat.fluidlogistic.HandPointerPackagerTogglePacketMixin",
+    "logistics.ChainConveyerPackageMixinForge",
     "logistics.FactoryGaugeBEMixinForge",
-    "FrogportRendererMixinForge",
-    "FrogportVisualMixinForge",
+    "logistics.FrogportRendererMixinForge",
+    "logistics.FrogportVisualMixinForge",
     "logistics.PackageDestroyPacketMixinForge",
     "logistics.PackageEntityMixinForge",
-    "PackagerBlockMixinForge",
-    "accessors.PackagerBEAdvancementAccessorForge"
+    "logistics.PackagerBlockMixinForge"
   ],
   "injectors": {
     "defaultRequire": 1
