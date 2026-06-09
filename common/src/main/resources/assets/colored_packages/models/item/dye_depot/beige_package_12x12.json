@@ -2,6 +2,6 @@
   "parent": "create:item/package/cardboard_12x12",
   "textures": {
     "0": "colored_packages:item/package/dye_depot/beige",
-    "particle": "colored_packages:item/package/particle/beige"
+    "particle": "colored_packages:item/package/dye_depot/particle/beige"
   }
 }

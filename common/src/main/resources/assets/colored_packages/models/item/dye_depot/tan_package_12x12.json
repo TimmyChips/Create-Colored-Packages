@@ -3,6 +3,6 @@
   "textures": {
     "0": "colored_packages:item/package/dye_depot/tan",
     "layer": "colored_packages:item/package/dye_depot/tan_layer",
-    "particle": "colored_packages:item/package/particle/tan"
+    "particle": "colored_packages:item/package/dye_depot/particle/tan"
   }
 }

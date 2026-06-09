@@ -6,7 +6,7 @@
 	"texture_size": [64, 64],
 	"textures": {
 		"0": "colored_packages:item/package/dye_depot/slate",
-		"particle": "create:item/package/cardboard_particle"
+		"particle": "colored_packages:item/package/dye_depot/particle/slate"
 	},
 	"elements": [
 		{

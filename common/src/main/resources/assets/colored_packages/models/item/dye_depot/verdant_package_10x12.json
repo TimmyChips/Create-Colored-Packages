@@ -2,6 +2,6 @@
   "parent": "create:item/package/cardboard_10x12",
   "textures": {
     "0": "colored_packages:item/package/dye_depot/verdant",
-    "particle": "colored_packages:item/package/particle/cyan"
+    "particle": "colored_packages:item/package/dye_depot/particle/cyan"
   }
 }

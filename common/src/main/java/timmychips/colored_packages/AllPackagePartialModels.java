@@ -21,7 +21,8 @@ public class AllPackagePartialModels {
     public static List<String> HAS_LAYERED_RIGGING = List.of(
             "light_blue",
             // Dye Depot
-            "tan"
+            "tan",
+            "rose"
     );
 
     static  {
