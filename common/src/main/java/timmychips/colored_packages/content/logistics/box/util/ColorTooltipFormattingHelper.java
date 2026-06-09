@@ -37,9 +37,25 @@ public enum ColorTooltipFormattingHelper {
     PURPLE("Purple", styleWithColor(new Color(159, 58, 212).getRGB())),
     RED("Red", styleWithColor(ChatFormatting.RED.getColor())),
     WHITE("White", styleWithColor(new Color(212, 212, 212).getRGB())),
-    YELLOW("Yellow", styleWithColor(ChatFormatting.YELLOW.getColor()));
+    YELLOW("Yellow", styleWithColor(ChatFormatting.YELLOW.getColor())),
 
-    // TODO Dye Depot colors
+    /// Dye depot color's with their rgb integer color (from DDDyes class)
+    AMBER("Amber", styleWithColor(14135040)),
+    AQUA("Aqua", styleWithColor(6222028)),
+    BEIGE("Beige", styleWithColor(14800291)),
+    CORAL("Coral", styleWithColor(14645080)),
+    FOREST("Forest", styleWithColor(3318566)),
+    GINGER("Ginger", styleWithColor(13590817)),
+    INDIGO("Indigo", styleWithColor(3350103)),
+    MAROON("Maroon", styleWithColor(8070931)),
+    MINT("Mint", styleWithColor(3722877)),
+    NAVY("Navy", styleWithColor(1391972)),
+    OLIVE("Olive", styleWithColor(9211690)),
+    ROSE("Rose", styleWithColor(16735844)),
+    SLATE("Slate", styleWithColor(5004934)),
+    TAN("Tan", styleWithColor(16030813)),
+    TEAL("Teal", styleWithColor(3111783)),
+    VERDANT("Verdant", styleWithColor(2447124));
 
     // Store enumerate values to map for getting (i.e. converts BLUE, and it's enum to blue=enum and places in map)
     private static final Map<String, ColorTooltipFormattingHelper> LOOKUP = Arrays.stream(values())
