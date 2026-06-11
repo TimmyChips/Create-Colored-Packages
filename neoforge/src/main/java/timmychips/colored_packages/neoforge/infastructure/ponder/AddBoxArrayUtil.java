@@ -37,6 +37,15 @@ public class AddBoxArrayUtil {
         });
     }
 
+    public ElementLink<EntityElement> addPos(CreateSceneBuilder scene, double x, double z, DyeColor color) {
+        return scene.world().createEntity(l -> {
+            ColoredPackageEntityForge coloredBox = new ColoredPackageEntityForge(l, this.currentPos.x() + x, this.currentPos.y(), this.currentPos.z() + z);
+            coloredBox.box = ColoredPackageStyles.getDefaultBoxFromColor(color);
+
+            return coloredBox;
+        });
+    }
+
     public static ElementLink<EntityElement> createBox(CreateSceneBuilder scene, Vector3d pos, DyeColor color) {
         return scene.world().createEntity(l -> {
             ColoredPackages.LOGGER.info("position: {}", new Vector3d(pos.x(), pos.y(), pos.z()));
