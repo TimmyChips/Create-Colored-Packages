@@ -21,7 +21,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import timmychips.colored_packages.AllPackagePartialModels;
-import timmychips.colored_packages.AllPackagerSpriteShifts;
+import timmychips.colored_packages.spriteshifts.AllPackagerSpriteShifts;
 import timmychips.colored_packages.content.logistics.packager.DyedPackagerVisual;
 
 public class DyedPackagerRendererForge extends SmartBlockEntityRenderer<DyedPackagerBlockEntityForge> {

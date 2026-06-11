@@ -69,8 +69,7 @@ public class AllPackagePartialModels {
         String prefixPath = "item/";
         String modelPath;
 
-        if (Platform.isModLoaded(DyeDepotCompat.DYE_DEPOT_ID) && DDDyes.isModDye(color)) {
-//            if (DDDyes.isModDye(color)) return PartialModel.of(ColoredPackages.asResource("item/" + DYE_DEPOT_DIR + path)); // Model will be in: 'models/item/dye_depot/verdant_package_12x12'
+        if (DyeDepotCompat.HAS_DYE_DEPOT && DDDyes.isModDye(color)) {
             modelPath = prefixPath + DYE_DEPOT_DIR + path; // Model will be in: 'models/item/dye_depot/verdant_package_12x12'
         }
         else modelPath = prefixPath + path; // Default

@@ -4,9 +4,9 @@ import com.simibubi.create.foundation.data.CreateRegistrate;
 import net.minecraft.resources.ResourceLocation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import timmychips.colored_packages.compat.DyeDepotCompat;
 import timmychips.colored_packages.content.logistics.box.ColoredPackageStyles;
 import timmychips.colored_packages.content.logistics.box.util.ColorTooltipFormattingHelper;
+import timmychips.colored_packages.spriteshifts.AllPackagerSpriteShifts;
 
 public final class ColoredPackages {
     public static final String MOD_ID = "colored_packages";

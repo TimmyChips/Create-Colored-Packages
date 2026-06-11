@@ -1,11 +1,10 @@
-package timmychips.colored_packages;
+package timmychips.colored_packages.spriteshifts;
 
 import net.createmod.catnip.render.SpriteShiftEntry;
 import net.createmod.catnip.render.SpriteShifter;
 import net.minecraft.world.item.DyeColor;
+import timmychips.colored_packages.ColoredPackages;
 import timmychips.colored_packages.compat.DyeDepotCompat;
-import timmychips.colored_packages.spriteshifts.ISpritePath;
-import timmychips.colored_packages.spriteshifts.SpriteDefaultPath;
 
 import java.util.EnumMap;
 import java.util.Map;

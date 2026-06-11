@@ -1,7 +1,7 @@
 package timmychips.colored_packages.compat;
 
 import dev.architectury.platform.Platform;
-import timmychips.colored_packages.AllPackagerSpriteShifts;
+import timmychips.colored_packages.spriteshifts.AllPackagerSpriteShifts;
 import timmychips.colored_packages.spriteshifts.SpriteDyeDepotPath;
 
 // Handles replacing implemented classes with ones for Dye Depot handling
