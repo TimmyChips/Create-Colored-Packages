@@ -51,8 +51,7 @@ public class ColoredPackagesScene {
             double zOffset = (row == 0) ? 0 : (row == 1) ? 2 : 4;
 
             for (int col = 0; col < colsInRow; col++) {
-                ColoredPackages.LOGGER.info("xOffset: {}, zOffset: {}", xOffset + col, zOffset);
-                addBoxUtil.addPos(scene, xOffset + col, zOffset, colorsList.get(colorIndex++));
+                addBoxUtil.add(scene, xOffset + col, zOffset, colorsList.get(colorIndex++));
             }
         }
     }

@@ -12,6 +12,7 @@ public class AllColoredPonderScenesImpl {
     public static void registerPlatform(PonderSceneRegistrationHelper<ItemProviderEntry<?, ?>> helper) {
         helper.forComponents(new ItemProviderEntry[]{AllPackageItems.packageItemEntries.getFirst()}).addStoryBoard("high_logistics/colored_packages_ground", ColoredPackagesScene::allColoredPackages);
 
+        // Dye Depot packages
         if (DyeDepotCompat.HAS_DYE_DEPOT) {
             helper.forComponents(new ItemProviderEntry[]{AllPackageItems.packageItemEntries.getFirst()}).addStoryBoard("high_logistics/colored_packages_ground", DyeDepotPackagesScene::allDyeDepotPackages);
         }
