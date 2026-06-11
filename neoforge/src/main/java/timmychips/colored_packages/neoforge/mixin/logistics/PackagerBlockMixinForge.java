@@ -29,7 +29,6 @@ import timmychips.colored_packages.neoforge.content.logistics.packager.DyedPacka
 
 import static net.minecraft.world.level.block.DirectionalBlock.FACING;
 
-@Debug(export = true)
 @Mixin(PackagerBlock.class)
 public class PackagerBlockMixinForge {
     @Shadow

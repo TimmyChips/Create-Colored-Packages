@@ -11,7 +11,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import timmychips.colored_packages.AllDyedBlocks;
 
-@Debug(export = true)
 @Mixin(HandPointerPackagerTogglePacket.class)
 public class HandPointerPackagerTogglePacketMixin {
 

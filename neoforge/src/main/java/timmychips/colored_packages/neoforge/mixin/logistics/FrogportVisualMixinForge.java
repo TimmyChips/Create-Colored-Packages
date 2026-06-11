@@ -22,7 +22,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import timmychips.colored_packages.content.logistics.box.ColoredPackageItem;
 import timmychips.colored_packages.content.logistics.box.util.ColoredPackagePartialUtil;
 
-@Debug(export = true)
 @Mixin(FrogportVisual.class)
 public abstract class FrogportVisualMixinForge extends AbstractBlockEntityVisual<FrogportBlockEntity> {
 

@@ -6,7 +6,6 @@ import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
-@Debug(export = true)
 @Mixin(PackagerBlockEntity.class)
 public interface PackagerBEAdvancementAccessorForge {
     @Accessor("advancements")

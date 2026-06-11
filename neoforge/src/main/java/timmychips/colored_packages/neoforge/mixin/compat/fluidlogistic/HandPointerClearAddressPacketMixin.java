@@ -10,7 +10,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import timmychips.colored_packages.AllDyedBlocks;
 
-@Debug(export = true)
 @Mixin(HandPointerClearClipboardAddressPacket.class)
 public class HandPointerClearAddressPacketMixin {
     @ModifyExpressionValue(method = "handle", at = @At(value = "INVOKE", target = "Lcom/tterrag/registrate/util/entry/BlockEntry;has(Lnet/minecraft/world/level/block/state/BlockState;)Z"
