@@ -66,11 +66,16 @@ public class AllPackagePartialModels {
 
     // Model location (e.g. "assets/colored_packages/models/item/purple_package_10x12")
     private static PartialModel partialModelLocation(DyeColor color, String path) {
-        if (Platform.isModLoaded(DyeDepotCompat.DYE_DEPOT_ID)) {
-            if (DDDyes.isModDye(color)) return PartialModel.of(ColoredPackages.asResource("item/" + DYE_DEPOT_DIR + path)); // Model will be in: 'models/item/dye_depot/verdant_package_12x12'
-        }
+        String prefixPath = "item/";
+        String modelPath;
 
-        return PartialModel.of(ColoredPackages.asResource("item/" + path));
+        if (Platform.isModLoaded(DyeDepotCompat.DYE_DEPOT_ID) && DDDyes.isModDye(color)) {
+//            if (DDDyes.isModDye(color)) return PartialModel.of(ColoredPackages.asResource("item/" + DYE_DEPOT_DIR + path)); // Model will be in: 'models/item/dye_depot/verdant_package_12x12'
+            modelPath = prefixPath + DYE_DEPOT_DIR + path; // Model will be in: 'models/item/dye_depot/verdant_package_12x12'
+        }
+        else modelPath = prefixPath + path; // Default
+
+        return PartialModel.of(ColoredPackages.asResource(modelPath));
     }
 
 
