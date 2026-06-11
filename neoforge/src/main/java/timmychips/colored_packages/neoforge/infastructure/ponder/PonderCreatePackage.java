@@ -1,4 +1,4 @@
-package timmychips.colored_packages.infastructure.ponder.neoforge;
+package timmychips.colored_packages.neoforge.infastructure.ponder;
 
 import com.simibubi.create.foundation.ponder.CreateSceneBuilder;
 import net.createmod.ponder.api.element.ElementLink;
@@ -9,9 +9,8 @@ import timmychips.colored_packages.ColoredPackages;
 import timmychips.colored_packages.content.logistics.box.ColoredPackageStyles;
 import timmychips.colored_packages.neoforge.content.logistics.box.ColoredPackageEntityForge;
 
-public class ColoredPonderUtilImpl {
-    // Create colored package at given position and color
-    public static ElementLink<EntityElement> createPackagePlatform(CreateSceneBuilder scene, Vector3d pos, DyeColor color) {
+public class PonderCreatePackage {
+    public static ElementLink<EntityElement> create(CreateSceneBuilder scene, Vector3d pos, DyeColor color) {
         return scene.world().createEntity(l -> {
             ColoredPackages.LOGGER.info("position: {}", new Vector3d(pos.x(), pos.y(), pos.z()));
             ColoredPackageEntityForge coloredBox = new ColoredPackageEntityForge(l, pos.x(), pos.y(), pos.z());
