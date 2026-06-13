@@ -40,12 +40,19 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.util.FakePlayer;
+import timmychips.colored_packages.compat.VibrantVaultsCompat;
+import timmychips.colored_packages.content.logistics.packager.CreatePackagerConverter;
+import timmychips.colored_packages.content.logistics.packager.DyedPackagerConverter;
+import timmychips.colored_packages.content.logistics.packager.IPackagerConverter;
 import timmychips.colored_packages.neoforge.AllDyedBlockEntityTypesForge;
+import timmychips.colored_packages.neoforge.compat.vibrantvaults.VibrantVaultsPackagerConverter;
 
 public class DyedPackagerBlockForge extends WrenchableDirectionalBlock implements IBE<DyedPackagerBlockEntityForge>, IWrenchable {
 
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
     public static final BooleanProperty LINKED = BooleanProperty.create("linked");
+
+    public static IPackagerConverter PACKAGER_CONVERTER;
 
     public DyedPackagerBlockForge(Properties properties) {
         super(properties);
@@ -53,6 +60,8 @@ public class DyedPackagerBlockForge extends WrenchableDirectionalBlock implement
         if (defaultBlockState.hasProperty(LINKED))
             defaultBlockState = defaultBlockState.setValue(LINKED, false);
         registerDefaultState(defaultBlockState.setValue(POWERED, false));
+
+        PACKAGER_CONVERTER = (VibrantVaultsCompat.HAS_VIBRANT_VAULTS) ? new VibrantVaultsPackagerConverter() : new DyedPackagerConverter();
     }
 
     @Override
@@ -124,11 +133,16 @@ public class DyedPackagerBlockForge extends WrenchableDirectionalBlock implement
                 .isSame(Fluids.WATER);
 
         if (isDye)
-            return onBlockEntityUseItemOn(level, pos,
+            if (PACKAGER_CONVERTER instanceof VibrantVaultsPackagerConverter vibrantPackagerConverter) {
+                return vibrantPackagerConverter.setDyedPackager(state, POWERED, level, pos, player, DyeColor.getColor(stack)) ?
+                        ItemInteractionResult.SUCCESS : ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+            }
+            else return onBlockEntityUseItemOn(level, pos,
                     be ->
                             be.applyColor(DyeColor.getColor(stack)) ? ItemInteractionResult.SUCCESS : ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION);
         if (hasWater) {
-            setToDefaultPackager(state, level, pos, AllBlocks.PACKAGER);
+//            setToDefaultPackager(state, level, pos, AllBlocks.PACKAGER);
+            PACKAGER_CONVERTER.setPackager(state, POWERED, level, pos, player);
             return ItemInteractionResult.SUCCESS;
         }
         ///

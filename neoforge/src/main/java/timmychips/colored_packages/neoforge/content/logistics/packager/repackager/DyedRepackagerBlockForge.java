@@ -34,7 +34,7 @@ public class DyedRepackagerBlockForge extends DyedPackagerBlockForge {
                 .isSame(Fluids.WATER);
 
         if (hasWater) {
-            setToDefaultPackager(state, level, pos, AllBlocks.REPACKAGER);
+            PACKAGER_CONVERTER.setPackager(state, POWERED, level, pos, player);
             return ItemInteractionResult.SUCCESS;
         }
 
