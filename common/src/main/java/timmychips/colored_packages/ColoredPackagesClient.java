@@ -2,6 +2,7 @@ package timmychips.colored_packages;
 
 import net.createmod.ponder.foundation.PonderIndex;
 import timmychips.colored_packages.client.PackageItemModelPredicate;
+import timmychips.colored_packages.compat.VibrantVaultsCompat;
 import timmychips.colored_packages.infastructure.ponder.ColoredPonderPlugin;
 
 public class ColoredPackagesClient {
@@ -9,5 +10,6 @@ public class ColoredPackagesClient {
         PonderIndex.addPlugin(new ColoredPonderPlugin());
         PackageItemModelPredicate.register();
         AllPackageParticles.registerFactories();
+        VibrantVaultsCompat.setVibrantPackagerSet();
     }
 }

@@ -5,6 +5,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.registries.RegisterEvent;
 import timmychips.colored_packages.AllDyedArmInteractionPointTypes;
 import timmychips.colored_packages.ColoredPackages;
+import timmychips.colored_packages.compat.VibrantVaultsCompat;
 
 @Mod(ColoredPackages.MOD_ID)
 public final class ColoredPackagesForge {
@@ -26,5 +27,7 @@ public final class ColoredPackagesForge {
     // After registering vanilla registries, initialize modded objects (so it doesn't freeze/crash)
     public static void onRegister(RegisterEvent event) {
         AllDyedArmInteractionPointTypes.init();
+        ColoredPackages.LOGGER.info("EVENT: {}", event);
+        ColoredPackages.LOGGER.info("LOCATION: {}", event.getRegistryKey().location().toString());
     }
 }

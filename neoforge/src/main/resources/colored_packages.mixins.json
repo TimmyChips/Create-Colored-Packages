@@ -19,6 +19,7 @@
     "logistics.FrogportRendererMixinForge",
     "logistics.FrogportVisualMixinForge",
     "logistics.PackageEntityMixinForge",
+    "logistics.PackagerBEMixinForge",
     "logistics.PackagerBlockMixinForge"
   ],
   "injectors": {
