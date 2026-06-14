@@ -132,14 +132,14 @@ public class DyedPackagerBlockForge extends WrenchableDirectionalBlock implement
                 .getFluid()
                 .isSame(Fluids.WATER);
 
-        if (isDye)
+        if (isDye) {
             if (PACKAGER_CONVERTER instanceof VibrantVaultsPackagerConverter vibrantPackagerConverter) {
                 return vibrantPackagerConverter.setDyedPackager(state, POWERED, level, pos, player, DyeColor.getColor(stack)) ?
                         ItemInteractionResult.SUCCESS : ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-            }
-            else return onBlockEntityUseItemOn(level, pos,
+            } else return onBlockEntityUseItemOn(level, pos,
                     be ->
                             be.applyColor(DyeColor.getColor(stack)) ? ItemInteractionResult.SUCCESS : ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION);
+        }
         if (hasWater) {
 //            setToDefaultPackager(state, level, pos, AllBlocks.PACKAGER);
             PACKAGER_CONVERTER.setPackager(state, POWERED, level, pos, player);
