@@ -27,7 +27,5 @@ public final class ColoredPackagesForge {
     // After registering vanilla registries, initialize modded objects (so it doesn't freeze/crash)
     public static void onRegister(RegisterEvent event) {
         AllDyedArmInteractionPointTypes.init();
-        ColoredPackages.LOGGER.info("EVENT: {}", event);
-        ColoredPackages.LOGGER.info("LOCATION: {}", event.getRegistryKey().location().toString());
     }
 }

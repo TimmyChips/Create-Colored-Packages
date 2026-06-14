@@ -77,10 +77,16 @@ public class PackagerBlockMixinForge {
 //                }
 
                 DyeColor dyeColor = DyeColor.getColor(itemInHand);
-                boolean result = PACKAGER_CONVERTER.setDyedPackager(state, POWERED, level, pos, player, dyeColor);
+                boolean result = PACKAGER_CONVERTER.setColored(state, POWERED, level, pos, player, dyeColor);
                 cir.setReturnValue(result ? ItemInteractionResult.SUCCESS : ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION);
             }
-            if (hasWater) cir.setReturnValue(ItemInteractionResult.SUCCESS);
+            if (hasWater) {
+                if (PACKAGER_CONVERTER.isCreatePackager(state)) cir.setReturnValue(ItemInteractionResult.SUCCESS);
+                else {
+                    PACKAGER_CONVERTER.setDefault(state, POWERED, level, pos, player);
+                    cir.setReturnValue(ItemInteractionResult.SUCCESS);
+                }
+            };
         }
     }
 

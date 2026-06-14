@@ -41,7 +41,6 @@ import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.util.FakePlayer;
 import timmychips.colored_packages.compat.VibrantVaultsCompat;
-import timmychips.colored_packages.content.logistics.packager.CreatePackagerConverter;
 import timmychips.colored_packages.content.logistics.packager.DyedPackagerConverter;
 import timmychips.colored_packages.content.logistics.packager.IPackagerConverter;
 import timmychips.colored_packages.neoforge.AllDyedBlockEntityTypesForge;
@@ -134,7 +133,7 @@ public class DyedPackagerBlockForge extends WrenchableDirectionalBlock implement
 
         if (isDye) {
             if (PACKAGER_CONVERTER instanceof VibrantVaultsPackagerConverter vibrantPackagerConverter) {
-                return vibrantPackagerConverter.setDyedPackager(state, POWERED, level, pos, player, DyeColor.getColor(stack)) ?
+                return vibrantPackagerConverter.setColored(state, POWERED, level, pos, player, DyeColor.getColor(stack)) ?
                         ItemInteractionResult.SUCCESS : ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
             } else return onBlockEntityUseItemOn(level, pos,
                     be ->
@@ -142,7 +141,7 @@ public class DyedPackagerBlockForge extends WrenchableDirectionalBlock implement
         }
         if (hasWater) {
 //            setToDefaultPackager(state, level, pos, AllBlocks.PACKAGER);
-            PACKAGER_CONVERTER.setPackager(state, POWERED, level, pos, player);
+            PACKAGER_CONVERTER.setDefault(state, POWERED, level, pos, player);
             return ItemInteractionResult.SUCCESS;
         }
         ///

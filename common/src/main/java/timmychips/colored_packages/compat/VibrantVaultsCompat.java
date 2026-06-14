@@ -20,6 +20,5 @@ public class VibrantVaultsCompat {
 
     @ExpectPlatform
     public static void setVibrantPackagerSet() {
-        ColoredPackages.LOGGER.info("uh oh wtf");
     }
 }
