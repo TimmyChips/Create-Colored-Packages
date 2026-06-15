@@ -34,7 +34,7 @@ public class ColoredPackagesMixinPlugin implements IMixinConfigPlugin {
 
     // Vibrant Vault mixins to apply if loaded
     private static final List<String> VIBRANT_VAULT_MIXINS = List.of(
-            "timmychips.colored_packages.neoforge.mixin.compat.vibrantvaults.PackagerBEMixinForge"
+            "timmychips.colored_packages.neoforge.mixin.compat.vibrantvaults.PackagerBEMixin"
     );
 
     // Since mods aren't loaded, use LoadingModList class to check if mod is present from mod id

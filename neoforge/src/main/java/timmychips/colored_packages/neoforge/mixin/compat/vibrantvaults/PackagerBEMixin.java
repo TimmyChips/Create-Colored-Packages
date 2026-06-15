@@ -11,7 +11,6 @@ import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
-import timmychips.colored_packages.ColoredPackages;
 import timmychips.colored_packages.neoforge.content.logistics.box.ColoredPackageItemForge;
 
 import java.util.Optional;
@@ -20,7 +19,7 @@ import static timmychips.colored_packages.compat.VibrantVaultsCompat.VIBRANT_PAC
 
 @Debug(export = true)
 @Mixin(PackagerBlockEntity.class)
-public class PackagerBEMixinForge {
+public class PackagerBEMixin {
 
     // Redirect Vibrant Vaults to call coloredContaining() method to get right colored box
     @Redirect(
@@ -28,8 +27,6 @@ public class PackagerBEMixinForge {
             at = @At(value = "INVOKE", target = "Lcom/simibubi/create/content/logistics/box/PackageItem;containing(Lnet/neoforged/neoforge/items/ItemStackHandler;)Lnet/minecraft/world/item/ItemStack;")
     )
     private ItemStack coloredContaining(ItemStackHandler stacks) {
-
-        ColoredPackages.LOGGER.info("should not be logged bruh :(");
 
         PackagerBlockEntity self = (PackagerBlockEntity) (Object) this;
 
