@@ -4,9 +4,7 @@ import dev.architectury.injectables.annotations.ExpectPlatform;
 import dev.architectury.platform.Platform;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
-import timmychips.colored_packages.ColoredPackages;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class VibrantVaultsCompat {
