@@ -15,13 +15,17 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
+import timmychips.colored_packages.compat.VibrantVaultsCompat;
+import timmychips.colored_packages.content.logistics.packager.DyedPackagerConverter;
 import timmychips.colored_packages.neoforge.AllDyedBlockEntityTypesForge;
+import timmychips.colored_packages.neoforge.compat.vibrantvaults.VibrantVaultsPackagerConverter;
 import timmychips.colored_packages.neoforge.content.logistics.packager.DyedPackagerBlockEntityForge;
 import timmychips.colored_packages.neoforge.content.logistics.packager.DyedPackagerBlockForge;
 
 public class DyedRepackagerBlockForge extends DyedPackagerBlockForge {
     public DyedRepackagerBlockForge(Properties properties) {
         super(properties);
+//        PACKAGER_CONVERTER = (VibrantVaultsCompat.HAS_VIBRANT_VAULTS) ? new VibrantVaultsPackagerConverter() : new DyedPackagerConverter();
     }
 
     @Override
