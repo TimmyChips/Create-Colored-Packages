@@ -12,56 +12,51 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.zlt.create_vibrant_vaults.block.ModBlocks;
-import timmychips.colored_packages.ColoredPackages;
+import timmychips.colored_packages.AllDyedBlocks;
+import timmychips.colored_packages.compat.VibrantVaultsCompat;
 import timmychips.colored_packages.content.logistics.packager.CreatePackagerConverter;
 
 import static timmychips.colored_packages.compat.VibrantVaultsCompat.VIBRANT_PACKAGERS_MAP;
 
 public class VibrantVaultsPackagerConverter extends CreatePackagerConverter {
 
-    private static final BlockEntry<PackagerBlock> FALLBACK_ENTRY = AllBlocks.PACKAGER;
-
     @Override
     public boolean setColored(BlockState state, BooleanProperty powered, Level level, BlockPos pos, LivingEntity player, DyeColor color) {
-        // Check if this vibrant packager block is the same as the dye trying to be applied; return false if so
-        ColoredPackages.LOGGER.info("Block key: {}", BuiltInRegistries.BLOCK.getKey(state.getBlock()));
-
-        ColoredPackages.LOGGER.info("is re-packager? {}", isRepackager(state));
         // Set to vibrant packager if not a re-packager
         if (!isRepackager(state)) {
+            // Check if this vibrant packager block is the same as the dye trying to be applied; return false item interaction if so
             ResourceLocation blockId = BuiltInRegistries.BLOCK.getKey(state.getBlock());
             if (VIBRANT_PACKAGERS_MAP.containsKey(blockId)) {
                 if (VIBRANT_PACKAGERS_MAP.get(blockId).equals(color)) return false;
             }
 
+            // Get vibrant packager block from dyed color input
             BlockEntry<?> entry = getVibrantPackager(color);
+            // Set packager to new vibrant packager for applicable dye
             if (entry != null) {
-                setPackagerBlock(entry, state, powered, level, pos, player); // Set to new colored Vibrant Packager
+                setPackagerBlock(entry, state, powered, level, pos, player);
                 return true;
             }
         }
 
+        // Fallback set packager to original Dyed Block Packager if packager has modded dye or is a re-packager
         return super.setColored(state, powered, level, pos, player, color);
-
-//        BlockEntry<?> entry = isRepackager(state) ? coloredEntry(state) : getVibrantPackager(color);
-//        boolean fallback = entry == null;
-//        if (fallback) {
-//            return super.setColored(state, powered, level, pos, player, color);
-//        }
-//        else setPackagerBlock(entry, state, powered, level, pos, player);
-//
-////        BlockEntity packagerBE = setPackagerBlock(entry, state, powered, level, pos, player);
-////        if (fallback) return setDyedPackagerColor(packagerBE, color); // Set packager color if it's a DyedPackagerBlockEntity
-////        else return true;
-//        setPackagerBlock(entry, state, powered, level, pos, player);
-//        return true;
     }
 
-    // No re-packager variants, use default Packager only
-//    @Override
-//    public BlockEntry<?> defaultEntry(BlockState state) {
-//        return AllBlocks.PACKAGER;
-//    }
+    @Override
+    public BlockEntry<?> defaultEntry(BlockState state) {
+        return AllDyedBlocks.DYED_PACKAGER.has(state) || VibrantVaultsCompat.VIBRANT_PACKAGERS_MAP.containsKey(BuiltInRegistries.BLOCK.getKey(state.getBlock())) ? AllBlocks.PACKAGER
+                : AllBlocks.REPACKAGER;
+    }
+
+    @Override
+    public BlockEntry<?> coloredEntry(BlockState state) {
+        if (VibrantVaultsCompat.HAS_VIBRANT_VAULTS &&
+                VibrantVaultsCompat.VIBRANT_PACKAGERS_MAP.containsKey(BuiltInRegistries.BLOCK.getKey(state.getBlock()))) {
+            return AllDyedBlocks.DYED_PACKAGER;
+        }
+        return super.coloredEntry(state);
+    }
 
     // Get VibrantVaultColor enum value from DyeColor ordinal
     public static ModBlocks.VibrantVaultColor getVibrantVaultColor(DyeColor color) {

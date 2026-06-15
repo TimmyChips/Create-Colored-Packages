@@ -25,7 +25,6 @@ import timmychips.colored_packages.neoforge.content.logistics.packager.DyedPacka
 public class DyedRepackagerBlockForge extends DyedPackagerBlockForge {
     public DyedRepackagerBlockForge(Properties properties) {
         super(properties);
-//        PACKAGER_CONVERTER = (VibrantVaultsCompat.HAS_VIBRANT_VAULTS) ? new VibrantVaultsPackagerConverter() : new DyedPackagerConverter();
     }
 
     @Override
