@@ -15,7 +15,14 @@ public class AllColoredPonderScenes {
         PonderSceneRegistrationHelper<ItemProviderEntry<?>> HELPER = helper.withKeyFunction(RegistryEntry::getId);
 
         HELPER.forComponents(new ItemProviderEntry[]{AllBlocks.PACKAGER}).addStoryBoard("high_logistics/dyed_packager", ColoredPackagerScenes::coloredPackager);
-        HELPER.forComponents(new ItemProviderEntry[]{AllPackageItems.packageItemEntries.get(0)}).addStoryBoard("high_logistics/colored_packages_ground", ColoredPackagesScene::allColoredPackages);
-            // Note that for the colored packages storyboard, the schematic itself has the colored package entities but Ponder won't show them :(
+
+        // Note that for the colored packages storyboard, the schematic itself has the colored package entities but Ponder won't show them :(
+        registerPlatform(HELPER);
+    }
+
+    // Colored package scenes
+    @ExpectPlatform
+    public static void registerPlatform(PonderSceneRegistrationHelper<ItemProviderEntry<?, ?>> helper) {
+        throw new AssertionError();
     }
 }

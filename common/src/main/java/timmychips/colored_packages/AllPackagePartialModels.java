@@ -1,16 +1,29 @@
 package timmychips.colored_packages;
 
+import com.ninni.dye_depot.registry.DDDyes;
 import com.simibubi.create.AllPartialModels;
 import com.simibubi.create.content.logistics.box.PackageStyles;
+import dev.architectury.platform.Platform;
 import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
+import timmychips.colored_packages.compat.DyeDepotCompat;
 import timmychips.colored_packages.content.logistics.box.ColoredPackageStyles;
+
+import java.util.List;
 
 public class AllPackagePartialModels {
 
     public static final PartialModel DYED_PACKAGER_COLOR_LABEL = block("dyed_packager/color_label"); // Partial model of the color label that will be rendered with Dyed Packager block
+    private static final String DYE_DEPOT_DIR = "dye_depot/";
+
+    public static List<String> HAS_LAYERED_RIGGING = List.of(
+            "light_blue",
+            // Dye Depot
+            "tan",
+            "rose"
+    );
 
     static  {
 
@@ -37,19 +50,34 @@ public class AllPackagePartialModels {
                 String path = splitStringForColor(color.getName(), key);
 
                 ResourceLocation coloredPackageKey = ColoredPackages.asResource(path); // "Key" id of colored package
-                PartialModel model = PartialModel.of(ColoredPackages.asResource("item/" + path)); // Model location (e.g. "assets/colored_packages/models/item/purple_package_10x12")
+                PartialModel model = partialModelLocation(color, path); // Partial Model location
 
                 // Add to Create Partial Models for packages
                 AllPartialModels.PACKAGES.put(coloredPackageKey, model);
 
-                // Cases for the rigging model for each color. E.g. light blue uses a thicker, "layered" package model, thus needs a wider rigging model to compensate. Unfortunately is hardcoded.
-                switch (color) {
-                    case LIGHT_BLUE -> AllPartialModels.PACKAGE_RIGGING.put(coloredPackageKey, PartialModel.of(ColoredPackageStyles.getLayeredRiggingModel(sizeStyle)));
-                    default -> AllPartialModels.PACKAGE_RIGGING.put(coloredPackageKey, PartialModel.of(sizeStyle.getRiggingModel()));
+                // Change the rigging model for layered package models E.g. uses a thicker, "layered" package model, thus needs a wider rigging model to compensate. Unfortunately is hardcoded.
+                if (HAS_LAYERED_RIGGING.contains(color.getName())) {
+                    AllPartialModels.PACKAGE_RIGGING.put(coloredPackageKey, PartialModel.of(ColoredPackageStyles.getLayeredRiggingModel(sizeStyle)));
                 }
+                else AllPartialModels.PACKAGE_RIGGING.put(coloredPackageKey, PartialModel.of(sizeStyle.getRiggingModel()));
             }
         }
     }
+
+    // Model location (e.g. "assets/colored_packages/models/item/purple_package_10x12")
+    private static PartialModel partialModelLocation(DyeColor color, String path) {
+        String prefixPath = "item/";
+        String modelPath;
+
+        if (DyeDepotCompat.HAS_DYE_DEPOT && DDDyes.isModDye(color)) {
+            modelPath = prefixPath + DYE_DEPOT_DIR + path; // Model will be in: 'models/item/dye_depot/verdant_package_12x12'
+        }
+        else modelPath = prefixPath + path; // Default
+
+        return PartialModel.of(ColoredPackages.asResource(modelPath));
+    }
+
+
 
     /**
      * Colored Package as a PartialModel

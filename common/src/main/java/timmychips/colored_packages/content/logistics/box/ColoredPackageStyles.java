@@ -62,7 +62,7 @@ public class ColoredPackageStyles extends PackageStyles {
     // Create's PackageStyles.PackageStyle getItemId() method always has "create" id in front, this band-aid method replaces the namespace with ours
     public static ResourceLocation getColoredItemId(PackageStyles.PackageStyle style) {
         String itemPath = style.getItemId().getPath();
-        return new ResourceLocation(ColoredPackages.MOD_ID, itemPath);
+        return ResourceLocation.fromNamespaceAndPath(ColoredPackages.MOD_ID, itemPath);
     }
 
     /**

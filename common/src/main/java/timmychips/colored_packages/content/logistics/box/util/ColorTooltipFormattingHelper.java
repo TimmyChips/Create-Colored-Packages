@@ -1,7 +1,10 @@
 package timmychips.colored_packages.content.logistics.box.util;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 import timmychips.colored_packages.ColoredPackages;
 
 import java.awt.*;
@@ -34,13 +37,33 @@ public enum ColorTooltipFormattingHelper {
     PURPLE("Purple", styleWithColor(new Color(159, 58, 212).getRGB())),
     RED("Red", styleWithColor(ChatFormatting.RED.getColor())),
     WHITE("White", styleWithColor(new Color(212, 212, 212).getRGB())),
-    YELLOW("Yellow", styleWithColor(ChatFormatting.YELLOW.getColor()));
+    YELLOW("Yellow", styleWithColor(ChatFormatting.YELLOW.getColor())),
+
+    /// Dye depot color's with their rgb integer color (from DDDyes class)
+    AMBER("Amber", styleWithColor(14135040)),
+    AQUA("Aqua", styleWithColor(6222028)),
+    BEIGE("Beige", styleWithColor(14800291)),
+    CORAL("Coral", styleWithColor(14645080)),
+    FOREST("Forest", styleWithColor(3318566)),
+    GINGER("Ginger", styleWithColor(13590817)),
+    INDIGO("Indigo", styleWithColor(3350103)),
+    MAROON("Maroon", styleWithColor(8070931)),
+    MINT("Mint", styleWithColor(3722877)),
+    NAVY("Navy", styleWithColor(1391972)),
+    OLIVE("Olive", styleWithColor(9211690)),
+    ROSE("Rose", styleWithColor(16735844)),
+    SLATE("Slate", styleWithColor(5004934)),
+    TAN("Tan", styleWithColor(16030813)),
+    TEAL("Teal", styleWithColor(3111783)),
+    VERDANT("Verdant", styleWithColor(2447124));
 
     // Store enumerate values to map for getting (i.e. converts BLUE, and it's enum to blue=enum and places in map)
     private static final Map<String, ColorTooltipFormattingHelper> LOOKUP = Arrays.stream(values())
             .collect(Collectors.toMap(ColorTooltipFormattingHelper::getName, helper -> helper));
     private final String langName;
     private final Style style;
+
+    private static final String COLOR_TRANSLATABLE_PATH = "color.minecraft.";
 
     ColorTooltipFormattingHelper(String langName, Style style) {
         this.langName = langName;
@@ -83,7 +106,7 @@ public enum ColorTooltipFormattingHelper {
      */
     public static String getLangName(String color) {
         try {
-            return LOOKUP.get(color).langName;
+            return Component.translatable(COLOR_TRANSLATABLE_PATH + color).getString(); // E.g. Gets the color name from the lang file from "color.minecraft.light_blue" = Light Blue (or another name if a resource pack changes it)
         } catch (Exception e) {
             ColoredPackages.LOGGER.info("Unable to find lang name for color: {}", color);
         }
