@@ -57,8 +57,6 @@ public class PackagerBlockMixinForge {
 
             ItemStack itemInHand = player.getItemInHand(hand);
 
-            PackagerBlock self = (PackagerBlock) (Object) this;
-
             /// Dye/water
             boolean isDye = itemInHand.is(Tags.Items.DYES);
             boolean hasWater = GenericItemEmptying.emptyItem(level, itemInHand, true)
@@ -67,52 +65,20 @@ public class PackagerBlockMixinForge {
                     .isSame(Fluids.WATER);
 
             if (isDye) {
-                // Set Packager to Dyed Packager and return newly created block entity
-//                BlockEntity blockEntity = coloredPackages$setToDyedPackager(state, level, pos, player);
-//                BlockEntity blockEntity = PACKAGER_CONVERTER.setPackager(state, POWERED, level, pos, player);
-
-                // Apply color to dyed packager block entity
-//                if (blockEntity instanceof DyedPackagerBlockEntityForge dyedPackagerBE) {
-//                    cir.setReturnValue(dyedPackagerBE.applyColor(DyeColor.getColor(itemInHand)) ? ItemInteractionResult.SUCCESS : ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION);
-//                }
-
+                // Set Packager to Dyed Packager and return interaction result
                 DyeColor dyeColor = DyeColor.getColor(itemInHand);
                 boolean result = PACKAGER_CONVERTER.setColored(state, POWERED, level, pos, player, dyeColor);
+
                 cir.setReturnValue(result ? ItemInteractionResult.SUCCESS : ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION);
             }
             if (hasWater) {
+                // Revert vibrant colored packagers to default packager if using water
                 if (PACKAGER_CONVERTER.isCreatePackager(state)) cir.setReturnValue(ItemInteractionResult.SUCCESS);
                 else {
                     PACKAGER_CONVERTER.setDefault(state, POWERED, level, pos, player);
                     cir.setReturnValue(ItemInteractionResult.SUCCESS);
                 }
-            };
+            }
         }
-    }
-
-    @Unique
-    private BlockEntity coloredPackages$setToDyedPackager(BlockState state, Level level, BlockPos pos, LivingEntity dyer) {
-        // Get block state properties from Packager block
-        PackagerBlock self = (PackagerBlock) (Object) this;
-
-        Direction currentFacing = state.getValue(FACING);
-        boolean currentPowered = state.getValue(POWERED);
-
-        // Get the dyed packager (or re-repackager) block entry if the Create packager entry has this state (i.e. it's a packager block) or not
-        BlockEntry<?> dyedPackagerEntry = AllBlocks.PACKAGER.has(state) ? AllDyedBlocks.DYED_PACKAGER
-                : AllDyedBlocks.DYED_REPACKAGER;
-
-        // Get Dyed Packager block state with current property values
-        BlockState dyedPackagerState = dyedPackagerEntry.getDefaultState()
-                .setValue(FACING, currentFacing)
-                .setValue(POWERED, currentPowered);
-
-        // Set and update Create Packager block to Dyed Packager block
-        level.setBlockAndUpdate(pos, dyedPackagerState);
-
-        // Set advancement owner to player to properly grant advancement
-        AdvancementBehaviour.setPlacedBy(level, pos, dyer);
-
-        return level.getBlockEntity(pos); // Return newly created dyed packager block entity
     }
 }

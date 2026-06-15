@@ -1,6 +1,7 @@
 package timmychips.colored_packages.neoforge.compat.vibrantvaults;
 
 import com.simibubi.create.AllBlocks;
+import com.simibubi.create.content.logistics.packager.PackagerBlock;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -12,47 +13,13 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.zlt.create_vibrant_vaults.block.ModBlocks;
-import timmychips.colored_packages.AllDyedBlocks;
 import timmychips.colored_packages.content.logistics.packager.CreatePackagerConverter;
 
 import static timmychips.colored_packages.compat.VibrantVaultsCompat.VIBRANT_PACKAGERS_MAP;
 
 public class VibrantVaultsPackagerConverter extends CreatePackagerConverter {
 
-//    private static ModBlocks.VibrantVaultColor vibrantVaultColor;
-
-//    @Override
-//    public boolean setDyedPackager(BlockState state, BooleanProperty powered, Level level, BlockPos pos, LivingEntity player, DyeColor color) {
-//        if (setVibrantVaultColor(color)) this.setPackagerOld(state, powered, level, pos, player);
-//        else super.setDyedPackager(state, powered, level, pos, player, color);
-//
-//        return true;
-//    }
-//
-//    public boolean setVibrantVaultColor(DyeColor color) {
-//        vibrantVaultColor = getVibrantVaultColor(color);
-//        return vibrantVaultColor != null;
-//    }
-
-    // Get VibrantVaultColor enum value from DyeColor ordinal
-    public static ModBlocks.VibrantVaultColor getVibrantVaultColor(DyeColor color) {
-        int ordinal = color.ordinal();
-        if (ordinal < 16) {
-            return ModBlocks.VibrantVaultColor.values()[ordinal];
-        }
-        return null;
-    }
-
-//    @Override
-//    public BlockEntry<?> getTargetEntry(BlockState state) {
-//        if (vibrantVaultColor != null) return ModBlocks.getVibrantPackager(vibrantVaultColor);
-//        return fallbackEntry(state);
-//    }
-
-    // Fallback to regular Dyed Packager if dye color isn't part of VibrantVaultColor / i.e. a non-vanilla color
-    private BlockEntry<?> fallbackEntry(BlockState state) {
-        return AllDyedBlocks.DYED_PACKAGER;
-    }
+    private static final BlockEntry<PackagerBlock> FALLBACK_ENTRY = AllBlocks.PACKAGER;
 
     @Override
     public boolean setColored(BlockState state, BooleanProperty powered, Level level, BlockPos pos, LivingEntity player, DyeColor color) {
@@ -61,28 +28,41 @@ public class VibrantVaultsPackagerConverter extends CreatePackagerConverter {
         if (VIBRANT_PACKAGERS_MAP.containsKey(blockId)) {
             if (VIBRANT_PACKAGERS_MAP.get(blockId).equals(color)) return false;
         }
-//        if (vibrantVaultColor == state.co)
 
-//        if (VIBRANT_PACKAGERS_MAP.containsKey(blockId)) {
-
-        BlockEntry<?> entry = getColoredPackager(state, color);
+        BlockEntry<?> entry = getColoredPackager(color);
         boolean fallback = entry == null;
-        entry = fallback ? fallbackEntry(state) : entry;
+//        entry = fallback ? super.setColored(state, powered, level, pos, player, color) : entry; // Fallback to regular Dyed Packager if dye color isn't part of VibrantVaultColor / i.e. a non-vanilla color
+        if (fallback) {
+            return super.setColored(state, powered, level, pos, player, color);
+        }
 
-        BlockEntity packagerBE = setPackagerBlock(entry, state, powered, level, pos, player);
-        if (fallback) return setDyedPackagerColor(packagerBE, color);
-        else return true;
+//        BlockEntity packagerBE = setPackagerBlock(entry, state, powered, level, pos, player);
+//        if (fallback) return setDyedPackagerColor(packagerBE, color); // Set packager color if it's a DyedPackagerBlockEntity
+//        else return true;
+        setPackagerBlock(entry, state, powered, level, pos, player);
+        return true;
     }
 
+    // No re-packager variants, use default Packager only
     @Override
     public BlockEntry<?> defaultEntry(BlockState state) {
         return AllBlocks.PACKAGER;
     }
 
-    public BlockEntry<?> getColoredPackager(BlockState state, DyeColor color) {
+    // Get VibrantVaultColor enum value from DyeColor ordinal
+    public static ModBlocks.VibrantVaultColor getVibrantVaultColor(DyeColor color) {
+        int ordinal = color.ordinal();
+        if (ordinal < 16) {
+            return ModBlocks.VibrantVaultColor.values()[ordinal];
+        }
+        return null; // Null if color value is greater than vanilla MC color values
+    }
+
+    // Get vibrant vault packager entry from color
+    public BlockEntry<?> getColoredPackager(DyeColor color) {
         ModBlocks.VibrantVaultColor vibrantVaultColor = getVibrantVaultColor(color);
 
-        if (vibrantVaultColor == null) return null;
-        else return ModBlocks.getVibrantPackager(vibrantVaultColor);
+        if (vibrantVaultColor == null) return null; // Return null to use fallback entry
+        else return ModBlocks.getVibrantPackager(vibrantVaultColor); // Vibrant Packager block from this color
     }
 }

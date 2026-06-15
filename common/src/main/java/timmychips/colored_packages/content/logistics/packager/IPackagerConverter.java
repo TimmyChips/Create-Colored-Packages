@@ -18,39 +18,25 @@ import static net.minecraft.world.level.block.DirectionalBlock.FACING;
 
 public interface IPackagerConverter {
 
+    // Set current packager block to Create's default packager/re-packager
     default BlockEntity setDefault(BlockState state, BooleanProperty powered, Level level, BlockPos pos, LivingEntity player) {
         BlockEntry<?> entry = defaultEntry(state);
         return setPackagerBlock(entry, state, powered, level, pos, player);
     }
 
+    // Set current packager to dyed packager block and set color
     default boolean setColored(BlockState state, BooleanProperty powered, Level level, BlockPos pos, LivingEntity player, DyeColor color) {
+        BlockEntity blockEntity = level.getBlockEntity(pos);
+        if (blockEntity instanceof DyedPackagerBlockEntity dyedBE) {
+            return dyedBE.color.map(dyeColor -> dyeColor.equals(color)).orElse(false);
+        }
+
         BlockEntry<?> entry = coloredEntry(state);
         BlockEntity packagerBE = setPackagerBlock(entry, state, powered, level, pos, player);
         return setDyedPackagerColor(packagerBE, color);
     }
 
-    default BlockEntity setPackagerOld(BlockState state, BooleanProperty powered, Level level, BlockPos pos, LivingEntity player) {
-
-        Direction currentFacing = state.getValue(FACING);
-        boolean currentPowered = state.getValue(powered);
-
-        // Get the dyed packager (or re-repackager) block entry if the Create packager entry has this state (i.e. it's a packager block) or not
-        BlockEntry<?> dyedPackagerEntry = getTargetEntry(state);
-
-        // Get Dyed Packager block state with current property values
-        BlockState dyedPackagerState = dyedPackagerEntry.getDefaultState()
-                .setValue(FACING, currentFacing)
-                .setValue(powered, currentPowered);
-
-        // Set and update Create Packager block to Dyed Packager block
-        level.setBlockAndUpdate(pos, dyedPackagerState);
-
-        // Set advancement owner to player to properly grant advancement
-        AdvancementBehaviour.setPlacedBy(level, pos, player);
-
-        return level.getBlockEntity(pos); // Return newly created dyed packager block entity
-    }
-
+    // Set to specified packager entry (default, dyed, or vibrant packager) and return corresponding BlockEntity
     default BlockEntity setPackagerBlock(BlockEntry<?> blockEntry, BlockState state, BooleanProperty powered, Level level, BlockPos pos, LivingEntity player) {
 
         Direction currentFacing = state.getValue(FACING);
@@ -76,18 +62,19 @@ public interface IPackagerConverter {
                 : AllDyedBlocks.DYED_REPACKAGER;
     }
 
-    // Gets Dyed Packager or Dyed Repackager based on what the packager is
+    // Return the default Create's packager or re-packager entry
     default BlockEntry<?> defaultEntry(BlockState state) {
         return AllDyedBlocks.DYED_PACKAGER.has(state) ? AllBlocks.PACKAGER
                 : AllBlocks.REPACKAGER;
     }
 
-    // Gets Dyed Packager or Dyed Repackager based on what the packager is
+    // Returns Dyed Packager or Re-Packager entry from if it's a re-packager or not
     default BlockEntry<?> coloredEntry(BlockState state) {
         return AllBlocks.PACKAGER.has(state) ? AllDyedBlocks.DYED_PACKAGER
                 : AllDyedBlocks.DYED_REPACKAGER;
     }
 
+    // Set's Dyed Packager / Dyed Re-Packager's color value to applied color
     default boolean setDyedPackagerColor(BlockEntity blockEntity, DyeColor color) {
         if (blockEntity instanceof DyedPackagerBlockEntity dyedPackagerBE) {
             return dyedPackagerBE.applyColor(color);
