@@ -10,11 +10,13 @@ import timmychips.colored_packages.neoforge.infastructure.ponder.scenes.DyeDepot
 
 public class AllColoredPonderScenesImpl {
     public static void registerPlatform(PonderSceneRegistrationHelper<ItemProviderEntry<?, ?>> helper) {
-        helper.forComponents(new ItemProviderEntry[]{AllPackageItems.packageItemEntries.getFirst()}).addStoryBoard("high_logistics/colored_packages_ground", ColoredPackagesScene::allColoredPackages);
+        for (ItemProviderEntry<?, ?> coloredEntry : AllPackageItems.packageItemEntries) {
+            helper.forComponents(new ItemProviderEntry[]{coloredEntry}).addStoryBoard("high_logistics/colored_packages_ground", ColoredPackagesScene::allColoredPackages);
 
-        // Dye Depot packages
-        if (DyeDepotCompat.HAS_DYE_DEPOT) {
-            helper.forComponents(new ItemProviderEntry[]{AllPackageItems.packageItemEntries.getFirst()}).addStoryBoard("high_logistics/colored_packages_ground", DyeDepotPackagesScene::allDyeDepotPackages);
+            // Dye Depot packages
+            if (DyeDepotCompat.HAS_DYE_DEPOT) {
+                helper.forComponents(new ItemProviderEntry[]{coloredEntry}).addStoryBoard("high_logistics/colored_packages_ground", DyeDepotPackagesScene::allDyeDepotPackages);
+            }
         }
     }
 }
