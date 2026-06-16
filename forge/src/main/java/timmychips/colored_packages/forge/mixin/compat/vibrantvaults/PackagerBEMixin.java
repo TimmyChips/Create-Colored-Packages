@@ -18,7 +18,6 @@ import java.util.Optional;
 
 import static timmychips.colored_packages.compat.VibrantVaultsCompat.VIBRANT_PACKAGERS_MAP;
 
-@Debug(export = true)
 @Mixin(PackagerBlockEntity.class)
 public class PackagerBEMixin {
 
