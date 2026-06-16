@@ -1,7 +1,6 @@
 package timmychips.colored_packages;
 
 import com.mojang.serialization.Codec;
-import com.mojang.serialization.MapCodec;
 import dev.architectury.registry.client.particle.ParticleProviderRegistry;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
@@ -9,12 +8,8 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.core.particles.*;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.codec.StreamCodec;
 import org.jetbrains.annotations.NotNull;
 import timmychips.colored_packages.content.logistics.box.ColoredPackageParticle;
-
-import java.util.function.Function;
 
 public class AllPackageParticles {
 
@@ -22,16 +17,10 @@ public class AllPackageParticles {
 
     // Particle provider registry for colored package particle
     public static final RegistrySupplier<ParticleType<ItemParticleOption>> COLORED_PACKAGE =
-//        PARTICLE_TYPES.register("colored_package", () -> new ParticleType<>(false, ItemParticleOption::codec, ItemParticleOption::streamCodec) {
-        PARTICLE_TYPES.register("colored_package", () -> new ParticleType<>(false) {
+        PARTICLE_TYPES.register("colored_package", () -> new ParticleType<>(false, ItemParticleOption.DESERIALIZER) {
             @Override
-            public MapCodec<ItemParticleOption> codec() {
+            public @NotNull Codec<ItemParticleOption> codec() {
                 return ItemParticleOption.codec(COLORED_PACKAGE.get());
-            }
-
-            @Override
-            public StreamCodec<? super RegistryFriendlyByteBuf, ItemParticleOption> streamCodec() {
-                return ItemParticleOption.streamCodec(COLORED_PACKAGE.get());
             }
         });
 
