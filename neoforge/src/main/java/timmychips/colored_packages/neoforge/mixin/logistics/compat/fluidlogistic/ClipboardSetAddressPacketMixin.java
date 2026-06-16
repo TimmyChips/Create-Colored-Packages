@@ -14,7 +14,6 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import timmychips.colored_packages.AllDyedBlocks;
 
-@Debug(export = true)
 @Mixin(ClipboardSetAddressPacket.class)
 public class ClipboardSetAddressPacketMixin {
     @Shadow @Final private BlockPos pos;

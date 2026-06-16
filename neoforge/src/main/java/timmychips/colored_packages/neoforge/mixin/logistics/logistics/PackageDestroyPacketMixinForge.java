@@ -19,7 +19,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import timmychips.colored_packages.AllPackageParticles;
 import timmychips.colored_packages.content.logistics.box.ColoredPackageItem;
 
-@Debug(export = true)
 @Mixin(PackageDestroyPacket.class)
 public class PackageDestroyPacketMixinForge {
 

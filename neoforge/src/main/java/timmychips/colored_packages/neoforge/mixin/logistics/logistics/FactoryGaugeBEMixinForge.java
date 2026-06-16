@@ -25,7 +25,6 @@ import timmychips.colored_packages.AllDyedBlocks;
 import java.util.EnumMap;
 import java.util.List;
 
-@Debug(export = true)
 @Mixin(FactoryPanelBlockEntity.class)
 public class FactoryGaugeBEMixinForge {
 

@@ -34,7 +34,7 @@ public class AllPackagePartialModels {
 
             ResourceLocation key = ColoredPackageStyles.getColoredItemId(sizeStyle); // Item id of package
             PartialModel model = PartialModel.of(ColoredPackages.asResource("item/" + key.getPath())); // Where the model is located at in the resources
-                    // e.g. resources/assets/colored_packages/models/item/colored_package_12x10
+            // e.g. resources/assets/colored_packages/models/item/colored_package_12x10
 
             // Add to Create Partial Models for packages
             AllPartialModels.PACKAGE_RIGGING.put(key, PartialModel.of(sizeStyle.getRiggingModel()));

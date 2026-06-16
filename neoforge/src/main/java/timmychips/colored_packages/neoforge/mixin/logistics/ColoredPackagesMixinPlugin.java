@@ -1,12 +1,18 @@
 package timmychips.colored_packages.forge.mixin;
 
-import net.minecraftforge.fml.ModList;
+import com.google.common.collect.ImmutableMap;
+import dev.architectury.platform.Platform;
+import net.minecraftforge.fml.loading.LoadingModList;
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
+import timmychips.colored_packages.ColoredPackages;
+import timmychips.colored_packages.compat.VibrantVaultsCompat;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.function.Supplier;
 
 // Optionally applies Mixins for compat mods, only applies Mixin if that mod is installed
 public class ColoredPackagesMixinPlugin implements IMixinConfigPlugin {
@@ -22,17 +28,25 @@ public class ColoredPackagesMixinPlugin implements IMixinConfigPlugin {
             "timmychips.colored_packages.forge.mixin.compat.fluidlogistic.HandPointerClearAddressPacketMixin",
             "timmychips.colored_packages.forge.mixin.compat.fluidlogistic.HandPointerInteractionHandlerMixin",
             "timmychips.colored_packages.forge.mixin.compat.fluidlogistic.HandPointerPackagerTogglePacketMixin"
-
     );
+
+    // Vibrant Vault mixins to apply if loaded
+    private static final List<String> VIBRANT_VAULT_MIXINS = List.of(
+            "timmychips.colored_packages.forge.mixin.compat.vibrantvaults.PackagerBEMixin"
+    );
+
+    // Since mods aren't loaded, use LoadingModList class to check if mod is present from mod id
+    private static boolean hasMod(String modId) {
+        return LoadingModList.get().getModFileById(modId) != null;
+    }
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-        if (ModList.get() != null) {
-            boolean fluidLogisticsLoaded = ModList.get().isLoaded(FACTORY_LOGISTIC_ID);
-            if (LOGISTICS_MIXINS.contains(mixinClassName)) {
-                return fluidLogisticsLoaded;
-            }
-        }
+
+        // Apply specified mixins if equivalent mod is present
+        if (LOGISTICS_MIXINS.contains(mixinClassName)) return hasMod(FACTORY_LOGISTIC_ID);
+        if (VIBRANT_VAULT_MIXINS.contains(mixinClassName)) return hasMod(VibrantVaultsCompat.VIBRANT_VAULTS_ID);
+
         return true;
     }
 

@@ -13,6 +13,7 @@
     "compat.fluidlogistic.HandPointerClearAddressPacketMixin",
     "compat.fluidlogistic.HandPointerInteractionHandlerMixin",
     "compat.fluidlogistic.HandPointerPackagerTogglePacketMixin",
+    "compat.vibrantvaults.PackagerBEMixin",
     "logistics.ChainConveyerPackageMixinForge",
     "logistics.FactoryGaugeBEMixinForge",
     "logistics.FrogportRendererMixinForge",
