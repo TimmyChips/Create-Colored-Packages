@@ -13,7 +13,6 @@ import timmychips.colored_packages.ColoredPackages;
 public class ColoredPonderUtil {
     // Create colored package at given position and color
     public static ElementLink<EntityElement> createColoredPackage(CreateSceneBuilder scene, Vector3d pos, DyeColor color) {
-        ColoredPackages.LOGGER.info("in ColoredPonderUtil, {}", pos);
         return createPackagePlatform(scene, pos, color);
     }
 
