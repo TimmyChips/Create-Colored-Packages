@@ -10,6 +10,5 @@ public class ColoredPackagesClient {
         PonderIndex.addPlugin(new ColoredPonderPlugin());
         PackageItemModelPredicate.register();
         AllPackageParticles.registerFactories();
-        VibrantVaultsCompat.setVibrantPackagerSet();
     }
 }
