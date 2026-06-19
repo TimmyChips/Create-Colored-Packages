@@ -2,6 +2,7 @@ package timmychips.colored_packages.neoforge;
 
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.registries.RegisterEvent;
 import timmychips.colored_packages.AllDyedArmInteractionPointTypes;
 import timmychips.colored_packages.ColoredPackages;
@@ -20,6 +21,8 @@ public final class ColoredPackagesForge {
         // Reload listener
         bus.addListener(AllCapabilitiesEvent::register);
         bus.addListener(ColoredPackagesForge::onRegister);
+        //
+        bus.addListener(ColoredPackagesForge::registerMisc);
         // Client bus listener
         bus.addListener(ColoredPackagesClientForge::init);
     }
@@ -27,5 +30,9 @@ public final class ColoredPackagesForge {
     // After registering vanilla registries, initialize modded objects (so it doesn't freeze/crash)
     public static void onRegister(RegisterEvent event) {
         AllDyedArmInteractionPointTypes.init();
+    }
+
+    public static void registerMisc(FMLCommonSetupEvent event) {
+        event.enqueueWork(VibrantVaultsCompat::setVibrantPackagerSet);
     }
 }

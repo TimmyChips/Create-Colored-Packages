@@ -2,6 +2,7 @@ package timmychips.colored_packages.compat.neoforge;
 
 import net.minecraft.world.item.DyeColor;
 import net.zlt.create_vibrant_vaults.block.ModBlocks;
+import timmychips.colored_packages.ColoredPackages;
 import timmychips.colored_packages.compat.VibrantVaultsCompat;
 
 import java.util.stream.Collectors;
