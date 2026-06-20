@@ -39,7 +39,7 @@ public class PackageDestroyPacketMixinForge {
 
         // Only for colored packages with our color tag
         if (ColoredPackageItem.hasColorTag(box)) {
-            if (ctx.getDirection().getReceptionSide().isClient()) {
+            if (ctx.getDirection().getReceptionSide().isClient()) { // spawn if receiving side is client
                 ctx.enqueueWork(() -> {
                     ClientPacketHandler.spawnPackageParticles(box, location);
                 });
